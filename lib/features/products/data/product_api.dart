@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:garden_of_eve/features/products/domain/product_model.dart';
 import 'package:garden_of_eve/utils/dio_network/dio_client.dart';
-import 'package:garden_of_eve/utils/dio_network/dio_exception.dart';
 
 class ProductApi {
   final DioClient dioClient = DioClient();
@@ -17,22 +15,6 @@ class ProductApi {
       return response;
     } catch (e) {
       rethrow;
-    }
-  }
-
-  Future<List<Product>> productsList() async {
-    List<Product> products = List.empty(growable: true);
-    try {
-      final response = await getProducts();
-      final rawData = response.data['data'];
-
-      for (final data in rawData) {
-        products.add(Product.fromJson(data));
-      }
-      return products;
-    } on DioError catch (e) {
-      final errorMessage = DioExceptions.fromDioError(e).toString();
-      throw errorMessage;
     }
   }
 }

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:garden_of_eve/network/api/constants/endpoints.dart';
+import 'package:garden_of_eve/constants/endpoints.dart';
 
 class DioClient {
   final Dio _dio = Dio();
@@ -12,7 +12,7 @@ class DioClient {
       ..options.responseType = ResponseType.json;
   }
 
-  // Get:-----------------------------------------------------------------------
+  //GET
   Future<Response> get(
     String url, {
     Map<String, dynamic>? queryParameters,
@@ -34,7 +34,7 @@ class DioClient {
     }
   }
 
-  // Post:----------------------------------------------------------------------
+  //POST
   Future<Response> post(
     String url, {
     data,
@@ -60,7 +60,7 @@ class DioClient {
     }
   }
 
-// Put:-----------------------------------------------------------------------
+  //PUT
   Future<Response> put(
     String url, {
     data,
@@ -86,7 +86,7 @@ class DioClient {
     }
   }
 
-// Delete:--------------------------------------------------------------------
+  //DELETE
   Future<dynamic> delete(
     String url, {
     data,

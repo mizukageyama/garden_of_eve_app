@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/features/products/domain/product_model.dart';
 
 class ProductTile extends StatelessWidget {
-  const ProductTile({Key? key}) : super(key: key);
+  const ProductTile({
+    Key? key,
+    required Product product,
+    this.width = double.infinity,
+  })  : _product = product,
+        super(key: key);
+  final Product _product;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 250,
+      width: width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         mainAxisSize: MainAxisSize.min,
@@ -30,34 +39,36 @@ class ProductTile extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
-                    children: const [
+                    children: [
                       Text(
-                        "Monsterra Plant",
-                        style: TextStyle(
+                        _product.name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
                           color: Color(0xff828599),
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Text(
-                        "Native to the rainforests of Central America, the big, bold Monstera deliciosa plant is also known as the \"split-leaf philodendron.",
+                        _product.description,
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xffa3a6ac),
                           fontWeight: FontWeight.w500,
                           fontSize: 12,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 4,
                       ),
                       Text(
-                        "\$22.00",
-                        style: TextStyle(
+                        "₱${_product.price.toStringAsFixed(2)}",
+                        style: const TextStyle(
                           color: Color(0xff6bbc9a),
                           fontWeight: FontWeight.w700,
                           fontSize: 16,
@@ -71,8 +82,8 @@ class ProductTile extends StatelessWidget {
                 top: -100,
                 child: SizedBox(
                   height: 140,
-                  child: Image.asset(
-                    'assets/images/plant.png',
+                  child: Image.network(
+                    _product.imgUrl,
                     fit: BoxFit.fitHeight,
                   ),
                 ),
