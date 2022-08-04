@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/data/api/product_api.dart';
-import 'package:garden_of_eve/ui/components/product_tile.dart';
+import 'package:garden_of_eve/features/products/data/product_api.dart';
+import 'package:garden_of_eve/common_widgets/product_tile_sqr.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({Key? key}) : super(key: key);

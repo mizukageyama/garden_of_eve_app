@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/ui/screens/products.dart';
+import 'package:garden_of_eve/features/products/presentation/home_products/home_products_screen.dart';
 
 void main() {
   runApp(const MyApp());

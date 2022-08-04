@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:garden_of_eve/data/models/product.dart';
-import 'package:garden_of_eve/network/dio_client.dart';
-import 'package:garden_of_eve/network/dio_exception.dart';
+import 'package:garden_of_eve/features/products/domain/product_model.dart';
+import 'package:garden_of_eve/utils/dio_network/dio_client.dart';
+import 'package:garden_of_eve/utils/dio_network/dio_exception.dart';
 
 class ProductApi {
   final DioClient dioClient = DioClient();

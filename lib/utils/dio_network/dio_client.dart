@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:garden_of_eve/data/api/constants/endpoints.dart';
+import 'package:garden_of_eve/network/api/constants/endpoints.dart';
 
 class DioClient {
   final Dio _dio = Dio();

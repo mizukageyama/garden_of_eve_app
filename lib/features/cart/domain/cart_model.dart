@@ -1,4 +1,4 @@
-import 'package:garden_of_eve/data/models/product.dart';
+import 'package:garden_of_eve/features/products/domain/product_model.dart';
 
 class Cart {
   int id;

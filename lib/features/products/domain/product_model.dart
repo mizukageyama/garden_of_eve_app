@@ -1,4 +1,4 @@
-import 'package:garden_of_eve/data/models/discount.dart';
+import 'package:garden_of_eve/features/products/domain/discount_model.dart';
 import 'package:intl/intl.dart';
 
 class Product {
