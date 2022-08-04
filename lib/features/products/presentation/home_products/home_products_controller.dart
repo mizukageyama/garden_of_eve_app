@@ -8,10 +8,35 @@ class HomeProdController extends GetxController {
 
   //Local Variables
   List<Product> products = List.empty(growable: true);
+  List<String> categories = List.empty(growable: true);
+  RxBool isLoading = true.obs;
+  RxInt activeCategoryIndex = 1.obs;
 
   //Methods
   Future<List<Product>> getProducts() async {
-    final users = await _productRepo.getProductList();
-    return users;
+    final products = await _productRepo.getProductList();
+    isLoading.value = false;
+    return products;
+  }
+
+  Future<List<String>> getCategories() async {
+    final categories = await _productRepo.getCategoryList();
+    return categories;
+  }
+
+  @override
+  void onInit() async {
+    print('onInit called');
+    categories = await getCategories();
+    categories.insert(0, "All");
+    products = await getProducts();
+    super.onInit();
+  }
+
+  void selectCategory(int index) {
+    if (index == activeCategoryIndex.value) {
+      return;
+    }
+    activeCategoryIndex.value = index;
   }
 }

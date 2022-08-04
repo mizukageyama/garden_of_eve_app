@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/features/products/presentation/home_products/home_products_screen.dart';
+import 'package:garden_of_eve/features/landing/landing_screen.dart';
+import 'package:garden_of_eve/utils/utils.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,13 +11,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Garden of Eve',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.grey,
       ),
-      home: ProductsScreen(),
+      home: LandingScreen(),
     );
   }
 }

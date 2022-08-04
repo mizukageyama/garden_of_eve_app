@@ -8,18 +8,29 @@ class ProductRepository {
 
   Future<List<Product>> getProductList() async {
     try {
-      List<Product> products = List.empty(growable: true);
       final response = await _productApi.getProducts();
       //All data -> response.data;
       final Map<String, dynamic> rawData = response.data['data'];
       //print(rawData);
       //final List<Product> d =
-      final d =
+      final products =
           rawData['products'].map((data) => Product.fromJson(data)).toList();
       // for (final data in rawData) {
       //   products.add(Product.fromJson(data));
       // }
-      return List<Product>.from(d);
+      return List<Product>.from(products);
+    } on DioError catch (e) {
+      final errorMessage = DioExceptions.fromDioError(e).toString();
+      throw errorMessage;
+    }
+  }
+
+  Future<List<String>> getCategoryList() async {
+    try {
+      final response = await _productApi.getCategories();
+      final categories =
+          response.data['data'].map((data) => data['name']).toList();
+      return List<String>.from(categories);
     } on DioError catch (e) {
       final errorMessage = DioExceptions.fromDioError(e).toString();
       throw errorMessage;
