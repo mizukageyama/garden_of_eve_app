@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/features/landing/landing_screen.dart';
+import 'package:garden_of_eve/constants/constants.dart';
+import 'package:garden_of_eve/features/landing/presentation/landing_screen.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 void main() {
@@ -15,7 +16,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Garden of Eve',
       theme: ThemeData(
+        fontFamily: 'Quicksand',
         primarySwatch: Colors.grey,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: lightGreenColor,
+        ),
+        scaffoldBackgroundColor: bgColor,
       ),
       home: LandingScreen(),
     );

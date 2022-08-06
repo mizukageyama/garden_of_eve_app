@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common_widgets/product_tile_text.dart';
+import 'package:garden_of_eve/constants/constants.dart';
 import 'package:garden_of_eve/features/products/domain/product_model.dart';
+import 'package:garden_of_eve/utils/utils.dart';
 
 class ProductTile extends StatelessWidget {
   const ProductTile({
@@ -14,7 +17,7 @@ class ProductTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 250,
+      height: 256,
       width: width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
@@ -25,10 +28,10 @@ class ProductTile extends StatelessWidget {
             clipBehavior: Clip.none,
             children: <Widget>[
               Container(
-                height: 150,
+                height: 156,
                 width: double.infinity,
                 decoration: const BoxDecoration(
-                  color: Colors.white,
+                  color: whiteColor,
                   borderRadius: BorderRadius.all(
                     Radius.circular(18),
                   ),
@@ -36,45 +39,10 @@ class ProductTile extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   margin: const EdgeInsets.only(top: 50),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        _product.name,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: Color(0xff828599),
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        _product.description,
-                        maxLines: 3,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          color: Color(0xffa3a6ac),
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Text(
-                        "₱${_product.price.toStringAsFixed(2)}",
-                        style: const TextStyle(
-                          color: Color(0xff6bbc9a),
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
+                  child: ProductTileText(
+                    name: _product.name,
+                    desc: _product.description,
+                    price: _product.price,
                   ),
                 ),
               ),
@@ -82,9 +50,21 @@ class ProductTile extends StatelessWidget {
                 top: -100,
                 child: SizedBox(
                   height: 140,
-                  child: Image.network(
-                    _product.imgUrl,
-                    fit: BoxFit.fitHeight,
+                  child: CachedNetworkImage(
+                    imageUrl: _product.imgUrl,
+                    errorWidget: (context, url, error) => Center(
+                      child: SizedBox(
+                        width: width,
+                        child: Text(
+                          'Could not load image',
+                          textAlign: TextAlign.center,
+                          style: quicksandMedium.copyWith(
+                            color: neutralGreyColor,
+                            fontSize: 13.5,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),

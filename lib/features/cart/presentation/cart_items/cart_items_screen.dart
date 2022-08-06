@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/constants/constants.dart';
 
 class CartItemScreen extends StatelessWidget {
   const CartItemScreen({Key? key}) : super(key: key);
@@ -8,7 +9,15 @@ class CartItemScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(),
-        body: const Text('Cart Item Screen'),
+        body: Center(
+          child: Text(
+            'Cart Items Screen',
+            style: quicksandSemiBold.copyWith(
+              color: oxfordBlueColor,
+              fontSize: 18,
+            ),
+          ),
+        ),
       ),
     );
   }

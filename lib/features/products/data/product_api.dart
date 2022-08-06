@@ -6,7 +6,7 @@ class ProductApi {
 
   Future<Response> getProducts() async {
     try {
-      final Response response = await dioClient.get('/products',
+      final Response response = await dioClient.get('products?page=1&limit=5',
           options: Options(headers: {
             "content-type": "application/json",
           }));
