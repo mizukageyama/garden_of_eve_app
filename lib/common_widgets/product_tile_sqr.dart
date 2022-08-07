@@ -24,7 +24,7 @@ class ProductTile extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           StackedImage(
-            containerHeight: 45,
+            containerHeight: 40,
             topPosition: -100,
             imgHeight: 140,
             imgUrl: _product.imgUrl,
@@ -32,7 +32,7 @@ class ProductTile extends StatelessWidget {
             hasTopRightRadius: true,
           ),
           Container(
-            height: 106,
+            height: 116,
             padding: const EdgeInsets.symmetric(horizontal: 12),
             decoration: const BoxDecoration(
               color: whiteColor,
