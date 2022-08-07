@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/constants/constants.dart';
+import 'package:garden_of_eve/constants/_constants.dart';
 
 class ProductListScreen extends StatelessWidget {
   const ProductListScreen({Key? key}) : super(key: key);

@@ -9,6 +9,7 @@ class HomeProdController extends GetxController {
   //Local Variables
   List<Product> products = List.empty(growable: true);
   List<String> categories = List.empty(growable: true);
+  Set<Product> recentlyViewed = {};
   RxBool isLoading = true.obs;
   RxInt activeCategoryIndex = 1.obs;
 
@@ -30,6 +31,8 @@ class HomeProdController extends GetxController {
     categories = await getCategories();
     categories.insert(0, "All");
     products = await getProducts();
+    recentlyViewed.add(products[4]);
+    recentlyViewed.add(products[2]);
     super.onInit();
   }
 

@@ -20,7 +20,9 @@ class LoadingProducts extends StatelessWidget {
               left: index == 0 ? 20 : 0,
               right: 20,
             ),
-            child: const ProductTileSkeleton(),
+            child: const ProductTileSkeleton(
+              width: 185,
+            ),
           );
         },
       ),

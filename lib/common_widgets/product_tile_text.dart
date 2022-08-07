@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/constants/constants.dart';
+import 'package:garden_of_eve/constants/_constants.dart';
 
 class ProductTileText extends StatelessWidget {
   const ProductTileText({
@@ -51,9 +51,6 @@ class ProductTileText extends StatelessWidget {
             color: greenColor,
             fontSize: 16,
           ),
-        ),
-        const SizedBox(
-          height: 5,
         ),
       ],
     );
