@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: bgColor,
       ),
+      defaultTransition: Transition.noTransition,
       home: LandingScreen(),
     );
   }

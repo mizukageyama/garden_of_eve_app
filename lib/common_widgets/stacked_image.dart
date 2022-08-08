@@ -9,6 +9,8 @@ class StackedImage extends StatelessWidget {
     required this.imgHeight,
     required this.imgUrl,
     this.topPosition,
+    this.leftPosition,
+    this.radius = 18,
     this.hasTopLeftRadius = false,
     this.hasTopRightRadius = false,
     this.hasBottomLeftRadius = false,
@@ -19,15 +21,17 @@ class StackedImage extends StatelessWidget {
   final double imgHeight;
   final String imgUrl;
   final double? topPosition;
+  final double? leftPosition;
   final bool hasTopLeftRadius;
   final bool hasTopRightRadius;
   final bool hasBottomLeftRadius;
   final bool hasBottomRightRadius;
+  final double radius;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: Alignment.topCenter,
+      alignment: Alignment.bottomCenter,
       clipBehavior: Clip.none,
       children: [
         Container(
@@ -35,19 +39,18 @@ class StackedImage extends StatelessWidget {
           decoration: BoxDecoration(
             color: whiteColor,
             borderRadius: BorderRadius.only(
-              topLeft:
-                  hasTopLeftRadius ? const Radius.circular(18) : Radius.zero,
+              topLeft: hasTopLeftRadius ? Radius.circular(radius) : Radius.zero,
               bottomLeft:
-                  hasBottomLeftRadius ? const Radius.circular(18) : Radius.zero,
+                  hasBottomLeftRadius ? Radius.circular(radius) : Radius.zero,
               topRight:
-                  hasTopRightRadius ? const Radius.circular(18) : Radius.zero,
-              bottomRight: hasBottomRightRadius
-                  ? const Radius.circular(18)
-                  : Radius.zero,
+                  hasTopRightRadius ? Radius.circular(radius) : Radius.zero,
+              bottomRight:
+                  hasBottomRightRadius ? Radius.circular(radius) : Radius.zero,
             ),
           ),
         ),
         Positioned(
+          left: leftPosition,
           top: topPosition,
           child: SizedBox(
             height: imgHeight,

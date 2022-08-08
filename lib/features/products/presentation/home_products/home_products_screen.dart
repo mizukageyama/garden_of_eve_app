@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common_widgets/custom_appbar.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/products/presentation/home_products/home_products_controller.dart';
 import 'package:garden_of_eve/features/products/presentation/widgets/_widgets.dart';
@@ -10,13 +11,25 @@ class ProductsScreen extends StatelessWidget {
   final homeProdController = Get.put(HomeProdController());
   final landingPageScroller = ScrollController();
   final categoryScroller = ScrollController();
-  final productScroller = ScrollController();
   final recentScroller = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(100),
+          child: CustomAppBar(
+            rightWidget: [
+              CircleAvatar(
+                radius: 20,
+                backgroundImage: AssetImage(
+                  'assets/images/profile.jpg',
+                ),
+              ),
+            ],
+          ),
+        ),
         backgroundColor: bgColor,
         body: Padding(
           padding: const EdgeInsets.only(top: 20),
@@ -24,29 +37,6 @@ class ProductsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Image.asset(
-                      'assets/icons/menu.png',
-                      height: 24,
-                      width: 24,
-                    ),
-                    const CircleAvatar(
-                      radius: 20,
-                      backgroundImage: AssetImage(
-                        'assets/images/profile.jpg',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30),
                 child: SearchProductField(),
@@ -107,7 +97,7 @@ class ProductsScreen extends StatelessWidget {
   }
 
   Widget _showCategories() {
-    if (homeProdController.isLoading.value) {
+    if (homeProdController.isLoadingCategory.value) {
       return const LoadingCategory();
     }
     if (homeProdController.categories.isEmpty) {
@@ -123,7 +113,7 @@ class ProductsScreen extends StatelessWidget {
   }
 
   Widget _showProducts() {
-    if (homeProdController.isLoading.value) {
+    if (homeProdController.isLoadingProd.value) {
       return const LoadingProducts();
     }
     if (homeProdController.products.isEmpty) {
@@ -132,14 +122,11 @@ class ProductsScreen extends StatelessWidget {
         width: 0,
       );
     }
-    return ProductListView(
-      products: homeProdController.products,
-      scroller: productScroller,
-    );
+    return ProductListView();
   }
 
   Widget _showRecentlyViewed() {
-    if (homeProdController.isLoading.value) {
+    if (homeProdController.isLoadingProd.value) {
       return const SizedBox(
         height: 0,
         width: 0,

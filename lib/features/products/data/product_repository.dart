@@ -5,25 +5,24 @@ import 'package:dio/dio.dart';
 
 class ProductRepository {
   final ProductApi _productApi = ProductApi();
+  int totalPages = 0;
 
-  Future<List<Product>> getProductList() async {
+  Future<List<Product>> getProductList(int page) async {
     try {
-      final response = await _productApi.getProducts();
-      //All data -> response.data;
+      final response = await _productApi.getProducts(page);
       final Map<String, dynamic> rawData = response.data['data'];
-      //print(rawData);
-      //final List<Product> d =
+      totalPages = rawData['total_pages'];
       final products =
           rawData['products'].map((data) => Product.fromJson(data)).toList();
-      // for (final data in rawData) {
-      //   products.add(Product.fromJson(data));
-      // }
+
       return List<Product>.from(products);
     } on DioError catch (e) {
       final errorMessage = DioExceptions.fromDioError(e).toString();
       throw errorMessage;
     }
   }
+
+  get totalPage => totalPages;
 
   Future<List<String>> getCategoryList() async {
     try {
