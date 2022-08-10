@@ -7,23 +7,20 @@ import 'package:garden_of_eve/utils/utils.dart';
 class CategoryListView extends StatelessWidget {
   CategoryListView({
     Key? key,
-    required this.categories,
-    required this.scroller,
   }) : super(key: key);
 
   final HomeProdController homeProdController = Get.find();
-  final List<String> categories;
-  final ScrollController scroller;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 35,
       child: ListView.builder(
-        controller: scroller,
+        key: const PageStorageKey<String>('pageOne'),
+        controller: homeProdController.categoryScroller,
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        itemCount: categories.length,
+        itemCount: homeProdController.categories.length,
         itemBuilder: (context, index) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -46,7 +43,7 @@ class CategoryListView extends StatelessWidget {
                             ),
                             borderRadius: BorderRadius.circular(20),
                             child: Text(
-                              categories[index],
+                              homeProdController.categories[index],
                               style: quicksandBold.copyWith(
                                 color: whiteColor,
                                 fontSize: 14,
@@ -58,7 +55,7 @@ class CategoryListView extends StatelessWidget {
                               vertical: 8,
                             ),
                             child: Text(
-                              categories[index],
+                              homeProdController.categories[index],
                               style: quicksandBold.copyWith(
                                 color: greyColor,
                                 fontSize: 14,

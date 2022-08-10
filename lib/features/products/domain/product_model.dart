@@ -87,4 +87,12 @@ class Product {
     return '\nname: $name, createdAt: ${DateFormat.yMMMMd().format(createdAt)} ${DateFormat.jm().format(createdAt)}, '
         'modifiedAt: ${DateFormat.yMMMM().format(modifiedAt)} ${DateFormat.jm().format(modifiedAt)}';
   }
+
+  double get getPrice {
+    if (discount != null) {
+      double discounted = price * (discount!.discountPercent / 100);
+      return price - discounted;
+    }
+    return price;
+  }
 }

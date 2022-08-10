@@ -29,7 +29,7 @@ class GradientContainer extends StatelessWidget {
         borderRadius: borderRadius,
         gradient: const LinearGradient(
           begin: Alignment.bottomLeft,
-          end: Alignment.topRight,
+          end: Alignment.topCenter,
           colors: [
             darkGreenColor,
             lightGreenColor,

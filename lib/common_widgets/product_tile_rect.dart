@@ -13,6 +13,7 @@ class ProductTileRect extends StatelessWidget {
     this.width = double.infinity,
   })  : _product = product,
         super(key: key);
+
   final Product _product;
   final double width;
 
@@ -59,9 +60,7 @@ class ProductTileRect extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Center(
                       child: ProductTileText(
-                        name: _product.name,
-                        desc: _product.description,
-                        price: _product.price,
+                        product: _product,
                         maxLines: 2,
                       ),
                     ),

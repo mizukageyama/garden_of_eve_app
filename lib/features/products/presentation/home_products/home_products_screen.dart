@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common_widgets/custom_appbar.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/products/presentation/home_products/home_products_controller.dart';
-import 'package:garden_of_eve/features/products/presentation/widgets/_widgets.dart';
-import 'package:garden_of_eve/features/products/presentation/widgets/recently_viewed_list_view.dart';
+import 'package:garden_of_eve/features/products/presentation/home_products/widgets/_widgets.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class ProductsScreen extends StatelessWidget {
   ProductsScreen({Key? key}) : super(key: key);
   final homeProdController = Get.put(HomeProdController());
-  final landingPageScroller = ScrollController();
+  final homePageScroller = ScrollController();
   final categoryScroller = ScrollController();
-  final recentScroller = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +44,7 @@ class ProductsScreen extends StatelessWidget {
               ),
               Flexible(
                 child: SingleChildScrollView(
-                  controller: landingPageScroller,
+                  controller: homePageScroller,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
@@ -106,10 +104,7 @@ class ProductsScreen extends StatelessWidget {
         width: 0,
       );
     }
-    return CategoryListView(
-      categories: homeProdController.categories,
-      scroller: categoryScroller,
-    );
+    return CategoryListView();
   }
 
   Widget _showProducts() {
@@ -126,21 +121,26 @@ class ProductsScreen extends StatelessWidget {
   }
 
   Widget _showRecentlyViewed() {
-    if (homeProdController.isLoadingProd.value) {
-      return const SizedBox(
-        height: 0,
-        width: 0,
-      );
-      //return const LoadingProducts();
-    }
+    // if (homeProdController.isLoadingProd.value) {
+    //   return const SizedBox(
+    //     height: 0,
+    //     width: 0,
+    //   );
+    //   //return const LoadingProducts();
+    // }
     if (homeProdController.recentlyViewed.isEmpty) {
-      return const Center(
-        child: Text('No data'),
+      return SizedBox(
+        height: 120,
+        child: Center(
+          child: Text(
+            'No recent viewed yet',
+            style: quicksandMedium.copyWith(
+              color: neutralGreyColor,
+            ),
+          ),
+        ),
       );
     }
-    return RecentlyViewedListView(
-      recentlyViewed: homeProdController.recentlyViewed,
-      scroller: recentScroller,
-    );
+    return RecentlyViewedListView();
   }
 }

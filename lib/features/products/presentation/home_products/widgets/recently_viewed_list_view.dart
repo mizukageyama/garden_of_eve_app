@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common_widgets/product_tile_rect.dart';
-import 'package:garden_of_eve/features/products/domain/product_model.dart';
+import 'package:garden_of_eve/features/products/presentation/home_products/home_products_controller.dart';
+import 'package:garden_of_eve/utils/utils.dart';
 
 class RecentlyViewedListView extends StatelessWidget {
-  const RecentlyViewedListView({
+  RecentlyViewedListView({
     Key? key,
-    required this.recentlyViewed,
-    required this.scroller,
   }) : super(key: key);
 
-  final Set<Product> recentlyViewed;
-  final ScrollController scroller;
+  final HomeProdController homeProdController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 120,
       child: ListView.builder(
-        controller: scroller,
+        key: const PageStorageKey<String>('pageOne'),
+        controller: homeProdController.recentScroller,
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        itemCount: recentlyViewed.length,
+        itemCount: homeProdController.recentlyViewed.length,
         itemBuilder: (context, index) {
           return Row(
             mainAxisSize: MainAxisSize.min,
@@ -31,7 +30,7 @@ class RecentlyViewedListView extends StatelessWidget {
                   right: 20,
                 ),
                 child: ProductTileRect(
-                  product: recentlyViewed.elementAt(index),
+                  product: homeProdController.recentlyViewed[index],
                   width: 290,
                 ),
               ),

@@ -3,27 +3,35 @@ import 'package:garden_of_eve/common_widgets/product_tile_text.dart';
 import 'package:garden_of_eve/common_widgets/stacked_image.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/products/domain/product_model.dart';
+import 'package:garden_of_eve/features/products/presentation/home_products/home_products_controller.dart';
 import 'package:garden_of_eve/features/products/presentation/product_info/product_info_screen.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class ProductTile extends StatelessWidget {
-  const ProductTile({
+  ProductTile({
     Key? key,
     required Product product,
     this.width = double.infinity,
   })  : _product = product,
         super(key: key);
+
   final Product _product;
   final double width;
+  final HomeProdController homeProdController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Get.to(
-        () => ProductInfoScreen(
-          product: _product,
-        ),
-      ),
+      onTap: () {
+        Get.to(
+          () => ProductInfoScreen(
+            product: _product,
+          ),
+        );
+        Future.delayed(const Duration(seconds: 1), () {
+          homeProdController.addRecent(_product);
+        });
+      },
       child: SizedBox(
         height: 256,
         width: width,
@@ -51,9 +59,7 @@ class ProductTile extends StatelessWidget {
               ),
               child: Center(
                 child: ProductTileText(
-                  name: _product.name,
-                  desc: _product.description,
-                  price: _product.price,
+                  product: _product,
                 ),
               ),
             ),

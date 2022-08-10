@@ -36,15 +36,15 @@ class BottomNavBar extends StatelessWidget {
             ),
             Expanded(
               child: BottomNavItem(
-                activeIcon: Icons.shopping_cart_rounded,
-                inactiveIcon: Icons.shopping_cart_outlined,
+                activeIcon: Icons.local_mall_rounded,
+                inactiveIcon: Icons.local_mall_outlined,
                 index: 2,
               ),
             ),
             Expanded(
               child: BottomNavItem(
-                activeIcon: Icons.receipt_rounded,
-                inactiveIcon: Icons.receipt_outlined,
+                activeIcon: Icons.sell_rounded,
+                inactiveIcon: Icons.sell_outlined,
                 index: 3,
               ),
             ),

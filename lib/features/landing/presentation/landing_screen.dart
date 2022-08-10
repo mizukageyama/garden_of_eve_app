@@ -24,7 +24,7 @@ class LandingScreen extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             Get.to(
-              () => const ProductListScreen(),
+              () => ProductListScreen(),
             );
           },
           child: const GradientContainer(

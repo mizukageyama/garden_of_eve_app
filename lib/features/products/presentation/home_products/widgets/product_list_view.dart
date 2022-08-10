@@ -16,6 +16,7 @@ class ProductListView extends StatelessWidget {
       height: 256,
       child: Obx(
         () => ListView.builder(
+          key: const PageStorageKey<String>('pageOne'),
           controller: homeProdController.productScroller,
           scrollDirection: Axis.horizontal,
           shrinkWrap: true,

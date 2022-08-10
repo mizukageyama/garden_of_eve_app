@@ -4,13 +4,25 @@ import 'package:garden_of_eve/utils/dio_network/dio_client.dart';
 class ProductApi {
   final DioClient dioClient = DioClient();
 
+  Future<Response> getProductsByCategory(int page, String category) async {
+    try {
+      final Response response = await dioClient.get(
+          'products/by_category?page=$page&limit=5&category_key=$category',
+          options: Options(headers: {
+            "content-type": "application/json",
+          }));
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<Response> getProducts(int page) async {
     try {
-      final Response response =
-          await dioClient.get('products?page=$page&limit=5',
-              options: Options(headers: {
-                "content-type": "application/json",
-              }));
+      final Response response = await dioClient.get('products?page=$page',
+          options: Options(headers: {
+            "content-type": "application/json",
+          }));
       return response;
     } catch (e) {
       rethrow;
