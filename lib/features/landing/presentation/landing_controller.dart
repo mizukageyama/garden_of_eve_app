@@ -16,8 +16,8 @@ class LandingPageController extends GetxController {
     const FavoritesScreen(
       key: PageStorageKey<String>('pageTwo'),
     ),
-    const CartItemScreen(
-      key: PageStorageKey<String>('pageThree'),
+    CartItemScreen(
+      key: const PageStorageKey<String>('pageThree'),
     ),
     const OrderListScreen(
       key: PageStorageKey<String>('pageFour'),

@@ -5,5 +5,5 @@ class ProductInfoController extends GetxController {
 
   void totalPriceByQty(double price, int qty) => totalPrice.value = price * qty;
 
-  get total => totalPrice.value;
+  double get total => totalPrice.value;
 }

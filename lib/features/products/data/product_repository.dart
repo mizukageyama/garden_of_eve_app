@@ -37,9 +37,9 @@ class ProductRepository {
     }
   }
 
-  get totalPagebyCategory => totalPagesByCategory;
+  int get totalPagebyCategory => totalPagesByCategory;
 
-  get totalPage => totalPages;
+  int get totalPage => totalPages;
 
   Future<List<String>> getCategoryList() async {
     try {

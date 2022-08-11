@@ -95,7 +95,7 @@ class ProductInfoScreen extends StatelessWidget {
                                         maxLimit: product.qty,
                                         onChange: (value) =>
                                             _prodInfo.totalPriceByQty(
-                                                product.price, value),
+                                                product.getPrice, value),
                                       ),
                                       const SizedBox(
                                         height: 5,
@@ -135,7 +135,7 @@ class ProductInfoScreen extends StatelessWidget {
           ],
         ),
         bottomNavigationBar: AddToCartRow(
-          price: product.getPrice,
+          product: product,
         ),
       ),
     );

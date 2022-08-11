@@ -55,10 +55,6 @@ class ProdListController extends GetxController {
 
     totalPage = _productRepo.totalPage;
     productHasMoreData = currentPage < totalPage;
-    print(currentPage);
-    print(totalPage);
-    print(productHasMoreData);
-    print(prodList.length);
 
     if (productHasMoreData) currentPage++;
   }

@@ -7,20 +7,27 @@ class QuantityIncrementor extends StatelessWidget {
     Key? key,
     required this.maxLimit,
     required this.onChange,
-  }) : super(key: key);
+    this.initialVal = 1,
+    this.style2 = false,
+  })  : _count = initialVal.obs,
+        super(key: key);
 
-  final RxInt count = 1.obs;
+  final RxInt _count;
+  final int initialVal;
   final int maxLimit;
   final Function(int) onChange;
+  final bool style2;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
       decoration: BoxDecoration(
-        border: Border.all(
-          color: neutralGreyColor,
-        ),
+        border: style2
+            ? null
+            : Border.all(
+                color: neutralGreyColor,
+              ),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -29,21 +36,27 @@ class QuantityIncrementor extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              if (count.value > 1) {
-                count.value -= 1;
-                onChange(count.value);
+              if (_count.value > 1) {
+                _count - (1);
+                onChange(_count.value);
               }
             },
             child: Container(
               padding: const EdgeInsets.all(3),
-              decoration: const BoxDecoration(
-                color: greenColor,
-                shape: BoxShape.circle,
+              decoration: BoxDecoration(
+                color: style2 ? Colors.transparent : greenColor,
+                shape: style2 ? BoxShape.rectangle : BoxShape.circle,
+                borderRadius: style2 ? BorderRadius.circular(8) : null,
+                border: style2
+                    ? Border.all(
+                        color: greenColor,
+                      )
+                    : null,
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.remove_rounded,
-                color: whiteColor,
-                size: 18,
+                color: style2 ? greenColor : whiteColor,
+                size: style2 ? 14 : 18,
               ),
             ),
           ),
@@ -51,34 +64,36 @@ class QuantityIncrementor extends StatelessWidget {
             width: 45,
             child: Obx(
               () => Text(
-                '${count.value}',
+                '${_count.value}',
                 textAlign: TextAlign.center,
                 style: quicksandBold.copyWith(
                   color: darkGreyColor,
-                  fontSize: 18,
+                  fontSize: style2 ? 14 : 18,
                 ),
               ),
             ),
           ),
           InkWell(
             onTap: () {
-              if (count.value < maxLimit) {
-                count.value += 1;
-                onChange(count.value);
+              if (_count.value < maxLimit) {
+                _count + (1);
+                onChange(_count.value);
               }
             },
             child: Container(
               padding: const EdgeInsets.all(3),
-              decoration: const BoxDecoration(
-                color: greenColor,
-                shape: BoxShape.circle,
-              ),
-              child: const Center(
-                child: Icon(
-                  Icons.add_rounded,
-                  color: whiteColor,
-                  size: 18,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: greenColor,
                 ),
+                color: greenColor,
+                shape: style2 ? BoxShape.rectangle : BoxShape.circle,
+                borderRadius: style2 ? BorderRadius.circular(8) : null,
+              ),
+              child: Icon(
+                Icons.add_rounded,
+                color: whiteColor,
+                size: style2 ? 14 : 18,
               ),
             ),
           ),
