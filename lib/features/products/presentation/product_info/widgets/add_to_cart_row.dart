@@ -32,9 +32,7 @@ class AddToCartRow extends StatelessWidget {
         children: [
           Obx(
             () => Text(
-              _prodInfo.total == 0
-                  ? "₱${product.getPrice.toStringAsFixed(2)}"
-                  : "₱${_prodInfo.total.toStringAsFixed(2)}",
+              "₱${(product.getPrice * _prodInfo.qty).toStringAsFixed(2)}",
               style: quicksandSemiBold.copyWith(
                   fontSize: 18, color: darkGreyColor),
             ),
@@ -43,15 +41,19 @@ class AddToCartRow extends StatelessWidget {
             width: 30,
           ),
           Expanded(
-            child: GradientContainer(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
-              child: Text(
-                'ADD TO CART',
-                textAlign: TextAlign.center,
-                style:
-                    quicksandSemiBold.copyWith(fontSize: 14, color: whiteColor),
+            child: InkWell(
+              onTap: () => _prodInfo.addToCart(3, product.id, _prodInfo.qty),
+              child: GradientContainer(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+                child: Text(
+                  'ADD TO CART',
+                  textAlign: TextAlign.center,
+                  style: quicksandSemiBold.copyWith(
+                      fontSize: 14, color: whiteColor),
+                ),
+                borderRadius: BorderRadius.circular(25),
               ),
-              borderRadius: BorderRadius.circular(25),
             ),
           )
         ],

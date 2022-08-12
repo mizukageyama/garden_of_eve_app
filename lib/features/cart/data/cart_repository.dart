@@ -22,4 +22,28 @@ class CartRepository {
   }
 
   int get totalPage => totalPages;
+
+  Future<Map<String, dynamic>> addToCart(
+    int userId,
+    int prodId,
+    int qty,
+  ) async {
+    try {
+      final response = await _cartApi.addToCart(userId, prodId, qty);
+      return response.data;
+    } on DioError catch (e) {
+      final errorMessage = DioExceptions.fromDioError(e).toString();
+      throw errorMessage;
+    }
+  }
+
+  Future<String> removeCartItem(int cartId) async {
+    try {
+      final response = await _cartApi.removeFromCart(cartId);
+      return response.data['data']['message'];
+    } on DioError catch (e) {
+      final errorMessage = DioExceptions.fromDioError(e).toString();
+      throw errorMessage;
+    }
+  }
 }

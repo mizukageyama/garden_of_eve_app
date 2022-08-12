@@ -5,8 +5,13 @@ import 'package:garden_of_eve/features/products/presentation/product_info/widget
 import 'package:garden_of_eve/utils/utils.dart';
 
 class CartTile extends StatelessWidget {
-  const CartTile({Key? key, required this.cartItem}) : super(key: key);
+  CartTile({
+    Key? key,
+    required this.cartItem,
+  })  : _qty = cartItem.qty.obs,
+        super(key: key);
   final Cart cartItem;
+  final RxInt _qty;
 
   @override
   Widget build(BuildContext context) {
@@ -66,11 +71,13 @@ class CartTile extends StatelessWidget {
                             overflow: TextOverflow.ellipsis),
                         maxLines: 2,
                       ),
-                      Text(
-                        '₱${cartItem.productInfo.getPrice}',
-                        style: quicksandBold.copyWith(
-                          color: greenColor,
-                          fontSize: 13.5,
+                      Obx(
+                        () => Text(
+                          '₱${(cartItem.productInfo.getPrice * _qty.value).toStringAsFixed(2)}',
+                          style: quicksandBold.copyWith(
+                            color: greenColor,
+                            fontSize: 13.5,
+                          ),
                         ),
                       ),
                     ],
@@ -80,10 +87,11 @@ class CartTile extends StatelessWidget {
             ),
           ),
           QuantityIncrementor(
-              initialVal: cartItem.qty,
-              style2: true,
-              maxLimit: cartItem.productInfo.qty,
-              onChange: (value) => print(value))
+            initialVal: cartItem.qty,
+            style2: true,
+            maxLimit: cartItem.productInfo.qty,
+            onChange: (value) => _qty.value = value,
+          )
         ],
       ),
     );

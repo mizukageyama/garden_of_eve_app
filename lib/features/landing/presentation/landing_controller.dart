@@ -13,8 +13,8 @@ class LandingPageController extends GetxController {
     ProductsScreen(
       key: const PageStorageKey<String>('pageOne'),
     ),
-    const FavoritesScreen(
-      key: PageStorageKey<String>('pageTwo'),
+    FavoritesScreen(
+      key: const PageStorageKey<String>('pageTwo'),
     ),
     CartItemScreen(
       key: const PageStorageKey<String>('pageThree'),

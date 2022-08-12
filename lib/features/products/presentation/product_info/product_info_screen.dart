@@ -93,9 +93,9 @@ class ProductInfoScreen extends StatelessWidget {
                                     children: [
                                       QuantityIncrementor(
                                         maxLimit: product.qty,
-                                        onChange: (value) =>
-                                            _prodInfo.totalPriceByQty(
-                                                product.getPrice, value),
+                                        onChange: (value) {
+                                          _prodInfo.setQty = value;
+                                        },
                                       ),
                                       const SizedBox(
                                         height: 5,

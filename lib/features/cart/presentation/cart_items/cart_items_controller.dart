@@ -19,12 +19,12 @@ class CartListController extends GetxController {
   @override
   void onInit() async {
     print('onInit | CartListController');
-    await _getCartData(isRefresh: true);
+    await getCartData(isRefresh: true);
     cartListScroller.addListener(() async {
       if (cartListScroller.position.pixels ==
           cartListScroller.position.maxScrollExtent) {
         print('Fetching new data...');
-        await _getCartData();
+        await getCartData();
       }
     });
 
@@ -32,7 +32,7 @@ class CartListController extends GetxController {
   }
 
   //For Products
-  Future<void> _getCartData({bool isRefresh = false}) async {
+  Future<void> getCartData({bool isRefresh = false}) async {
     if (isRefresh) {
       isLoadingProd.value = true;
       currentPage = 1;
