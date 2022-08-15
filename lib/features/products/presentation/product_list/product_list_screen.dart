@@ -32,7 +32,7 @@ class ProductListScreen extends StatelessWidget {
 
   Widget _showProducts() {
     if (prodListController.isLoadingProd.value) {
-      return Text('Loading');
+      return const Text('Loading');
       //return const LoadingProducts();
     }
     if (prodListController.prodList.isEmpty) {

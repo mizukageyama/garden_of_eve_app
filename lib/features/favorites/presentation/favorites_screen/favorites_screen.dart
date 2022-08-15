@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common_widgets/custom_appbar.dart';
-import 'package:garden_of_eve/features/favorites/favorites_controller.dart';
-import 'package:garden_of_eve/features/favorites/favorites_list_view.dart';
+import 'package:garden_of_eve/features/favorites/presentation/favorites_screen/favorites_controller.dart';
+import 'package:garden_of_eve/features/favorites/presentation/widgets/favorites_list_view.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class FavoritesScreen extends StatelessWidget {

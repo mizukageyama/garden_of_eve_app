@@ -55,7 +55,7 @@ class AddToCartRow extends StatelessWidget {
                 borderRadius: BorderRadius.circular(25),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

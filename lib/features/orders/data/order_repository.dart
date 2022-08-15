@@ -1,0 +1,25 @@
+import 'package:garden_of_eve/features/orders/data/order_api.dart';
+import 'package:garden_of_eve/features/orders/domain/order_model.dart';
+import 'package:garden_of_eve/utils/dio_network/dio_exception.dart';
+import 'package:dio/dio.dart';
+
+class OrderRepository {
+  final OdrerApi _orderApi = OdrerApi();
+  int totalPages = 0;
+
+  Future<List<Order>> geCartList(int userId, int page) async {
+    try {
+      final response = await _orderApi.getOrders(userId, page);
+      final Map<String, dynamic> rawData = response.data['data'];
+      totalPages = rawData['total_pages'];
+      final orders =
+          rawData['orders'].map((data) => Order.fromJson(data)).toList();
+      return List<Order>.from(orders);
+    } on DioError catch (e) {
+      final errorMessage = DioExceptions.fromDioError(e).toString();
+      throw errorMessage;
+    }
+  }
+
+  int get totalPage => totalPages;
+}

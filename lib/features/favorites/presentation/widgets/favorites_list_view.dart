@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:garden_of_eve/common_widgets/product_tile_rect.dart';
-import 'package:garden_of_eve/features/favorites/favorites_controller.dart';
+import 'package:garden_of_eve/features/favorites/presentation/favorites_screen/favorites_controller.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class FavListView extends StatelessWidget {

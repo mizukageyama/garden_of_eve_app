@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/common_widgets/custom_appbar.dart';
+import 'package:garden_of_eve/common_widgets/gradient_container.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/widgets/cart_list_view.dart';
@@ -17,15 +17,16 @@ class CartItemScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(
-              height: 15,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
+            GradientContainer(
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(5),
+                bottomRight: Radius.circular(45),
+              ),
+              padding: const EdgeInsets.fromLTRB(15, 15, 30, 15),
               child: Text(
                 'My Cart',
-                style: quicksandBold.copyWith(
-                  color: greyColor,
+                style: quicksandSemiBold.copyWith(
+                  color: whiteColor,
                   fontSize: 18,
                 ),
               ),

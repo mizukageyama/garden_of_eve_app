@@ -36,7 +36,7 @@ class CartTile extends StatelessWidget {
                 Container(
                   width: 65,
                   decoration: const BoxDecoration(
-                    color: lightGreenColor,
+                    //color: lightGreenColor,
                     borderRadius: BorderRadius.all(
                       Radius.circular(15),
                     ),

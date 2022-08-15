@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_screen.dart';
-import 'package:garden_of_eve/features/favorites/favorites_screen.dart';
+import 'package:garden_of_eve/features/favorites/presentation/favorites_screen/favorites_screen.dart';
 import 'package:garden_of_eve/features/orders/presentation/order_list/order_list_screen.dart';
 import 'package:garden_of_eve/features/products/presentation/home_products/home_products_screen.dart';
 import 'package:garden_of_eve/utils/utils.dart';
@@ -19,8 +19,8 @@ class LandingPageController extends GetxController {
     CartItemScreen(
       key: const PageStorageKey<String>('pageThree'),
     ),
-    const OrderListScreen(
-      key: PageStorageKey<String>('pageFour'),
+    OrderListScreen(
+      key: const PageStorageKey<String>('pageFour'),
     )
   ];
 

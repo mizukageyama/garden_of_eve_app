@@ -8,6 +8,8 @@ class HomeProdController extends GetxController {
   //Repository
   final ProductRepository _productRepo = ProductRepository();
 
+  final List<List<Product>> categoryProd = [[]];
+
   //Product Variable
   final productScroller = ScrollController();
   RxList<Product> products = RxList.empty(growable: true);

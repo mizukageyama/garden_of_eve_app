@@ -1,3 +1,4 @@
+import 'package:garden_of_eve/constants/api_key_holder.dart';
 import 'package:garden_of_eve/utils/dio_network/dio_client.dart';
 import 'package:dio/dio.dart';
 
@@ -11,7 +12,7 @@ class CartApi {
         options: Options(
           headers: {
             "content-type": "application/json",
-            "authorization": "Bearer $apiKey"
+            "authorization": "Bearer ${API.key}"
           },
         ),
       );
@@ -29,7 +30,7 @@ class CartApi {
         options: Options(
           headers: {
             "content-type": "application/json",
-            "authorization": "Bearer $apiKey"
+            "authorization": "Bearer ${API.key}"
           },
         ),
       );
@@ -46,7 +47,7 @@ class CartApi {
         options: Options(
           headers: {
             "content-type": "application/json",
-            "authorization": "Bearer $apiKey"
+            "authorization": "Bearer ${API.key}"
           },
         ),
       );
