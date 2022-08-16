@@ -1,38 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common_widgets/custom_appbar.dart';
 import 'package:garden_of_eve/common_widgets/gradient_container.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/widgets/cart_list_view.dart';
+import 'package:garden_of_eve/features/cart/presentation/cart_items/widgets/checkout_bottom_bar.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class CartItemScreen extends StatelessWidget {
   CartItemScreen({Key? key}) : super(key: key);
-  final cartListController = Get.put(CartListController());
+  final CartListController cartListController = Get.find();
+  RxBool selectAll = false.obs;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: const CustomAppBar(
+          hasBackButton: true,
+          title: 'My Cart',
+        ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            GradientContainer(
-              borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(5),
-                bottomRight: Radius.circular(45),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Obx(
+                    () => Checkbox(
+                      side: const BorderSide(
+                        color: greyColor,
+                      ),
+                      checkColor: whiteColor,
+                      activeColor: greenColor,
+                      value: selectAll.value,
+                      onChanged: (value) {
+                        selectAll.value = value!;
+                      },
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                    ),
+                  ),
+                  Text(
+                    "Select All",
+                    style: quicksandSemiBold.copyWith(
+                      fontSize: 14,
+                      color: oxfordBlueColor,
+                    ),
+                  ),
+                ],
               ),
-              padding: const EdgeInsets.fromLTRB(15, 15, 30, 15),
-              child: Text(
-                'My Cart',
-                style: quicksandSemiBold.copyWith(
-                  color: whiteColor,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
             ),
             Flexible(
               child: Obx(
@@ -41,6 +63,7 @@ class CartItemScreen extends StatelessWidget {
             ),
           ],
         ),
+        bottomNavigationBar: const CheckoutBottomBar(),
       ),
     );
   }
@@ -63,6 +86,12 @@ class CartItemScreen extends StatelessWidget {
       );
     }
 
-    return CartListView();
+    return ConstrainedBox(
+      constraints: const BoxConstraints(
+        maxHeight: 465,
+        minHeight: 0,
+      ),
+      child: CartListView(),
+    );
   }
 }

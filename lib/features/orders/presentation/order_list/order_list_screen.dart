@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common_widgets/_common_widgets.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/orders/presentation/order_list/order_list_controller.dart';
+import 'package:garden_of_eve/features/orders/presentation/order_list/widgets/order_list_view.dart';
 import 'package:garden_of_eve/features/orders/presentation/order_list/widgets/order_tile.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
@@ -12,6 +13,7 @@ class OrderListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('build');
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -32,23 +34,28 @@ class OrderListScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Obx(
-              () => orderController.isLoading.value
-                  ? const CircularProgressIndicator()
-                  : OrderTile(
-                      order: orderController.orders[0],
-                    ),
+            Flexible(
+              child: Obx(
+                () => showOrders(),
+              ),
             ),
-            const SizedBox(
-              height: 15,
-            ),
-            Obx(
-              () => orderController.isLoading.value
-                  ? const CircularProgressIndicator()
-                  : OrderTile(
-                      order: orderController.orders[0],
-                    ),
-            ),
+            // Obx(
+            //   () => orderController.isLoading.value
+            //       ? const CircularProgressIndicator()
+            //       : OrderTile(
+            //           order: orderController.orders[0],
+            //         ),
+            // ),
+            // const SizedBox(
+            //   height: 15,
+            // ),
+            // Obx(
+            //   () => orderController.isLoading.value
+            //       ? const CircularProgressIndicator()
+            //       : OrderTile(
+            //           order: orderController.orders[0],
+            //         ),
+            // ),
             const SizedBox(
               height: 10,
             ),
@@ -56,6 +63,28 @@ class OrderListScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget showOrders() {
+    print('obx');
+    if (orderController.isLoading.value) {
+      return const SizedBox(
+        height: 85,
+        child: Center(
+          child: Text(
+            'Loading...',
+          ),
+        ),
+      );
+    }
+    if (orderController.orders.isEmpty) {
+      return const SizedBox(
+        height: 0,
+        width: 0,
+      );
+    }
+
+    return OrderListView();
   }
 }
 

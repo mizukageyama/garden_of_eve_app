@@ -4,17 +4,19 @@ import 'package:garden_of_eve/features/landing/presentation/landing_controller.d
 import 'package:garden_of_eve/utils/utils.dart';
 
 class BottomNavItem extends StatelessWidget {
-  BottomNavItem({
-    Key? key,
-    required this.activeIcon,
-    required this.inactiveIcon,
-    required this.index,
-  }) : super(key: key);
+  BottomNavItem(
+      {Key? key,
+      required this.activeIcon,
+      required this.inactiveIcon,
+      required this.index,
+      this.size = 26})
+      : super(key: key);
 
   final LandingPageController landingController = Get.find();
   final IconData activeIcon;
   final IconData inactiveIcon;
   final int index;
+  final double size;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class BottomNavItem extends StatelessWidget {
           color: landingController.isActive(index)
               ? activeGreenColor
               : inactiveGreyColor,
-          size: 26,
+          size: size,
         ),
       ),
       onPressed: () {

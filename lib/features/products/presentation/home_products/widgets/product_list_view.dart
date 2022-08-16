@@ -14,40 +14,38 @@ class ProductListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 256,
-      child: Obx(
-        () => ListView.builder(
-          key: const PageStorageKey<String>('pageOne'),
-          controller: homeProdController.productScroller,
-          scrollDirection: Axis.horizontal,
-          shrinkWrap: true,
-          itemCount: homeProdController.products.length + 1,
-          itemBuilder: (context, index) {
-            if (index == homeProdController.products.length) {
-              return Visibility(
-                visible: homeProdController.productHasMoreData,
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 40),
-                  child: CupertinoActivityIndicator(),
-                ),
-              );
-            }
-            return Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(
-                    left: index == 0 ? 20 : 0,
-                    right: 20,
-                  ),
-                  child: ProductTile(
-                    product: homeProdController.products[index],
-                    width: 185,
-                  ),
-                ),
-              ],
+      child: ListView.builder(
+        key: const PageStorageKey<String>('pageOne'),
+        controller: homeProdController.productScroller,
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        itemCount: homeProdController.products.length + 1,
+        itemBuilder: (context, index) {
+          if (index == homeProdController.products.length) {
+            return Visibility(
+              visible: homeProdController.productHasMoreData,
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                child: CupertinoActivityIndicator(),
+              ),
             );
-          },
-        ),
+          }
+          return Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  left: index == 0 ? 20 : 0,
+                  right: 20,
+                ),
+                child: ProductTile(
+                  product: homeProdController.products[index],
+                  width: 185,
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

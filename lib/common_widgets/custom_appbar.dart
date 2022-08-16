@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/constants/app_colors.dart';
+import 'package:garden_of_eve/constants/app_text_styles.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
@@ -8,6 +9,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     this.hasBackButton = false,
     this.height,
     this.rightWidget,
+    this.title,
   }) : super(key: key);
 
   @override
@@ -15,6 +17,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final bool hasBackButton;
   final List<Widget>? rightWidget;
   final double? height;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +49,24 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                     width: 24,
                   ),
                 ),
-          ...?rightWidget
+          title == null
+              ? const SizedBox(
+                  height: 0,
+                  width: 0,
+                )
+              : Text(
+                  title!,
+                  style: quicksandSemiBold.copyWith(
+                    color: oxfordBlueColor,
+                    fontSize: 17,
+                  ),
+                ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ...?rightWidget,
+            ],
+          ),
         ],
       ),
     );

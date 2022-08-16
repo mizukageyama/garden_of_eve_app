@@ -5,7 +5,7 @@ import 'package:garden_of_eve/constants/app_text_styles.dart';
 import 'package:garden_of_eve/features/orders/domain/order_model.dart';
 import 'package:garden_of_eve/features/orders/presentation/order_info/order_info_screen.dart';
 import 'package:garden_of_eve/features/orders/presentation/order_list/widgets/order_items_list.dart';
-import 'package:garden_of_eve/features/profile/presentation/address/widgets/shipping_addr_tile.dart';
+import 'package:garden_of_eve/features/profile/presentation/address/presentation/widgets/shipping_addr_tile.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class OrderTile extends StatelessWidget {

@@ -39,6 +39,7 @@ dev_dependencies:
   get: ^4.6.5
   shimmer: ^2.0.0
   cached_network_image: ^3.2.1
+  badges: ^2.0.3
 
 
 # The following section is specific to Flutter.

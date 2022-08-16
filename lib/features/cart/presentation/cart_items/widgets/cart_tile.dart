@@ -12,86 +12,113 @@ class CartTile extends StatelessWidget {
         super(key: key);
   final Cart cartItem;
   final RxInt _qty;
+  final RxBool isSelected = false.obs;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 85,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-      decoration: const BoxDecoration(
-        color: whiteColor,
-        borderRadius: BorderRadius.all(
-          Radius.circular(15),
-        ),
-      ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        mainAxisSize: MainAxisSize.min,
         children: [
-          Flexible(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: 65,
-                  decoration: const BoxDecoration(
-                    //color: lightGreenColor,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15),
-                    ),
-                  ),
-                  child: CachedNetworkImage(
-                    imageUrl: cartItem.productInfo.imgUrl,
-                    errorWidget: (context, url, error) => Center(
-                      child: Text(
-                        'Could not load image',
-                        textAlign: TextAlign.center,
-                        style: quicksandMedium.copyWith(
-                          color: neutralGreyColor,
-                          fontSize: 13.5,
-                        ),
-                      ),
-                    ),
-                  ),
+          Visibility(
+            child: Obx(
+              () => Checkbox(
+                side: const BorderSide(
+                  color: greyColor,
                 ),
-                const SizedBox(
-                  width: 10,
+                checkColor: whiteColor,
+                activeColor: greenColor,
+                value: isSelected.value,
+                onChanged: (value) {
+                  isSelected.value = value!;
+                },
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
                 ),
-                Flexible(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        cartItem.productInfo.name,
-                        style: quicksandMedium.copyWith(
-                            color: oxfordBlueColor,
-                            fontSize: 13.5,
-                            overflow: TextOverflow.ellipsis),
-                        maxLines: 2,
-                      ),
-                      Obx(
-                        () => Text(
-                          '₱${(cartItem.productInfo.getPrice * _qty.value).toStringAsFixed(2)}',
-                          style: quicksandBold.copyWith(
-                            color: greenColor,
-                            fontSize: 13.5,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
-          QuantityIncrementor(
-            initialVal: cartItem.qty,
-            style2: true,
-            maxLimit: cartItem.productInfo.qty,
-            onChange: (value) => _qty.value = value,
-          )
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              decoration: const BoxDecoration(
+                color: whiteColor,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(15),
+                ),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Flexible(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          width: 65,
+                          decoration: const BoxDecoration(
+                            //color: lightGreenColor,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(15),
+                            ),
+                          ),
+                          child: CachedNetworkImage(
+                            imageUrl: cartItem.productInfo.imgUrl,
+                            errorWidget: (context, url, error) => Center(
+                              child: Text(
+                                'Could not load image',
+                                textAlign: TextAlign.center,
+                                style: quicksandMedium.copyWith(
+                                  color: neutralGreyColor,
+                                  fontSize: 13.5,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                cartItem.productInfo.name,
+                                style: quicksandMedium.copyWith(
+                                    color: oxfordBlueColor,
+                                    fontSize: 13.5,
+                                    overflow: TextOverflow.ellipsis),
+                                maxLines: 2,
+                              ),
+                              Obx(
+                                () => Text(
+                                  '₱${(cartItem.productInfo.getPrice * _qty.value).toStringAsFixed(2)}',
+                                  style: quicksandBold.copyWith(
+                                    color: greenColor,
+                                    fontSize: 13.5,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  QuantityIncrementor(
+                    initialVal: cartItem.qty,
+                    style2: true,
+                    maxLimit: cartItem.productInfo.qty,
+                    onChange: (value) => _qty.value = value,
+                  )
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

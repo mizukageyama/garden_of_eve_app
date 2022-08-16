@@ -22,6 +22,7 @@ class BottomNavBar extends StatelessWidget {
                 activeIcon: Icons.home_rounded,
                 inactiveIcon: Icons.home_outlined,
                 index: 0,
+                size: 28,
               ),
             ),
             Expanded(
@@ -36,16 +37,18 @@ class BottomNavBar extends StatelessWidget {
             ),
             Expanded(
               child: BottomNavItem(
-                activeIcon: Icons.local_mall_rounded,
-                inactiveIcon: Icons.local_mall_outlined,
+                activeIcon: Icons.person,
+                inactiveIcon: Icons.person_outlined,
                 index: 2,
+                size: 28,
               ),
             ),
             Expanded(
               child: BottomNavItem(
-                activeIcon: Icons.sell_rounded,
-                inactiveIcon: Icons.sell_outlined,
+                activeIcon: Icons.settings_rounded,
+                inactiveIcon: Icons.settings_outlined,
                 index: 3,
+                size: 28,
               ),
             ),
           ],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common_widgets/custom_appbar.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
+import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
+import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_screen.dart';
 import 'package:garden_of_eve/features/products/presentation/home_products/home_products_controller.dart';
 import 'package:garden_of_eve/features/products/presentation/home_products/widgets/_widgets.dart';
 import 'package:garden_of_eve/utils/utils.dart';
@@ -8,6 +10,7 @@ import 'package:garden_of_eve/utils/utils.dart';
 class ProductsScreen extends StatelessWidget {
   ProductsScreen({Key? key}) : super(key: key);
   final homeProdController = Get.put(HomeProdController());
+  final cartListController = Get.put(CartListController());
   final homePageScroller = ScrollController();
   final categoryScroller = ScrollController();
 
@@ -15,16 +18,40 @@ class ProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: const PreferredSize(
-          preferredSize: Size.fromHeight(100),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(100),
           child: CustomAppBar(
             rightWidget: [
-              CircleAvatar(
-                radius: 20,
-                backgroundImage: AssetImage(
-                  'assets/images/profile.jpg',
+              Badge(
+                padding: const EdgeInsets.all(7.0),
+                badgeColor: greenColor,
+                showBadge: true,
+                position: const BadgePosition(top: -12, end: -10),
+                badgeContent: Text(
+                  '1',
+                  style: quicksandRegular.copyWith(
+                    color: whiteColor,
+                  ),
+                ),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  onTap: () => Get.to(() => CartItemScreen()),
+                  child: const Icon(
+                    Icons.local_mall_outlined,
+                    size: 26,
+                    color: oxfordBlueColor,
+                  ),
                 ),
               ),
+              const SizedBox(
+                width: 10,
+              ),
+              // const CircleAvatar(
+              //   radius: 20,
+              //   backgroundImage: AssetImage(
+              //     'assets/images/profile.jpg',
+              //   ),
+              // ),
             ],
           ),
         ),
