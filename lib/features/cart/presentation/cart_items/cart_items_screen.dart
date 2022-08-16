@@ -9,13 +9,13 @@ import 'package:garden_of_eve/utils/utils.dart';
 class CartItemScreen extends StatelessWidget {
   CartItemScreen({Key? key}) : super(key: key);
   final CartListController cartListController = Get.find();
-  RxBool selectAll = false.obs;
+  final RxBool selectAll = false.obs;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: const CustomAppBar(
+        appBar: CustomAppBar(
           hasBackButton: true,
           title: 'My Cart',
         ),

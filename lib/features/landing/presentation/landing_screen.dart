@@ -7,7 +7,10 @@ import 'package:garden_of_eve/features/products/presentation/product_list/produc
 import 'package:garden_of_eve/utils/utils.dart';
 
 class LandingScreen extends StatelessWidget {
-  LandingScreen({Key? key}) : super(key: key);
+  LandingScreen({
+    Key? key,
+  }) : super(key: key);
+
   final landingController = Get.put(LandingPageController());
 
   @override

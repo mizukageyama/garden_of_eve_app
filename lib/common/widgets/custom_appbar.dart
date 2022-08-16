@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common/controllers/main_controller.dart';
 import 'package:garden_of_eve/constants/app_colors.dart';
 import 'package:garden_of_eve/constants/app_text_styles.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
-  const CustomAppBar({
+  CustomAppBar({
     Key? key,
     this.hasBackButton = false,
     this.height,
@@ -18,6 +19,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final List<Widget>? rightWidget;
   final double? height;
   final String? title;
+  final MainController _main = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                       )
                     : InkWell(
                         splashColor: Colors.transparent,
-                        onTap: () => Scaffold.of(context).openDrawer(),
+                        onTap: () => _main.openDrawer(),
                         child: Image.asset(
                           'assets/icons/menu.png',
                           height: 24,

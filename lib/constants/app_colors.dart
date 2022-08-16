@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 const Color bgColor = Color(0xffecf3e3);
 const Color darkGreenColor = Color(0xff5ac089);
 const Color lightGreenColor = Color(0xff70c680);
+const Color darkestGreenColor = Color(0xff013f28);
 
 //For Icons
 const Color activeGreenColor = Color(0xff4dbd90); //Bottom Nav Active

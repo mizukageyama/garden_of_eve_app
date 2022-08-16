@@ -13,7 +13,7 @@ class ProductListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: const CustomAppBar(
+        appBar: CustomAppBar(
           hasBackButton: true,
         ),
         body: Column(
