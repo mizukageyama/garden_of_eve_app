@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/common_widgets/custom_appbar.dart';
-import 'package:garden_of_eve/common_widgets/gradient_container.dart';
+import 'package:garden_of_eve/common/widgets/custom_appbar.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/widgets/cart_list_view.dart';

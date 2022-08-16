@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/common_widgets/_common_widgets.dart';
-import 'package:garden_of_eve/common_widgets/stacked_image.dart';
+import 'package:garden_of_eve/common/widgets/_common_widgets.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/products/domain/product_model.dart';
 import 'package:garden_of_eve/features/products/presentation/product_info/product_info_screen.dart';

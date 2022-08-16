@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/common_widgets/custom_appbar.dart';
+import 'package:garden_of_eve/common/widgets/custom_appbar.dart';
 import 'package:garden_of_eve/features/orders/domain/order_model.dart';
 
 class OrderInfoScreen extends StatelessWidget {

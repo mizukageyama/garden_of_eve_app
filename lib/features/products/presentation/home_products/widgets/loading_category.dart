@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/common_widgets/category_skeleton.dart';
+import 'package:garden_of_eve/common/widgets/category_skeleton.dart';
 
 class LoadingCategory extends StatelessWidget {
   const LoadingCategory({Key? key}) : super(key: key);

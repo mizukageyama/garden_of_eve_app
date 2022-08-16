@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/common_widgets/product_tile_sqr_skeleton.dart';
+import 'package:garden_of_eve/common/widgets/product_tile_sqr_skeleton.dart';
 
 class LoadingProducts extends StatelessWidget {
   const LoadingProducts({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/common_widgets/_common_widgets.dart';
-import 'package:garden_of_eve/common_widgets/custom_appbar.dart';
+import 'package:garden_of_eve/common/widgets/_common_widgets.dart';
+import 'package:garden_of_eve/common/widgets/custom_appbar.dart';
 import 'package:garden_of_eve/features/products/presentation/product_list/product_list_controller.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 

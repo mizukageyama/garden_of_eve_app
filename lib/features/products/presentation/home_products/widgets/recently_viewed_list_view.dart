@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/common_widgets/product_tile_rect.dart';
+import 'package:garden_of_eve/common/widgets/product_tile_rect.dart';
 import 'package:garden_of_eve/features/products/presentation/home_products/home_products_controller.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 

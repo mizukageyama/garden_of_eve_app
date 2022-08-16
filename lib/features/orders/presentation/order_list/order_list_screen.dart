@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/common_widgets/_common_widgets.dart';
+import 'package:garden_of_eve/common/widgets/_common_widgets.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/orders/presentation/order_list/order_list_controller.dart';
 import 'package:garden_of_eve/features/orders/presentation/order_list/widgets/order_list_view.dart';
-import 'package:garden_of_eve/features/orders/presentation/order_list/widgets/order_tile.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class OrderListScreen extends StatelessWidget {
