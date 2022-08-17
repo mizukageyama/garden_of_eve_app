@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/widgets/_common_widgets.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
+import 'package:garden_of_eve/features/checkout/presentation/checkout_item/checkout_screen.dart';
+import 'package:garden_of_eve/utils/utils.dart';
 
 class CheckoutBottomBar extends StatelessWidget {
   const CheckoutBottomBar({Key? key}) : super(key: key);
@@ -170,7 +172,7 @@ class CheckoutBottomBar extends StatelessWidget {
             height: 10,
           ),
           InkWell(
-            onTap: () {},
+            onTap: () => Get.to(() => const CheckoutScreen()),
             child: GradientContainer(
               height: 50,
               child: Center(

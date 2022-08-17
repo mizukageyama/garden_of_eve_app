@@ -1,5 +1,3 @@
-import 'package:garden_of_eve/features/favorites/data/favorites_api.dart';
-import 'package:garden_of_eve/features/orders/domain/order_model.dart';
 import 'package:garden_of_eve/features/products/domain/product_model.dart';
 import 'package:garden_of_eve/utils/dio_network/dio_exception.dart';
 import 'package:dio/dio.dart';

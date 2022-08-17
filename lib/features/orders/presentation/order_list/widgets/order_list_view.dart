@@ -39,6 +39,5 @@ class OrderListView extends StatelessWidget {
         );
       },
     );
-    ;
   }
 }

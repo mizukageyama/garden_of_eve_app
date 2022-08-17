@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common/controllers/search_controller.dart';
 import 'package:garden_of_eve/features/products/data/product_repository.dart';
 import 'package:garden_of_eve/features/products/domain/product_model.dart';
 import 'package:garden_of_eve/features/products/presentation/product_list/product_list_screen.dart';
@@ -7,8 +8,7 @@ import 'package:garden_of_eve/utils/utils.dart';
 class HomeProdController extends GetxController {
   //Repository
   final ProductRepository _productRepo = ProductRepository();
-
-  final List<List<Product>> categoryProd = [[]];
+  final SearchController searchController = Get.put(SearchController());
 
   //Product Variable
   final productScroller = ScrollController();
@@ -65,6 +65,7 @@ class HomeProdController extends GetxController {
       return;
     }
     if (index == 0) {
+      searchController.setSearchKey = '';
       Get.to(() => ProductListScreen());
     } else {
       activeCategoryIndex.value = index;

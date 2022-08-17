@@ -6,14 +6,17 @@ import 'package:garden_of_eve/utils/utils.dart';
 class CartListController extends GetxController {
   //Repository
   final CartRepository _cartRepo = CartRepository();
+  final RxBool selectAll = false.obs;
 
-  //Product Variable
+  //Cart Variable
   final cartListScroller = ScrollController();
   RxList<Cart> cartList = RxList.empty(growable: true);
   RxBool isLoadingProd = true.obs;
   bool productHasMoreData = false;
   int currentPage = 1;
   late int totalPage;
+
+  RxSet<Cart> selectedItems = RxSet<Cart>();
 
   //Methods
   @override

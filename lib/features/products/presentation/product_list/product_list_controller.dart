@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common/controllers/search_controller.dart';
 import 'package:garden_of_eve/features/products/data/product_repository.dart';
 import 'package:garden_of_eve/features/products/domain/product_model.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class ProdListController extends GetxController {
+  final SearchController searchController = Get.find();
+
   //Repository
   final ProductRepository _productRepo = ProductRepository();
 
@@ -44,7 +47,10 @@ class ProdListController extends GetxController {
 
     final result = await _productRepo.getProductList(
       currentPage,
+      searchController.getSearchKey,
     );
+
+    print('Search key: ${searchController.getSearchKey}');
 
     if (isRefresh) {
       prodList.value = result;

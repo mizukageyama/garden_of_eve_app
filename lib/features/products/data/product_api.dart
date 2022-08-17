@@ -17,12 +17,18 @@ class ProductApi {
     }
   }
 
-  Future<Response> getProducts(int page) async {
+  Future<Response> getProducts(int page, String searchKey) async {
     try {
-      final Response response = await dioClient.get('products?page=$page',
-          options: Options(headers: {
-            "content-type": "application/json",
-          }));
+      String filterProduct = '';
+      if (searchKey != '') {
+        filterProduct = '&search_key=$searchKey';
+      }
+
+      final Response response =
+          await dioClient.get('products?page=$page$filterProduct',
+              options: Options(headers: {
+                "content-type": "application/json",
+              }));
       return response;
     } catch (e) {
       rethrow;

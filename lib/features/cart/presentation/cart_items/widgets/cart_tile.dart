@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/cart/domain/cart_model.dart';
+import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
 import 'package:garden_of_eve/features/products/presentation/product_info/widgets/quantity_incrementor.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
@@ -8,11 +9,10 @@ class CartTile extends StatelessWidget {
   CartTile({
     Key? key,
     required this.cartItem,
-  })  : _qty = cartItem.qty.obs,
-        super(key: key);
+  }) : super(key: key);
+
+  final CartListController cartListController = Get.find();
   final Cart cartItem;
-  final RxInt _qty;
-  final RxBool isSelected = false.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +28,17 @@ class CartTile extends StatelessWidget {
                 ),
                 checkColor: whiteColor,
                 activeColor: greenColor,
-                value: isSelected.value,
+                value: cartItem.isSelected.value,
                 onChanged: (value) {
-                  isSelected.value = value!;
+                  cartItem.isSelected.value = value!;
+                  if (cartItem.isSelected.value) {
+                    cartListController.selectedItems.add((cartItem));
+                  } else {
+                    cartListController.selectAll.value = false;
+                    cartListController.selectedItems.remove((cartItem));
+                  }
+                  // print('Selected Cart Items:');
+                  // print(cartListController.selectedItems);
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(6),
@@ -59,7 +67,6 @@ class CartTile extends StatelessWidget {
                         Container(
                           width: 65,
                           decoration: const BoxDecoration(
-                            //color: lightGreenColor,
                             borderRadius: BorderRadius.all(
                               Radius.circular(15),
                             ),
@@ -96,7 +103,7 @@ class CartTile extends StatelessWidget {
                               ),
                               Obx(
                                 () => Text(
-                                  '₱${(cartItem.productInfo.getPrice * _qty.value).toStringAsFixed(2)}',
+                                  '₱${(cartItem.productInfo.getPrice * cartItem.qty.value).toStringAsFixed(2)}',
                                   style: quicksandBold.copyWith(
                                     color: greenColor,
                                     fontSize: 13.5,
@@ -110,10 +117,10 @@ class CartTile extends StatelessWidget {
                     ),
                   ),
                   QuantityIncrementor(
-                    initialVal: cartItem.qty,
+                    initialVal: cartItem.qty.value,
                     style2: true,
                     maxLimit: cartItem.productInfo.qty,
-                    onChange: (value) => _qty.value = value,
+                    onChange: (value) => cartItem.qty.value = value,
                   )
                 ],
               ),

@@ -23,9 +23,9 @@ class ProductRepository {
     }
   }
 
-  Future<List<Product>> getProductList(int page) async {
+  Future<List<Product>> getProductList(int page, String searchKey) async {
     try {
-      final response = await _productApi.getProducts(page);
+      final response = await _productApi.getProducts(page, searchKey);
       final Map<String, dynamic> rawData = response.data['data'];
       totalPages = rawData['total_pages'];
       final products =

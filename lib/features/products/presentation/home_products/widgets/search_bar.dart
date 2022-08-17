@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common/controllers/search_controller.dart';
 import 'package:garden_of_eve/constants/app_colors.dart';
+import 'package:garden_of_eve/features/products/presentation/product_list/product_list_screen.dart';
+import 'package:garden_of_eve/utils/utils.dart';
 
 class SearchProductField extends StatelessWidget {
-  const SearchProductField({Key? key}) : super(key: key);
+  SearchProductField({Key? key}) : super(key: key);
+  final SearchController searchController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +32,10 @@ class SearchProductField extends StatelessWidget {
         ),
         onFieldSubmitted: (value) {
           print('Submitted: $value');
+          if (value != '') {
+            searchController.setSearchKey = value;
+            Get.to(() => ProductListScreen());
+          }
         });
   }
 }

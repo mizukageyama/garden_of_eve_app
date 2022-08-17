@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/common/controllers/main_controller.dart';
 import 'package:garden_of_eve/common/widgets/custom_appbar.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
@@ -10,6 +9,7 @@ import 'package:garden_of_eve/utils/utils.dart';
 
 class ProductsScreen extends StatelessWidget {
   ProductsScreen({Key? key}) : super(key: key);
+
   final homeProdController = Get.put(HomeProdController());
   final cartListController = Get.put(CartListController());
   final homePageScroller = ScrollController();
@@ -63,8 +63,8 @@ class ProductsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: SearchProductField(),
               ),
               const SizedBox(

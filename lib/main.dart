@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
-import 'package:garden_of_eve/features/landing/presentation/landing_screen.dart';
 import 'package:garden_of_eve/main_screen.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
