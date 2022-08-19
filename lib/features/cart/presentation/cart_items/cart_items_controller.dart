@@ -30,8 +30,15 @@ class CartListController extends GetxController {
         await getCartData();
       }
     });
-
     super.onInit();
+  }
+
+  double subTotal() {
+    double subTotal = 0.0;
+    selectedItems.map((item) {
+      subTotal += (item.productInfo.getPrice * item.qty.value);
+    }).toList();
+    return subTotal;
   }
 
   //For Products

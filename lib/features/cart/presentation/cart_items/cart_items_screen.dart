@@ -28,7 +28,7 @@ class CartItemScreen extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: const CheckoutBottomBar(),
+        bottomNavigationBar: CheckoutBottomBar(),
       ),
     );
   }

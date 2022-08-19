@@ -8,6 +8,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   CustomAppBar({
     Key? key,
     this.hasBackButton = false,
+    this.backgroundColor = bgColor,
+    this.contentColor = oxfordBlueColor,
     this.height,
     this.rightWidget,
     this.title,
@@ -19,13 +21,16 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final List<Widget>? rightWidget;
   final double? height;
   final String? title;
-  final MainController _main = Get.find();
+  final Color backgroundColor;
+  final Color contentColor;
+  final MainController _main = Get.put(MainController());
+  //final MainController _main = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(15),
-      color: bgColor,
+      color: backgroundColor,
       height: height,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,10 +46,10 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                     ? InkWell(
                         splashColor: Colors.transparent,
                         onTap: () => Get.back(),
-                        child: const Icon(
+                        child: Icon(
                           Icons.arrow_back_ios_rounded,
                           size: 24,
-                          color: oxfordBlueColor,
+                          color: contentColor,
                         ),
                       )
                     : InkWell(
@@ -65,7 +70,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
               child: Text(
                 '$title',
                 style: quicksandSemiBold.copyWith(
-                  color: oxfordBlueColor,
+                  color: contentColor,
                   fontSize: 17,
                 ),
                 textAlign: TextAlign.center,

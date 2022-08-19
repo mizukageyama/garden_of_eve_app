@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/widgets/_common_widgets.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
+import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/checkout_screen.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class CheckoutBottomBar extends StatelessWidget {
-  const CheckoutBottomBar({Key? key}) : super(key: key);
+  CheckoutBottomBar({Key? key}) : super(key: key);
+  final CartListController cartListController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -79,11 +81,13 @@ class CheckoutBottomBar extends StatelessWidget {
                   color: neutralGreyColor,
                 ),
               ),
-              Text(
-                "₱${(200).toStringAsFixed(2)}",
-                style: quicksandBold.copyWith(
-                  fontSize: 14,
-                  color: oxfordBlueColor,
+              Obx(
+                () => Text(
+                  "₱${(cartListController.subTotal()).toStringAsFixed(2)}",
+                  style: quicksandBold.copyWith(
+                    fontSize: 14,
+                    color: oxfordBlueColor,
+                  ),
                 ),
               ),
             ],
@@ -91,31 +95,31 @@ class CheckoutBottomBar extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Delivery Fee:",
-                style: quicksandSemiBold.copyWith(
-                  fontSize: 14,
-                  color: neutralGreyColor,
-                ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Text(
-                "₱${(120).toStringAsFixed(2)}",
-                style: quicksandBold.copyWith(
-                  fontSize: 14,
-                  color: oxfordBlueColor,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     Text(
+          //       "Delivery Fee:",
+          //       style: quicksandSemiBold.copyWith(
+          //         fontSize: 14,
+          //         color: neutralGreyColor,
+          //       ),
+          //     ),
+          //     const SizedBox(
+          //       width: 10,
+          //     ),
+          //     Text(
+          //       "₱${(120).toStringAsFixed(2)}",
+          //       style: quicksandBold.copyWith(
+          //         fontSize: 14,
+          //         color: oxfordBlueColor,
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // const SizedBox(
+          //   height: 10,
+          // ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -172,7 +176,13 @@ class CheckoutBottomBar extends StatelessWidget {
             height: 10,
           ),
           InkWell(
-            onTap: () => Get.to(() => const CheckoutScreen()),
+            onTap: () {
+              if (cartListController.selectedItems.isNotEmpty) {
+                Get.to(() => CheckoutScreen());
+              } else {
+                print('No selected items to checkout');
+              }
+            },
             child: GradientContainer(
               height: 50,
               child: Center(
