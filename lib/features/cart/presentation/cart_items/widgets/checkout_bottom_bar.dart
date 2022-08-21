@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/widgets/_common_widgets.dart';
+import 'package:garden_of_eve/common/widgets/custom_text_field.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/checkout_screen.dart';
@@ -36,38 +37,9 @@ class CheckoutBottomBar extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          TextFormField(
-              minLines: 1,
-              style: quicksandSemiBold.copyWith(
-                color: darkGreyColor,
-                fontSize: 14,
-              ),
-              decoration: InputDecoration(
-                labelStyle: quicksandSemiBold.copyWith(
-                  color: neutralGreyColor,
-                  fontSize: 14,
-                ),
-                filled: true,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-                fillColor: whiteColor,
-                labelText: 'Promo Code',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                    color: neutralGreyColor,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                    color: neutralGreyColor,
-                  ),
-                ),
-                floatingLabelBehavior: FloatingLabelBehavior.never,
-              ),
-              onFieldSubmitted: (value) {
-                print('Submitted: $value');
-              }),
+          const CustomTextField(
+            labelText: 'Promo Code',
+          ),
           const SizedBox(
             height: 10,
           ),

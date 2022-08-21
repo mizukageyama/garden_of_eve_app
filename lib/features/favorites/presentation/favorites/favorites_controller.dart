@@ -13,8 +13,8 @@ class FavoritesController extends GetxController {
   int totalPages = 0;
 
   @override
-  void onInit() async {
-    await getFavorites(isRefresh: true);
+  void onInit() {
+    getFavorites(isRefresh: true);
     // favListScroller.addListener(() async {
     //   if (favListScroller.position.pixels ==
     //       favListScroller.position.maxScrollExtent) {

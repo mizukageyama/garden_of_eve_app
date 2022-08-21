@@ -30,8 +30,8 @@ class HomeProdController extends GetxController {
 
   //Methods
   @override
-  void onInit() async {
-    await getCategories();
+  void onInit() {
+    getCategories();
 
     productScroller.addListener(() async {
       if (productScroller.position.pixels ==

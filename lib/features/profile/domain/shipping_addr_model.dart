@@ -13,7 +13,7 @@ class ShippingAddr {
 
   factory ShippingAddr.fromJson(Map<String, dynamic> json) {
     return ShippingAddr(
-      addressId: json['address_id'] as int,
+      addressId: json['id'] as int,
       fullName: json['full_name'] as String,
       address: json['address'] as String,
       contactNumber: json['contact_number'] as String,

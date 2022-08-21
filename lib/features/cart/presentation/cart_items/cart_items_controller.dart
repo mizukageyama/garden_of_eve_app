@@ -20,9 +20,9 @@ class CartListController extends GetxController {
 
   //Methods
   @override
-  void onInit() async {
+  void onInit() {
     print('onInit | CartListController');
-    await getCartData(isRefresh: true);
+    getCartData(isRefresh: true);
     cartListScroller.addListener(() async {
       if (cartListScroller.position.pixels ==
           cartListScroller.position.maxScrollExtent) {

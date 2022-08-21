@@ -11,7 +11,6 @@ class OrderListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      key: const PageStorageKey<String>('pageOne'),
       controller: orderListController.orderScroller,
       padding: const EdgeInsets.symmetric(horizontal: 15),
       shrinkWrap: true,

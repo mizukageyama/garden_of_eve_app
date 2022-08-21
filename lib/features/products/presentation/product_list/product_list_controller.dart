@@ -20,9 +20,9 @@ class ProdListController extends GetxController {
 
   //Methods
   @override
-  void onInit() async {
+  void onInit() {
     print('onInit | ProdListController');
-    await _getProductsData(isRefresh: true);
+    _getProductsData(isRefresh: true);
     prodListScroller.addListener(() async {
       if (prodListScroller.position.pixels ==
           prodListScroller.position.maxScrollExtent) {

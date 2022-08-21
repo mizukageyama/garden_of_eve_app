@@ -13,8 +13,8 @@ class OrderListController extends GetxController {
   bool hasMoreData = false;
 
   @override
-  void onInit() async {
-    await getOrders(isRefresh: true);
+  void onInit() {
+    getOrders(isRefresh: true);
 
     orderScroller.addListener(() async {
       if (orderScroller.position.pixels ==
