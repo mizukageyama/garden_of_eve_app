@@ -26,9 +26,17 @@ class Validator {
     if (value == null) {
       return 'This is a required field';
     }
-    bool isNum = double.tryParse(value) != null;
-    if (!isNum) {
+    const pattern = r'^[0-9]*$';
+    final regex = RegExp(pattern);
+    if (!regex.hasMatch(value)) {
       return 'Enter a number';
+    }
+    return null;
+  }
+
+  String? phoneNumber(String? value) {
+    if (value == null) {
+      return 'This is a required field';
     }
     return null;
   }

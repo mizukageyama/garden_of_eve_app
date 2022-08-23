@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -11,6 +12,7 @@ class CustomTextField extends StatelessWidget {
     this.callback,
     this.validator,
     this.keyboardType,
+    this.inputFormatters,
     this.borderRadius = const BorderRadius.all(
       Radius.circular(
         10.0,
@@ -26,6 +28,7 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final BorderRadius borderRadius;
   final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +63,9 @@ class CustomTextField extends StatelessWidget {
         ),
         floatingLabelBehavior: floatLabel ? null : FloatingLabelBehavior.never,
       ),
+      inputFormatters: inputFormatters,
       onFieldSubmitted: (value) {
         callback!();
-        //print('Submitted: $value');
       },
       validator: validator,
     );

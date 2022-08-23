@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/common/controllers/addr_form_controller.dart';
+import 'package:flutter/services.dart';
+import 'package:garden_of_eve/common/controllers/ph_address_controller.dart';
+import 'package:garden_of_eve/common/controllers/shipping_addr_form_controller.dart';
 import 'package:garden_of_eve/common/services/validator.dart';
 import 'package:garden_of_eve/common/widgets/custom_dropdown2.dart';
 import 'package:garden_of_eve/common/widgets/custom_text_field.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class ShippingAddrForm extends StatelessWidget {
-  ShippingAddrForm({Key? key}) : super(key: key);
-  final AddrFormController _addrForm = Get.put(AddrFormController());
-  final RxBool isDropdownClicked = false.obs;
+  ShippingAddrForm({
+    Key? key,
+    required ShippingAddrFormController formController,
+  })  : _formController = formController,
+        super(key: key);
+
+  final ShippingAddrFormController _formController;
+  final _phAddress = Get.put(PhAddressController());
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +25,15 @@ class ShippingAddrForm extends StatelessWidget {
           children: [
             Expanded(
               child: CustomTextField(
+                controller: _formController.saFullName,
                 labelText: 'Full Name',
                 floatLabel: true,
+                inputFormatters: [
+                  FilteringTextInputFormatter(
+                    RegExp(r'^[a-zA-Z\s]+'),
+                    allow: true,
+                  ),
+                ],
                 borderRadius: BorderRadius.circular(10),
                 validator: Validator().notEmpty,
               ),
@@ -29,10 +43,18 @@ class ShippingAddrForm extends StatelessWidget {
             ),
             Expanded(
               child: CustomTextField(
+                controller: _formController.saContactNum,
                 labelText: 'Contact Number',
                 floatLabel: true,
                 keyboardType: TextInputType.phone,
-                validator: Validator().notEmpty,
+                inputFormatters: [
+                  FilteringTextInputFormatter(
+                    RegExp(r'^[0-9]*'),
+                    allow: true,
+                  ),
+                  LengthLimitingTextInputFormatter(11),
+                ],
+                validator: Validator().phoneNumber,
               ),
             ),
           ],
@@ -41,13 +63,15 @@ class ShippingAddrForm extends StatelessWidget {
           height: 10,
         ),
         CustomDropdown2(
-          dropdownItems: _addrForm.regions,
+          dpKey: _phAddress.regionKey,
+          dropdownItems: _phAddress.regions,
           hintText: 'Region',
           onChanged: (value) {
-            _addrForm.region = '$value';
+            _formController.saRegion = '$value';
+            _phAddress.region = '$value';
           },
           validator: (value) {
-            if (_addrForm.selectedRegion.value == null) {
+            if (_phAddress.selectedRegion.value == null) {
               return 'This is a required field';
             }
             return null;
@@ -58,14 +82,15 @@ class ShippingAddrForm extends StatelessWidget {
         ),
         Obx(
           () => CustomDropdown2(
-            dpKey: _addrForm.provinceKey,
-            dropdownItems: _addrForm.provinces,
+            dpKey: _phAddress.provinceKey,
+            dropdownItems: _phAddress.provinces,
             hintText: 'Province',
             onChanged: (value) {
-              _addrForm.province = '$value';
+              _formController.saProvince = '$value';
+              _phAddress.province = '$value';
             },
             validator: (value) {
-              if (_addrForm.selectedProvince.value == null) {
+              if (_phAddress.selectedProvince.value == null) {
                 return 'This is a required field';
               }
               return null;
@@ -77,14 +102,15 @@ class ShippingAddrForm extends StatelessWidget {
         ),
         Obx(
           () => CustomDropdown2(
-            dpKey: _addrForm.municipalityKey,
-            dropdownItems: _addrForm.municipalities,
-            hintText: 'Municipality',
+            dpKey: _phAddress.municipalityKey,
+            dropdownItems: _phAddress.municipalities,
+            hintText: 'City/Municipality',
             onChanged: (value) {
-              _addrForm.municipality = '$value';
+              _formController.saCity = '$value';
+              _phAddress.municipality = '$value';
             },
             validator: (value) {
-              if (_addrForm.selectedMunicipality.value == null) {
+              if (_phAddress.selectedMunicipality.value == null) {
                 return 'This is a required field';
               }
               return null;
@@ -96,14 +122,15 @@ class ShippingAddrForm extends StatelessWidget {
         ),
         Obx(
           () => CustomDropdown2(
-            dpKey: _addrForm.barangayKey,
-            dropdownItems: _addrForm.barangays,
+            dpKey: _phAddress.barangayKey,
+            dropdownItems: _phAddress.barangays,
             hintText: 'Barangay',
             onChanged: (value) {
-              _addrForm.barangay = '$value';
+              _formController.saBarangay = '$value';
+              _phAddress.barangay = '$value';
             },
             validator: (value) {
-              if (_addrForm.selectedBarangay == '') {
+              if (_phAddress.selectedBarangay == '') {
                 return 'This is a required field';
               }
               return null;
@@ -114,15 +141,10 @@ class ShippingAddrForm extends StatelessWidget {
           height: 10,
         ),
         CustomTextField(
+          controller: _formController.saHouseAddr,
           labelText: 'Street Name, Building, House No.',
           floatLabel: true,
           validator: Validator().notEmpty,
-        ),
-        Visibility(
-          visible: isDropdownClicked.value,
-          child: const SizedBox(
-            height: 200,
-          ),
         ),
       ],
     );

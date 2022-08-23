@@ -33,7 +33,7 @@ class _CustomDropdown2State extends State<CustomDropdown2> {
   Widget build(BuildContext context) {
     return DropdownButtonFormField2(
       key: widget._key,
-      dropdownMaxHeight: 200,
+      dropdownMaxHeight: 300,
       decoration: InputDecoration(
         labelText: widget.hintText,
         labelStyle: quicksandRegular.copyWith(fontSize: 14),

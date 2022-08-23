@@ -3,7 +3,7 @@ import 'package:garden_of_eve/common/models/ph_addr_model.dart';
 import 'package:garden_of_eve/constants/ph_location.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
-class AddrFormController extends GetxController {
+class PhAddressController extends GetxController {
   final PhAddress addr = PhAddress.fromJson(PhLocation.data);
   Rxn<Region?> selectedRegion = Rxn<Region>();
   Rxn<Province?> selectedProvince = Rxn<Province>();
