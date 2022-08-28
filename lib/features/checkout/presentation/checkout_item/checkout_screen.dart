@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/widgets/custom_appbar.dart';
+import 'package:garden_of_eve/common/widgets/custom_stepper.dart' as cs;
 import 'package:garden_of_eve/constants/app_colors.dart';
 import 'package:garden_of_eve/constants/app_text_styles.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/checkout_controller.dart';
@@ -24,11 +25,11 @@ class CheckoutScreen extends StatelessWidget {
           contentColor: whiteColor,
         ),
         body: Obx(
-          () => Stepper(
+          () => cs.CutomStepper(
             physics: const AlwaysScrollableScrollPhysics(),
             currentStep: _checkoutController.currentStep,
             onStepTapped: _checkoutController.tapStep,
-            type: StepperType.horizontal,
+            type: cs.StepperType.horizontal,
             steps: [
               Step(
                 title: Text(

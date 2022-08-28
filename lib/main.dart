@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           backgroundColor: lightGreenColor,
         ),
+        splashFactory: NoSplash.splashFactory,
         scaffoldBackgroundColor: bgColor,
       ),
       defaultTransition: Transition.noTransition,

@@ -9,12 +9,14 @@ class ShippingAddrTile extends StatelessWidget {
     this.forListView = false,
     this.showRemove = false,
     this.backgroundColor = whiteColor,
+    this.fontColor = darkGreyColor,
   }) : super(key: key);
 
   final ShippingAddr addr;
   final bool forListView;
   final bool showRemove;
   final Color backgroundColor;
+  final Color fontColor;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class ShippingAddrTile extends StatelessWidget {
                 addr.address,
                 style: quicksandSemiBold.copyWith(
                   fontSize: 15,
-                  color: darkGreyColor,
+                  color: fontColor,
                 ),
               ),
               const SizedBox(height: 1),
@@ -49,7 +51,7 @@ class ShippingAddrTile extends StatelessWidget {
                 '${addr.fullName} | ${addr.contactNumber}',
                 style: quicksandMedium.copyWith(
                   fontSize: 14,
-                  color: darkGreyColor,
+                  color: fontColor,
                 ),
               ),
             ],

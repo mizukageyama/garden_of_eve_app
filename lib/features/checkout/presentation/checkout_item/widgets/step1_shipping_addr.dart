@@ -18,16 +18,32 @@ class Step1ShippingAddr extends StatelessWidget {
   final cont1 = ExpandableController(initialExpanded: true);
   final cont2 = ExpandableController();
 
+  void togglePanels(int selected) {
+    if (activeRadioButton.value != selected) {
+      activeRadioButton.value = selected;
+      cont1.toggle();
+      cont2.toggle();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        InkWell(
+        Text(
+          'Select shipping address for your order',
+          style: quicksandSemiBold.copyWith(
+            fontSize: 17,
+            color: oxfordBlueColor,
+          ),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        GestureDetector(
           onTap: () {
-            activeRadioButton.value = 1;
-            cont1.toggle();
-            cont2.toggle();
+            togglePanels(1);
           },
           child: Row(
             children: [
@@ -35,91 +51,101 @@ class Step1ShippingAddr extends StatelessWidget {
                 () => Radio(
                   value: 1,
                   groupValue: activeRadioButton.value,
-                  onChanged: null,
+                  visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity,
+                  ),
+                  activeColor: greenColor,
+                  onChanged: (value) {
+                    togglePanels(1);
+                  },
                 ),
               ),
               Text(
                 'Your saved shipping address',
                 style: quicksandMedium.copyWith(
-                  fontSize: 16,
+                  fontSize: 15,
+                  color: darkGreyColor,
                 ),
               ),
             ],
           ),
         ),
-        Obx(
-          () => ExpandableNotifier(
-            controller: cont1,
-            child: Expandable(
-              collapsed: const SizedBox(
-                height: 0,
-                width: 0,
-              ),
-              expanded: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Obx(
-                    () => showAddress(),
-                  ),
-                ],
-              ),
+        ExpandableNotifier(
+          controller: cont1,
+          child: Expandable(
+            collapsed: const SizedBox(
+              height: 0,
+              width: 0,
+            ),
+            expanded: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(
+                  height: 15,
+                ),
+                Obx(
+                  () => showAddress(),
+                ),
+              ],
             ),
           ),
         ),
         const SizedBox(
           height: 15,
         ),
-        InkWell(
+        GestureDetector(
           onTap: () {
-            activeRadioButton.value = 2;
-            cont1.toggle();
-            cont2.toggle();
+            togglePanels(2);
           },
           child: Row(
             children: [
               Obx(
                 () => Radio(
+                  visualDensity: const VisualDensity(
+                    horizontal: VisualDensity.minimumDensity,
+                    vertical: VisualDensity.minimumDensity,
+                  ),
+                  activeColor: greenColor,
                   value: 2,
                   groupValue: activeRadioButton.value,
-                  onChanged: null,
+                  onChanged: (value) {
+                    togglePanels(2);
+                  },
                 ),
               ),
               Text(
                 'Enter new shipping address',
                 style: quicksandMedium.copyWith(
-                  fontSize: 16,
+                  fontSize: 15,
+                  color: darkGreyColor,
                 ),
               ),
             ],
           ),
         ),
-        Obx(
-          () => ExpandableNotifier(
-            controller: cont2,
-            child: Expandable(
-              collapsed: const SizedBox(
-                height: 0,
-                width: 0,
-              ),
-              expanded: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const SizedBox(
-                    height: 20,
+        ExpandableNotifier(
+          controller: cont2,
+          child: Expandable(
+            collapsed: const SizedBox(
+              height: 0,
+              width: 0,
+            ),
+            expanded: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                Form(
+                  key: _formKey,
+                  child: ShippingAddrForm(
+                    formController: shippingFormController,
                   ),
-                  Form(
-                    key: _formKey,
-                    child: ShippingAddrForm(
-                      formController: shippingFormController,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
@@ -127,12 +153,18 @@ class Step1ShippingAddr extends StatelessWidget {
           height: 20,
         ),
         InkWell(
-          onTap: () {
-            if (_formKey.currentState!.validate()) {
-              print(
-                  '${shippingFormController.saFullName.text} | ${shippingFormController.saContactNum.text}');
-              print(shippingFormController.fullAddressInput);
-              _checkoutController.nextStep();
+          onTap: () async {
+            if (activeRadioButton.value == 1) {
+              if (shippingFormController.hasSelected) {
+                _checkoutController.nextStep();
+              } else {
+                print('Please select address');
+              }
+            } else {
+              if (_formKey.currentState!.validate()) {
+                await shippingFormController.setAddrFromInput();
+                _checkoutController.nextStep();
+              }
             }
           },
           child: GradientContainer(
@@ -176,6 +208,9 @@ class Step1ShippingAddr extends StatelessWidget {
       height: 200,
       child: ShippingAddrListView(
         backgroundColor: bgColor,
+        selectAddr: (selectedAddr) =>
+            shippingFormController.setAddrFromSaved(selectedAddr),
+        selectedId: shippingFormController.selectedAddrId,
       ),
     );
   }

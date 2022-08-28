@@ -1,9 +1,10 @@
 import 'package:garden_of_eve/features/profile/data/shipping_addr_repository.dart';
+import 'package:garden_of_eve/features/profile/domain/shipping_addr_model.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class ShippingAddrController extends GetxController {
   final ShippingAddrRepository _addrRepo = ShippingAddrRepository();
-  final RxList addrList = RxList.empty(growable: true);
+  final RxList<ShippingAddr> addrList = RxList.empty(growable: true);
   RxBool isLoading = false.obs;
 
   @override

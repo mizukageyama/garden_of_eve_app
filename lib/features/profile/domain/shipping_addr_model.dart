@@ -28,4 +28,9 @@ class ShippingAddr {
   //   data['contact_number'] = this.contactNumber;
   //   return data;
   // }
+
+  @override
+  String toString() {
+    return address + ' $addressId';
+  }
 }
