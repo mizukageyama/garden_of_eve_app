@@ -34,7 +34,7 @@ class ShippingAddrFormController extends GetxController {
     );
   }
 
-  bool get hasSelected => selectedShippingAddr != null;
+  bool get hasSelected => selectedShippingAddr.value != null;
 
   Future<void> setAddrFromSaved(ShippingAddr savedAddr) async {
     selectedShippingAddr.value = savedAddr;

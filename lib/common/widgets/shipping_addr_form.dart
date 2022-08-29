@@ -54,7 +54,7 @@ class ShippingAddrForm extends StatelessWidget {
                   ),
                   LengthLimitingTextInputFormatter(11),
                 ],
-                validator: Validator().phoneNumber,
+                validator: Validator().notEmpty,
               ),
             ),
           ],

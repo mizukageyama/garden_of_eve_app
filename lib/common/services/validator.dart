@@ -34,13 +34,6 @@ class Validator {
     return null;
   }
 
-  String? phoneNumber(String? value) {
-    if (value == null) {
-      return 'This is a required field';
-    }
-    return null;
-  }
-
   String? notEmpty(String? value) {
     if (value == '') {
       return 'This is a required field';
