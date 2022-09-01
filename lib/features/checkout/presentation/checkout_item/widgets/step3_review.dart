@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/common/widgets/gradient_container.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/checkout_controller.dart';
+import 'package:garden_of_eve/features/orders/domain/order_items_model.dart';
+import 'package:garden_of_eve/features/orders/presentation/order_list/widgets/order_items_list.dart';
+import 'package:garden_of_eve/features/profile/presentation/address/widgets/shipping_addr_tile.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class Step3Review extends StatelessWidget {
@@ -34,32 +36,46 @@ class Step3Review extends StatelessWidget {
           height: 20,
         ),
         Container(
-          height: 100,
           decoration: BoxDecoration(
             border: Border.all(
               color: neutralGreyColor,
             ),
             borderRadius: BorderRadius.circular(8),
           ),
-          padding: const EdgeInsets.all(8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          padding: const EdgeInsets.all(15),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                'Shipping Address',
-                style: quicksandSemiBold.copyWith(
-                  fontSize: 15,
-                  color: oxfordBlueColor,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Shipping Address',
+                    style: quicksandSemiBold.copyWith(
+                      fontSize: 15,
+                      color: oxfordBlueColor,
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () => _checkoutController.tapStep(0),
+                    child: Text(
+                      'Edit',
+                      style: quicksandSemiBold.copyWith(
+                        fontSize: 15,
+                        color: greenColor,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                'Edit',
-                style: quicksandSemiBold.copyWith(
-                  fontSize: 15,
-                  color: greenColor,
-                  decoration: TextDecoration.underline,
-                ),
+              const SizedBox(
+                height: 10,
+              ),
+              ShippingAddrTile(
+                addr: _checkoutController.getSelectedAddr,
               ),
             ],
           ),
@@ -68,54 +84,112 @@ class Step3Review extends StatelessWidget {
           height: 15,
         ),
         Container(
-          height: 150,
           decoration: BoxDecoration(
             border: Border.all(
               color: neutralGreyColor,
             ),
             borderRadius: BorderRadius.circular(8),
           ),
-          padding: const EdgeInsets.all(8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          padding: const EdgeInsets.all(15),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                'Payment',
-                style: quicksandSemiBold.copyWith(
-                  fontSize: 15,
-                  color: oxfordBlueColor,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Payment Option',
+                    style: quicksandSemiBold.copyWith(
+                      fontSize: 15,
+                      color: oxfordBlueColor,
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () => _checkoutController.tapStep(1),
+                    child: Text(
+                      'Edit',
+                      style: quicksandSemiBold.copyWith(
+                        fontSize: 15,
+                        color: greenColor,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                'Edit',
-                style: quicksandSemiBold.copyWith(
-                  fontSize: 15,
-                  color: greenColor,
-                  decoration: TextDecoration.underline,
-                ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Image.asset(
+                    _checkoutController.getSelectedPayment.logo,
+                    height: 24,
+                    width: 24,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    _checkoutController.getSelectedPayment.title,
+                    style: quicksandMedium.copyWith(
+                      fontSize: 15,
+                      color: darkGreyColor,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
         ),
         const SizedBox(
-          height: 20,
+          height: 15,
         ),
-        InkWell(
-          onTap: () => _checkoutController.createOrder(),
-          child: GradientContainer(
-            borderRadius: BorderRadius.circular(10),
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: Center(
-              child: Text(
-                'Submit Order',
-                textAlign: TextAlign.center,
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: neutralGreyColor,
+            ),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Product Items',
                 style: quicksandSemiBold.copyWith(
-                  fontSize: 14,
-                  color: whiteColor,
+                  fontSize: 15,
+                  color: oxfordBlueColor,
                 ),
               ),
-            ),
+              const SizedBox(
+                height: 10,
+              ),
+              OrderItemsList(
+                bordered: false,
+                items: [
+                  OrderItem(
+                    id: 5,
+                    name: 'Agave Palm Tree Plant',
+                    description: 'Price: 300, Quantity: 2',
+                  ),
+                  OrderItem(
+                    id: 1,
+                    name: 'Peperomia Watermelon Plant',
+                    description: 'Price: 800, Quantity: 2',
+                  ),
+                  OrderItem(
+                    id: 2,
+                    name: 'Rubber Tree Plant',
+                    description: 'Price: 1500, Quantity: 1',
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ],

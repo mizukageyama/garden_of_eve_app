@@ -28,7 +28,7 @@ class LandingPageController extends GetxController {
 
   bool isActive(int index) => index == activeIndex.value;
 
-  get currentPage => pages[activeIndex.value];
+  StatelessWidget get currentPage => pages[activeIndex.value];
 
-  get selectedIndex => activeIndex.value;
+  int get selectedIndex => activeIndex.value;
 }

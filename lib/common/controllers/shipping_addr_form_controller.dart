@@ -40,5 +40,7 @@ class ShippingAddrFormController extends GetxController {
     selectedShippingAddr.value = savedAddr;
   }
 
+  ShippingAddr? get addrModel => selectedShippingAddr.value;
+
   int get selectedAddrId => selectedShippingAddr.value?.addressId ?? 0;
 }

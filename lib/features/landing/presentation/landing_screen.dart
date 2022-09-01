@@ -11,7 +11,7 @@ class LandingScreen extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final landingController = Get.put(LandingPageController());
+  final LandingPageController landingController = Get.find();
 
   @override
   Widget build(BuildContext context) {

@@ -17,11 +17,11 @@ class AddToCartRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         color: whiteColor,
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: neutralGreyColor,
+            color: neutralGreyColor.withOpacity(.1),
             blurRadius: 5,
           ),
         ],

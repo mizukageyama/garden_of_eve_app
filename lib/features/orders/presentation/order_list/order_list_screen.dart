@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/widgets/_common_widgets.dart';
+import 'package:garden_of_eve/common/widgets/custom_appbar.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/orders/presentation/order_list/order_list_controller.dart';
 import 'package:garden_of_eve/features/orders/presentation/order_list/widgets/order_list_view.dart';
@@ -12,27 +13,32 @@ class OrderListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('build');
     return SafeArea(
       child: Scaffold(
+        appBar: CustomAppBar(
+          hasBackButton: true,
+          backgroundColor: lightGreenColor,
+          contentColor: whiteColor,
+          title: 'My Orders',
+        ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            GradientContainer(
-              borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(5),
-                bottomRight: Radius.circular(45),
-              ),
-              padding: const EdgeInsets.fromLTRB(15, 15, 30, 15),
-              child: Text(
-                'My Orders',
-                style: quicksandSemiBold.copyWith(
-                  color: whiteColor,
-                  fontSize: 18,
-                ),
-              ),
-            ),
+            // GradientContainer(
+            //   borderRadius: const BorderRadius.only(
+            //     topRight: Radius.circular(5),
+            //     bottomRight: Radius.circular(45),
+            //   ),
+            //   padding: const EdgeInsets.fromLTRB(15, 15, 30, 15),
+            //   child: Text(
+            //     'My Orders',
+            //     style: quicksandSemiBold.copyWith(
+            //       color: whiteColor,
+            //       fontSize: 18,
+            //     ),
+            //   ),
+            // ),
             Flexible(
               child: Obx(
                 () => showOrders(),

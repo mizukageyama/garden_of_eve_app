@@ -7,6 +7,7 @@ import 'package:garden_of_eve/features/checkout/presentation/checkout_item/check
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/widgets/step1_shipping_addr.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/widgets/step2_payment.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/widgets/step3_review.dart';
+import 'package:garden_of_eve/features/checkout/presentation/checkout_item/widgets/submit_order_bottom_bar.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class CheckoutScreen extends StatelessWidget {
@@ -77,6 +78,12 @@ class CheckoutScreen extends StatelessWidget {
                 width: 0,
               );
             },
+          ),
+        ),
+        bottomNavigationBar: Obx(
+          () => Visibility(
+            visible: _checkoutController.currentStep == 2,
+            child: SubmitOrderBottomBar(),
           ),
         ),
       ),

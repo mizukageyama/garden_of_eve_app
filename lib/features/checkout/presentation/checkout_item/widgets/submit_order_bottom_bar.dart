@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/widgets/_common_widgets.dart';
-import 'package:garden_of_eve/common/widgets/custom_text_field.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
-import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
-import 'package:garden_of_eve/features/checkout/presentation/checkout_item/checkout_screen.dart';
+import 'package:garden_of_eve/features/checkout/presentation/checkout_item/checkout_controller.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
-class CheckoutBottomBar extends StatelessWidget {
-  CheckoutBottomBar({Key? key}) : super(key: key);
-  final CartListController cartListController = Get.find();
+class SubmitOrderBottomBar extends StatelessWidget {
+  SubmitOrderBottomBar({Key? key}) : super(key: key);
+  final CheckoutController _checkoutController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -27,18 +25,28 @@ class CheckoutBottomBar extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            "Have a coupon code? Enter here:",
-            style: quicksandSemiBold.copyWith(
-              fontSize: 13,
-              color: neutralGreyColor,
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const CustomTextField(
-            labelText: 'Promo Code',
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Total:",
+                style: quicksandSemiBold.copyWith(
+                  fontSize: 14,
+                  color: neutralGreyColor,
+                ),
+              ),
+              // Obx(
+              //   () =>
+              Text(
+                "₱${(500).toStringAsFixed(2)}",
+                //"₱${(_cartListController.subTotal()).toStringAsFixed(2)}",
+                style: quicksandBold.copyWith(
+                  fontSize: 14,
+                  color: oxfordBlueColor,
+                ),
+              ),
+              // ),
+            ],
           ),
           const SizedBox(
             height: 10,
@@ -47,19 +55,20 @@ class CheckoutBottomBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Sub total:",
+                "Delivery Fee:",
                 style: quicksandSemiBold.copyWith(
                   fontSize: 14,
                   color: neutralGreyColor,
                 ),
               ),
-              Obx(
-                () => Text(
-                  "₱${(cartListController.subTotal()).toStringAsFixed(2)}",
-                  style: quicksandBold.copyWith(
-                    fontSize: 14,
-                    color: oxfordBlueColor,
-                  ),
+              const SizedBox(
+                width: 10,
+              ),
+              Text(
+                "₱${(120).toStringAsFixed(2)}",
+                style: quicksandBold.copyWith(
+                  fontSize: 14,
+                  color: oxfordBlueColor,
                 ),
               ),
             ],
@@ -123,18 +132,13 @@ class CheckoutBottomBar extends StatelessWidget {
             height: 10,
           ),
           InkWell(
-            onTap: () {
-              if (cartListController.selectedItems.isNotEmpty) {
-                Get.to(() => CheckoutScreen());
-              } else {
-                print('No selected items to checkout');
-              }
-            },
+            onTap: () => _checkoutController.createOrder(),
             child: GradientContainer(
-              height: 50,
+              borderRadius: BorderRadius.circular(10),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Center(
                 child: Text(
-                  'CHECKOUT',
+                  'Submit Order',
                   textAlign: TextAlign.center,
                   style: quicksandSemiBold.copyWith(
                     fontSize: 14,

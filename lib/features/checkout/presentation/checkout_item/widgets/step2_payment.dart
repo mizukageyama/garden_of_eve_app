@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common/models/payment_options.dart';
 import 'package:garden_of_eve/common/widgets/_common_widgets.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/checkout_controller.dart';
@@ -40,7 +41,7 @@ class Step2Payment extends StatelessWidget {
           title: Row(
             children: [
               Image.asset(
-                'assets/icons/mastercard.png',
+                Payment.options[0].logo,
                 height: 24,
                 width: 24,
               ),
@@ -48,7 +49,7 @@ class Step2Payment extends StatelessWidget {
                 width: 5,
               ),
               Text(
-                'Debit/Credit Card',
+                Payment.options[0].title,
                 style: quicksandMedium.copyWith(
                   fontSize: 15,
                   color: darkGreyColor,
@@ -70,7 +71,7 @@ class Step2Payment extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image.asset(
-                'assets/icons/paypal.png',
+                Payment.options[1].logo,
                 height: 24,
                 width: 24,
               ),
@@ -78,7 +79,7 @@ class Step2Payment extends StatelessWidget {
                 width: 5,
               ),
               Text(
-                'Paypal',
+                Payment.options[1].title,
                 style: quicksandMedium.copyWith(
                   fontSize: 15,
                   color: darkGreyColor,
@@ -99,7 +100,7 @@ class Step2Payment extends StatelessWidget {
           title: Row(
             children: [
               Image.asset(
-                'assets/icons/gcash.png',
+                Payment.options[2].logo,
                 height: 24,
                 width: 24,
               ),
@@ -107,7 +108,7 @@ class Step2Payment extends StatelessWidget {
                 width: 5,
               ),
               Text(
-                'GCash',
+                Payment.options[2].title,
                 style: quicksandMedium.copyWith(
                   fontSize: 15,
                   color: darkGreyColor,
@@ -128,7 +129,7 @@ class Step2Payment extends StatelessWidget {
           title: Row(
             children: [
               Image.asset(
-                'assets/icons/cod2.png',
+                Payment.options[3].logo,
                 height: 24,
                 width: 24,
               ),
@@ -136,7 +137,7 @@ class Step2Payment extends StatelessWidget {
                 width: 5,
               ),
               Text(
-                'Cash on Delivery',
+                Payment.options[3].title,
                 style: quicksandMedium.copyWith(
                   fontSize: 15,
                   color: darkGreyColor,
@@ -155,7 +156,11 @@ class Step2Payment extends StatelessWidget {
           height: 20,
         ),
         InkWell(
-          onTap: () => _checkoutController.nextStep(),
+          onTap: () {
+            _checkoutController.payment =
+                Payment.options[_step2.activeIndex - 1];
+            _checkoutController.nextStep();
+          },
           child: GradientContainer(
             borderRadius: BorderRadius.circular(10),
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),

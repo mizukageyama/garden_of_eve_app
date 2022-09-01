@@ -408,9 +408,7 @@ class _CutomStepperState extends State<CutomStepper>
           ? greenColor
           : neutralGreyColor.withOpacity(0.38);
     } else {
-      return widget.steps[index].isActive
-          ? colorScheme.secondary
-          : colorScheme.background;
+      return widget.steps[index].isActive ? whiteColor : colorScheme.background;
     }
   }
 

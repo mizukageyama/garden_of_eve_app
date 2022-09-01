@@ -94,14 +94,16 @@ class Step1ShippingAddr extends StatelessWidget {
         InkWell(
           onTap: () async {
             if (_step1.activeRadioButton.value == 1) {
-              //if (shippingFormController.hasSelected) {
-              _checkoutController.nextStep();
-              // } else {
-              //   print('Please select address');
-              // }
+              if (shippingFormController.hasSelected) {
+                _checkoutController.nextStep();
+              } else {
+                print('Please select address');
+              }
             } else {
               if (_formKey.currentState!.validate()) {
                 await shippingFormController.setAddrFromInput();
+                _checkoutController.shippingAddress =
+                    shippingFormController.addrModel!;
                 _checkoutController.nextStep();
               }
             }
@@ -147,8 +149,11 @@ class Step1ShippingAddr extends StatelessWidget {
       height: 200,
       child: ShippingAddrListView(
         backgroundColor: bgColor,
-        selectAddr: (selectedAddr) =>
-            shippingFormController.setAddrFromSaved(selectedAddr),
+        selectAddr: (selectedAddr) async {
+          await shippingFormController.setAddrFromSaved(selectedAddr);
+          _checkoutController.shippingAddress =
+              shippingFormController.addrModel!;
+        },
         selectedId: shippingFormController.selectedAddrId,
       ),
     );

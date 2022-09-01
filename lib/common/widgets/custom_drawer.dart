@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common/controllers/main_controller.dart';
 import 'package:garden_of_eve/common/widgets/gradient_container.dart';
 import 'package:garden_of_eve/constants/app_colors.dart';
 import 'package:garden_of_eve/constants/app_items.dart';
 import 'package:garden_of_eve/constants/app_text_styles.dart';
+import 'package:garden_of_eve/features/landing/presentation/landing_controller.dart';
+import 'package:garden_of_eve/utils/utils.dart';
 
 class CustomDrawer extends StatelessWidget {
-  const CustomDrawer({Key? key}) : super(key: key);
+  CustomDrawer({Key? key}) : super(key: key);
+  final MainController _main = Get.find();
+  final LandingPageController _landing = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +79,18 @@ class CustomDrawer extends StatelessWidget {
             .map(
               (item) => ListTile(
                 onTap: () {
-                  print('clicked: ${item.title}');
+                  if (item.title == 'Sign out') {
+                    //confirmation dialog
+                    print('logout user');
+                  } else if (item.title == 'Profile') {
+                    _main.closeDrawer();
+                    _landing.changeIndex(2);
+                  } else if (item.title == 'Settings') {
+                    _main.closeDrawer();
+                    _landing.changeIndex(3);
+                  } else {
+                    Get.toNamed(item.screenRoute);
+                  }
                 },
                 leading: Icon(
                   item.icon,

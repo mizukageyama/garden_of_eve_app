@@ -40,17 +40,17 @@ class ShippingAddrTile extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                addr.address,
+                '${addr.fullName} | ${addr.contactNumber}',
                 style: quicksandSemiBold.copyWith(
-                  fontSize: 15,
+                  fontSize: 14,
                   color: fontColor,
                 ),
               ),
               const SizedBox(height: 1),
               Text(
-                '${addr.fullName} | ${addr.contactNumber}',
+                addr.address,
                 style: quicksandMedium.copyWith(
-                  fontSize: 14,
+                  fontSize: 15,
                   color: fontColor,
                 ),
               ),

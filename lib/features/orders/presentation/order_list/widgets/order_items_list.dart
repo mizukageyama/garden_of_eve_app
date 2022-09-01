@@ -7,9 +7,11 @@ class OrderItemsList extends StatelessWidget {
   const OrderItemsList({
     Key? key,
     required this.items,
+    this.bordered = true,
   }) : super(key: key);
 
   final List<OrderItem> items;
+  final bool bordered;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +32,13 @@ class OrderItemsList extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                      border: Border.all(
-                        color: neutralGreyColor,
-                      ),
+                      border: bordered
+                          ? Border.all(
+                              color: neutralGreyColor,
+                            )
+                          : null,
+                      color: bordered ? null : bgColor,
+                      borderRadius: bordered ? null : BorderRadius.circular(8),
                     ),
                     child: Image.asset(
                       'assets/images/plant.png',
