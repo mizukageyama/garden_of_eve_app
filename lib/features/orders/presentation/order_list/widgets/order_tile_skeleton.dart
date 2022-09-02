@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
-class ProductTileSkeleton extends StatelessWidget {
-  const ProductTileSkeleton({Key? key, required this.width}) : super(key: key);
-  final double width;
+class OrderTileSkeleton extends StatelessWidget {
+  const OrderTileSkeleton({Key? key}) : super(key: key);
+
+  double get randomHeight => (80 + Random().nextInt(210 - 80)).toDouble();
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 256,
-      width: width,
+      height: randomHeight,
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.2),
         borderRadius: const BorderRadius.all(
-          Radius.circular(18),
+          Radius.circular(15),
         ),
       ),
     );

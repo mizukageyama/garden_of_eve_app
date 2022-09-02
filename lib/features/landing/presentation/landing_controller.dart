@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/features/app_info/app_info_screen.dart';
 import 'package:garden_of_eve/features/favorites/presentation/favorites/favorites_screen.dart';
 import 'package:garden_of_eve/features/products/presentation/home_products/home_products_screen.dart';
 import 'package:garden_of_eve/features/profile/presentation/profile/profile_screen.dart';
-import 'package:garden_of_eve/features/settings/settings_screen.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class LandingPageController extends GetxController {
@@ -16,10 +16,10 @@ class LandingPageController extends GetxController {
     FavoritesScreen(
       key: const PageStorageKey<String>('pageTwo'),
     ),
-    const ProfileScreen(
-      key: PageStorageKey<String>('pageThree'),
+    ProfileScreen(
+      key: const PageStorageKey<String>('pageThree'),
     ),
-    const SettingsScreen(
+    const AppInfoScreen(
       key: PageStorageKey<String>('pageFour'),
     )
   ];

@@ -45,8 +45,8 @@ class BottomNavBar extends StatelessWidget {
             ),
             Expanded(
               child: BottomNavItem(
-                activeIcon: Icons.settings_rounded,
-                inactiveIcon: Icons.settings_outlined,
+                activeIcon: Icons.info,
+                inactiveIcon: Icons.info_outline,
                 index: 3,
                 size: 28,
               ),

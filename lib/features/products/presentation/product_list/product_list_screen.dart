@@ -1,8 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/common/widgets/_common_widgets.dart';
 import 'package:garden_of_eve/common/widgets/custom_appbar.dart';
+import 'package:garden_of_eve/common/widgets/loading_grid_view.dart';
+import 'package:garden_of_eve/common/widgets/product_tile_sqr_skeleton.dart';
 import 'package:garden_of_eve/features/products/presentation/product_list/product_list_controller.dart';
+import 'package:garden_of_eve/features/products/presentation/product_list/widgets/product_grid_view.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class ProductListScreen extends StatelessWidget {
@@ -32,8 +33,12 @@ class ProductListScreen extends StatelessWidget {
 
   Widget _showProducts() {
     if (prodListController.isLoadingProd.value) {
-      return const Text('Loading');
-      //return const LoadingProducts();
+      return const LoadingGridView(
+        widthPerTile: 185,
+        skeleton: ProductTileSkeleton(
+          width: 185,
+        ),
+      );
     }
     if (prodListController.prodList.isEmpty) {
       return const SizedBox(
@@ -44,43 +49,7 @@ class ProductListScreen extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: CustomScrollView(
-        shrinkWrap: true,
-        controller: prodListController.prodListScroller,
-        slivers: <Widget>[
-          SliverGrid(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              crossAxisSpacing: 15,
-              maxCrossAxisExtent: 185,
-              mainAxisExtent: 271,
-            ),
-            delegate:
-                SliverChildBuilderDelegate((BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 15),
-                child: ProductTile(
-                  product: prodListController.prodList[index],
-                  width: 185,
-                ),
-              );
-            }, childCount: prodListController.prodList.length),
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return Visibility(
-                  visible: prodListController.productHasMoreData,
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    child: CupertinoActivityIndicator(),
-                  ),
-                );
-              },
-              childCount: 1,
-            ),
-          ),
-        ],
-      ),
+      child: ProductGridView(),
     );
   }
 }

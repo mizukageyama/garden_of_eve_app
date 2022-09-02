@@ -85,9 +85,6 @@ class CustomDrawer extends StatelessWidget {
                   } else if (item.title == 'Profile') {
                     _main.closeDrawer();
                     _landing.changeIndex(2);
-                  } else if (item.title == 'Settings') {
-                    _main.closeDrawer();
-                    _landing.changeIndex(3);
                   } else {
                     Get.toNamed(item.screenRoute);
                   }

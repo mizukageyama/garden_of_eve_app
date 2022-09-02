@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/constants/app_colors.dart';
 import 'package:garden_of_eve/constants/app_text_styles.dart';
+import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_screen.dart';
+import 'package:garden_of_eve/features/orders/presentation/order_list/order_list_screen.dart';
+import 'package:garden_of_eve/features/profile/presentation/address/address_screen.dart';
 import 'package:garden_of_eve/features/profile/presentation/profile/widgets/custom_icon_button.dart';
 import 'package:garden_of_eve/features/profile/presentation/profile/widgets/title_and_subtext.dart';
+import 'package:garden_of_eve/features/profile/presentation/settings/settings_screen.dart';
+import 'package:garden_of_eve/features/profile/presentation/user_info/user_info_screen.dart';
+import 'package:garden_of_eve/features/profile/presentation/vouchers/vouchers_screen.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -90,22 +96,30 @@ class ProfileScreen extends StatelessWidget {
                                     CustomIconButton(
                                       icon: Icons.receipt_long_outlined,
                                       title: 'My Orders',
-                                      onTap: () {},
+                                      onTap: () => Get.to(
+                                        () => OrderListScreen(),
+                                      ),
                                     ),
                                     CustomIconButton(
                                       icon: Icons.local_mall,
                                       title: 'My Cart',
-                                      onTap: () {},
+                                      onTap: () => Get.to(
+                                        () => CartItemScreen(),
+                                      ),
                                     ),
                                     CustomIconButton(
                                       icon: Icons.edit,
                                       title: 'User Data',
-                                      onTap: () {},
+                                      onTap: () => Get.to(
+                                        () => const UserInfoScreen(),
+                                      ),
                                     ),
                                     CustomIconButton(
                                       icon: Icons.settings,
                                       title: 'Settings',
-                                      onTap: () {},
+                                      onTap: () => Get.to(
+                                        () => const SettingsScreen(),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -306,7 +320,9 @@ class ProfileScreen extends StatelessWidget {
                             ],
                           ),
                           InkWell(
-                            onTap: () {},
+                            onTap: () => Get.to(
+                              () => AddressScreen(),
+                            ),
                             child: Text(
                               'View',
                               style: quicksandSemiBold.copyWith(
@@ -366,7 +382,9 @@ class ProfileScreen extends StatelessWidget {
                             width: 15,
                           ),
                           InkWell(
-                            onTap: () {},
+                            onTap: () => Get.to(
+                              () => const VoucherScreen(),
+                            ),
                             child: Text(
                               'View',
                               style: quicksandSemiBold.copyWith(

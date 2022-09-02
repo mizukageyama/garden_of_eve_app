@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common/widgets/_common_widgets.dart';
 import 'package:garden_of_eve/common/widgets/custom_appbar.dart';
+import 'package:garden_of_eve/common/widgets/loading_list_view.dart';
+import 'package:garden_of_eve/common/widgets/product_tile_rect_skeleton.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_screen.dart';
@@ -124,7 +127,10 @@ class ProductsScreen extends StatelessWidget {
 
   Widget _showCategories() {
     if (homeProdController.isLoadingCategory.value) {
-      return const LoadingCategory();
+      return const LoadingListView(
+        skeleton: CategorySkeleton(),
+        skeletonHeight: 35,
+      );
     }
     if (homeProdController.categories.isEmpty) {
       return const SizedBox(
@@ -137,7 +143,12 @@ class ProductsScreen extends StatelessWidget {
 
   Widget _showProducts() {
     if (homeProdController.isLoadingProd.value) {
-      return const LoadingProducts();
+      return const LoadingListView(
+        skeleton: ProductTileSkeleton(
+          width: 185,
+        ),
+        skeletonHeight: 256,
+      );
     }
     if (homeProdController.products.isEmpty) {
       return const SizedBox(
@@ -149,13 +160,14 @@ class ProductsScreen extends StatelessWidget {
   }
 
   Widget _showRecentlyViewed() {
-    // if (homeProdController.isLoadingProd.value) {
-    //   return const SizedBox(
-    //     height: 0,
-    //     width: 0,
-    //   );
-    //   //return const LoadingProducts();
-    // }
+    if (homeProdController.isLoadingProd.value) {
+      return const LoadingListView(
+        skeleton: ProductTileRectSkeleton(
+          width: 290,
+        ),
+        skeletonHeight: 95,
+      );
+    }
     if (homeProdController.recentlyViewed.isEmpty) {
       return SizedBox(
         height: 120,

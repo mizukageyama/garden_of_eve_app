@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/widgets/custom_appbar.dart';
+import 'package:garden_of_eve/common/widgets/loading_list_view.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/widgets/cart_list_view.dart';
+import 'package:garden_of_eve/features/cart/presentation/cart_items/widgets/cart_tile_skeleton.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/widgets/checkout_bottom_bar.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
@@ -35,13 +37,10 @@ class CartItemScreen extends StatelessWidget {
 
   Widget _showCartItems() {
     if (cartListController.isLoadingProd.value) {
-      return const SizedBox(
-        height: 85,
-        child: Center(
-          child: Text(
-            'Loading...',
-          ),
-        ),
+      return const LoadingListView(
+        isHorizontalDirection: false,
+        itemCount: 10,
+        skeleton: CartTileSkeleton(),
       );
     }
     if (cartListController.cartList.isEmpty) {
