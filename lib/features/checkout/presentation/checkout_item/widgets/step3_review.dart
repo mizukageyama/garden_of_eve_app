@@ -173,16 +173,19 @@ class Step3Review extends StatelessWidget {
                 bordered: false,
                 items: [
                   OrderItem(
+                    imgUrl: '',
                     id: 5,
                     name: 'Agave Palm Tree Plant',
                     description: 'Price: 300, Quantity: 2',
                   ),
                   OrderItem(
+                    imgUrl: '',
                     id: 1,
                     name: 'Peperomia Watermelon Plant',
                     description: 'Price: 800, Quantity: 2',
                   ),
                   OrderItem(
+                    imgUrl: '',
                     id: 2,
                     name: 'Rubber Tree Plant',
                     description: 'Price: 1500, Quantity: 1',

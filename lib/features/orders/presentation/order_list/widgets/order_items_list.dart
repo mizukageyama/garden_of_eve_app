@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:garden_of_eve/constants/app_colors.dart';
 import 'package:garden_of_eve/constants/app_text_styles.dart';
 import 'package:garden_of_eve/features/orders/domain/order_items_model.dart';
+import 'package:garden_of_eve/utils/utils.dart';
 
 class OrderItemsList extends StatelessWidget {
   const OrderItemsList({
@@ -40,10 +41,20 @@ class OrderItemsList extends StatelessWidget {
                       color: bordered ? null : bgColor,
                       borderRadius: bordered ? null : BorderRadius.circular(8),
                     ),
-                    child: Image.asset(
-                      'assets/images/plant.png',
+                    child: CachedNetworkImage(
                       width: 25,
                       height: 25,
+                      imageUrl: data.imgUrl,
+                      errorWidget: (context, url, error) => Center(
+                        child: Text(
+                          'Could not load image',
+                          textAlign: TextAlign.center,
+                          style: quicksandMedium.copyWith(
+                            color: neutralGreyColor,
+                            fontSize: 13.5,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(

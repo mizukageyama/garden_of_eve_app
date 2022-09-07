@@ -26,7 +26,11 @@ class CartApi {
     try {
       final Response response = await dioClient.post(
         'cart',
-        data: {"user_id": userId, "product_id": prodId, "qty": qty},
+        data: {
+          "user_id": userId,
+          "product_id": prodId,
+          "qty": qty,
+        },
         options: Options(
           headers: {
             "content-type": "application/json",

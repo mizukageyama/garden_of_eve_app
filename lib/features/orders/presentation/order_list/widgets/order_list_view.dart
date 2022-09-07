@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:garden_of_eve/features/orders/presentation/order_list/order_list_controller.dart';
 import 'package:garden_of_eve/features/orders/presentation/order_list/widgets/order_tile.dart';
 import 'package:garden_of_eve/utils/utils.dart';
@@ -27,13 +26,8 @@ class OrderListView extends StatelessWidget {
         }
         return Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
-          child: InkWell(
-            onTap: () {
-              orderListController.orders.removeAt(index);
-            },
-            child: OrderTile(
-              order: orderListController.orders[index],
-            ),
+          child: OrderTile(
+            order: orderListController.orders[index],
           ),
         );
       },

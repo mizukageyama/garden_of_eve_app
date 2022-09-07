@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/products/domain/product_model.dart';
+import 'package:garden_of_eve/features/products/presentation/product_info/product_info_controller.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class ProductTileText extends StatelessWidget {
@@ -9,12 +10,13 @@ class ProductTileText extends StatelessWidget {
     required this.product,
     this.maxLines = 3,
     this.forProductInfo = false,
+    this.controller,
   }) : super(key: key);
 
   final Product product;
   final int maxLines;
   final bool forProductInfo;
-  final RxBool show = false.obs;
+  final ProductInfoController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +42,26 @@ class ProductTileText extends StatelessWidget {
             Visibility(
               visible: forProductInfo,
               child: InkWell(
-                onTap: () => show.value = !show.value,
+                onTap: () {
+                  controller?.toggleHeartIcon(1, product);
+                },
                 child: Obx(
-                  () => Icon(
-                    show.value
-                        ? Icons.favorite_rounded
-                        : Icons.favorite_border_rounded,
-                    color: greenColor,
+                  () => FutureBuilder(
+                    future: controller?.isFavorite(product),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return Icon(
+                          product.isFavorite.value
+                              ? Icons.favorite_rounded
+                              : Icons.favorite_border_rounded,
+                          color: greenColor,
+                        );
+                      }
+                      return const SizedBox(
+                        height: 0,
+                        width: 0,
+                      );
+                    },
                   ),
                 ),
               ),

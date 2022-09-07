@@ -21,4 +21,43 @@ class FavoritesApi {
       rethrow;
     }
   }
+
+  Future<Response> addToFav(int userId, int productId) async {
+    try {
+      final Response response = await dioClient.post(
+        'favorites',
+        data: {
+          "user_id": userId,
+          "product_id": productId,
+        },
+        options: Options(
+          headers: {
+            "content-type": "application/json",
+            "authorization": "Bearer ${API.key}"
+          },
+        ),
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Map<String, dynamic>> removeFav(int favId) async {
+    try {
+      final Map<String, dynamic> response = await dioClient.delete(
+        'favorites/$favId',
+        options: Options(
+          headers: {
+            "content-type": "application/json",
+            "authorization": "Bearer ${API.key}"
+          },
+        ),
+      );
+
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

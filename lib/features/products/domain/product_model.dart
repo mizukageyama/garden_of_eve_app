@@ -1,7 +1,9 @@
 import 'package:garden_of_eve/features/products/domain/discount_model.dart';
+import 'package:garden_of_eve/utils/utils.dart';
 import 'package:intl/intl.dart';
 
 class Product {
+  int? favId;
   int id;
   String name;
   String description;
@@ -18,6 +20,7 @@ class Product {
   DateTime createdAt;
   DateTime modifiedAt;
   Discount? discount;
+  RxBool isFavorite = false.obs;
 
   Product({
     required this.id,
@@ -36,6 +39,7 @@ class Product {
     required this.createdAt,
     required this.modifiedAt,
     required this.discount,
+    required this.favId,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -44,6 +48,7 @@ class Product {
       discountInfo = Discount.fromJson(json['discount']);
     }
     return Product(
+      favId: json['fav_id'] ?? 0,
       id: json['id'] as int,
       name: json['name'] as String,
       description: json['description'] as String,
@@ -95,4 +100,6 @@ class Product {
     }
     return price;
   }
+
+  set setFav(bool value) => isFavorite.value = value;
 }

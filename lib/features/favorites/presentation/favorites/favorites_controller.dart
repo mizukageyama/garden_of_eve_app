@@ -15,13 +15,13 @@ class FavoritesController extends GetxController {
   @override
   void onInit() {
     getFavorites(isRefresh: true);
-    // favListScroller.addListener(() async {
-    //   if (favListScroller.position.pixels ==
-    //       favListScroller.position.maxScrollExtent) {
-    //     print('Fetching new data...');
-    //     await getFavorites();
-    //   }
-    // });
+    favListScroller.addListener(() async {
+      if (favListScroller.position.pixels ==
+          favListScroller.position.maxScrollExtent) {
+        print('Fetching new data...');
+        await getFavorites();
+      }
+    });
     super.onInit();
   }
 
@@ -48,5 +48,17 @@ class FavoritesController extends GetxController {
     hasMoreData = currentPage < totalPages;
 
     if (hasMoreData) currentPage++;
+  }
+
+  bool isFavorite(int productId) {
+    if (favList.any((item) => item.id == productId)) {
+      return true;
+    }
+    return false;
+  }
+
+  Future<int> getFavoriteId(int productId) async {
+    Product favProd = favList.firstWhere((item) => item.id == productId);
+    return favProd.favId ?? 0;
   }
 }

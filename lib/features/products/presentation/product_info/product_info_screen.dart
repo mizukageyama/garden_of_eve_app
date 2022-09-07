@@ -59,6 +59,7 @@ class ProductInfoScreen extends StatelessWidget {
                               ProductTileText(
                                 forProductInfo: true,
                                 product: product,
+                                controller: _prodInfo,
                               ),
                               const SizedBox(
                                 height: 20,
