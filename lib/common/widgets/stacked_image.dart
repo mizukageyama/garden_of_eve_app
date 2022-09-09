@@ -37,6 +37,7 @@ class StackedImage extends StatelessWidget {
         Container(
           height: containerHeight,
           decoration: BoxDecoration(
+            border: Border.all(width: 0, color: whiteColor),
             color: whiteColor,
             borderRadius: BorderRadius.only(
               topLeft: hasTopLeftRadius ? Radius.circular(radius) : Radius.zero,

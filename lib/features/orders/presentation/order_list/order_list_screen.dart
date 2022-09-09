@@ -76,9 +76,6 @@ class OrderListScreen extends StatelessWidget {
             //           order: orderController.orders[0],
             //         ),
             // ),
-            const SizedBox(
-              height: 10,
-            ),
           ],
         ),
       ),

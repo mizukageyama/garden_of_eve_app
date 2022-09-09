@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/products/domain/product_model.dart';
 import 'package:garden_of_eve/features/products/presentation/product_info/product_info_controller.dart';
+import 'package:garden_of_eve/utils/format.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class ProductTileText extends StatelessWidget {
@@ -90,7 +91,7 @@ class ProductTileText extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                "₱${product.getPrice.toStringAsFixed(2)}",
+                "₱${Format.amount(product.getPrice)}",
                 style: quicksandBold.copyWith(
                   color: greenColor,
                   fontSize: 16,
@@ -101,7 +102,7 @@ class ProductTileText extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 5),
                   child: Text(
-                    "₱${product.price.toStringAsFixed(2)}",
+                    "₱${Format.amount(product.price)}",
                     style: quicksandSemiBold.copyWith(
                       decoration: TextDecoration.lineThrough,
                       decorationThickness: 2,

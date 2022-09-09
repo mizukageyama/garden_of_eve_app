@@ -4,6 +4,7 @@ import 'package:garden_of_eve/common/widgets/custom_text_field.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/checkout_screen.dart';
+import 'package:garden_of_eve/utils/format.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class CheckoutBottomBar extends StatelessWidget {
@@ -55,7 +56,7 @@ class CheckoutBottomBar extends StatelessWidget {
               ),
               Obx(
                 () => Text(
-                  "₱${(cartListController.subTotal()).toStringAsFixed(2)}",
+                  "₱${Format.amount(cartListController.subTotal())}",
                   style: quicksandBold.copyWith(
                     fontSize: 14,
                     color: oxfordBlueColor,
@@ -113,7 +114,7 @@ class CheckoutBottomBar extends StatelessWidget {
                 width: 10,
               ),
               Text(
-                "₱${(600).toStringAsFixed(2)}",
+                "₱${Format.amount(600)}",
                 style:
                     quicksandBold.copyWith(fontSize: 16, color: darkGreenColor),
               ),

@@ -6,6 +6,7 @@ import 'package:garden_of_eve/features/orders/domain/order_model.dart';
 import 'package:garden_of_eve/features/orders/presentation/order_info/order_info_screen.dart';
 import 'package:garden_of_eve/features/orders/presentation/order_list/widgets/order_items_list.dart';
 import 'package:garden_of_eve/features/profile/presentation/address/widgets/shipping_addr_tile.dart';
+import 'package:garden_of_eve/utils/format.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class OrderTile extends StatelessWidget {
@@ -51,7 +52,7 @@ class OrderTile extends StatelessWidget {
           Row(
             children: [
               Text(
-                "₱${order.total.toStringAsFixed(2)}",
+                "₱${Format.amount(order.total)}",
                 style: quicksandSemiBold.copyWith(
                   fontSize: 18,
                   color: darkGreyColor,

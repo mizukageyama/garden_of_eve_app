@@ -3,6 +3,7 @@ import 'package:garden_of_eve/common/widgets/_common_widgets.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/products/domain/product_model.dart';
 import 'package:garden_of_eve/features/products/presentation/product_info/product_info_controller.dart';
+import 'package:garden_of_eve/utils/format.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class AddToCartRow extends StatelessWidget {
@@ -32,7 +33,7 @@ class AddToCartRow extends StatelessWidget {
         children: [
           Obx(
             () => Text(
-              "₱${(product.getPrice * _prodInfo.qty).toStringAsFixed(2)}",
+              "₱${Format.amount(product.getPrice * _prodInfo.qty)}",
               style: quicksandSemiBold.copyWith(
                   fontSize: 18, color: darkGreyColor),
             ),

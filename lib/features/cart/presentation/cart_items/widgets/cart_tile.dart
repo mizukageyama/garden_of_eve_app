@@ -3,6 +3,7 @@ import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/cart/domain/cart_model.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
 import 'package:garden_of_eve/features/products/presentation/product_info/widgets/quantity_incrementor.dart';
+import 'package:garden_of_eve/utils/format.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class CartTile extends StatelessWidget {
@@ -103,7 +104,7 @@ class CartTile extends StatelessWidget {
                               ),
                               Obx(
                                 () => Text(
-                                  '₱${(cartItem.productInfo.getPrice * cartItem.qty.value).toStringAsFixed(2)}',
+                                  '₱${Format.amount(cartItem.productInfo.getPrice * cartItem.qty.value)}',
                                   style: quicksandBold.copyWith(
                                     color: greenColor,
                                     fontSize: 13.5,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/common/models/payment_options.dart';
 import 'package:garden_of_eve/common/widgets/_common_widgets.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
+import 'package:garden_of_eve/constants/app_items.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/checkout_controller.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/radio_step_controller.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/widgets/expandable_container.dart';
@@ -41,7 +41,7 @@ class Step2Payment extends StatelessWidget {
           title: Row(
             children: [
               Image.asset(
-                Payment.options[0].logo,
+                paymentOptions[0].logo,
                 height: 24,
                 width: 24,
               ),
@@ -49,7 +49,7 @@ class Step2Payment extends StatelessWidget {
                 width: 5,
               ),
               Text(
-                Payment.options[0].title,
+                paymentOptions[0].title,
                 style: quicksandMedium.copyWith(
                   fontSize: 15,
                   color: darkGreyColor,
@@ -71,7 +71,7 @@ class Step2Payment extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image.asset(
-                Payment.options[1].logo,
+                paymentOptions[1].logo,
                 height: 24,
                 width: 24,
               ),
@@ -79,7 +79,7 @@ class Step2Payment extends StatelessWidget {
                 width: 5,
               ),
               Text(
-                Payment.options[1].title,
+                paymentOptions[1].title,
                 style: quicksandMedium.copyWith(
                   fontSize: 15,
                   color: darkGreyColor,
@@ -100,7 +100,7 @@ class Step2Payment extends StatelessWidget {
           title: Row(
             children: [
               Image.asset(
-                Payment.options[2].logo,
+                paymentOptions[2].logo,
                 height: 24,
                 width: 24,
               ),
@@ -108,7 +108,7 @@ class Step2Payment extends StatelessWidget {
                 width: 5,
               ),
               Text(
-                Payment.options[2].title,
+                paymentOptions[2].title,
                 style: quicksandMedium.copyWith(
                   fontSize: 15,
                   color: darkGreyColor,
@@ -129,7 +129,7 @@ class Step2Payment extends StatelessWidget {
           title: Row(
             children: [
               Image.asset(
-                Payment.options[3].logo,
+                paymentOptions[3].logo,
                 height: 24,
                 width: 24,
               ),
@@ -137,7 +137,7 @@ class Step2Payment extends StatelessWidget {
                 width: 5,
               ),
               Text(
-                Payment.options[3].title,
+                paymentOptions[3].title,
                 style: quicksandMedium.copyWith(
                   fontSize: 15,
                   color: darkGreyColor,
@@ -158,7 +158,7 @@ class Step2Payment extends StatelessWidget {
         InkWell(
           onTap: () {
             _checkoutController.payment =
-                Payment.options[_step2.activeIndex - 1];
+                paymentOptions[_step2.activeIndex - 1];
             _checkoutController.nextStep();
           },
           child: GradientContainer(

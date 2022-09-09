@@ -9,10 +9,12 @@ class OrderItemsList extends StatelessWidget {
     Key? key,
     required this.items,
     this.bordered = true,
+    this.showAll = false,
   }) : super(key: key);
 
   final List<OrderItem> items;
   final bool bordered;
+  final bool showAll;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,13 @@ class OrderItemsList extends StatelessWidget {
   }
 
   List<Widget> orderItemTile() {
-    return items
+    List<OrderItem> itemsCopy = List.empty(growable: true);
+    if (!showAll) {
+      itemsCopy.addAll(items.take(2));
+    } else {
+      itemsCopy.addAll(items);
+    }
+    return itemsCopy
         .map((data) => Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: Row(
