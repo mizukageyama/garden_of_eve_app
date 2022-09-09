@@ -15,6 +15,7 @@ class CartItemScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: CustomAppBar(
           hasBackButton: true,
           title: 'My Cart',

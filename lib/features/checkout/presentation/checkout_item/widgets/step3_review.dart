@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
+import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/checkout_controller.dart';
 import 'package:garden_of_eve/features/orders/domain/order_items_model.dart';
 import 'package:garden_of_eve/features/orders/presentation/order_list/widgets/order_items_list.dart';
@@ -9,6 +10,7 @@ import 'package:garden_of_eve/utils/utils.dart';
 class Step3Review extends StatelessWidget {
   Step3Review({Key? key}) : super(key: key);
   final CheckoutController _checkoutController = Get.find();
+  final CartListController _cart = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -74,8 +76,15 @@ class Step3Review extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              ShippingAddrTile(
-                addr: _checkoutController.getSelectedAddr,
+              Obx(
+                () => _checkoutController.getSelectedAddr == null
+                    ? const SizedBox(
+                        height: 0,
+                        width: 0,
+                      )
+                    : ShippingAddrTile(
+                        addr: _checkoutController.getSelectedAddr!,
+                      ),
               ),
             ],
           ),
@@ -122,24 +131,31 @@ class Step3Review extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Row(
-                children: [
-                  Image.asset(
-                    _checkoutController.getSelectedPayment.logo,
-                    height: 24,
-                    width: 24,
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    _checkoutController.getSelectedPayment.title,
-                    style: quicksandMedium.copyWith(
-                      fontSize: 15,
-                      color: darkGreyColor,
-                    ),
-                  ),
-                ],
+              Obx(
+                () => _checkoutController.getSelectedPayment == null
+                    ? const SizedBox(
+                        height: 0,
+                        width: 0,
+                      )
+                    : Row(
+                        children: [
+                          Image.asset(
+                            _checkoutController.getSelectedPayment!.logo,
+                            height: 24,
+                            width: 24,
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            _checkoutController.getSelectedPayment!.title,
+                            style: quicksandMedium.copyWith(
+                              fontSize: 15,
+                              color: darkGreyColor,
+                            ),
+                          ),
+                        ],
+                      ),
               ),
             ],
           ),
@@ -171,26 +187,8 @@ class Step3Review extends StatelessWidget {
               ),
               OrderItemsList(
                 bordered: false,
-                items: [
-                  OrderItem(
-                    imgUrl: '',
-                    id: 5,
-                    name: 'Agave Palm Tree Plant',
-                    description: 'Price: 300, Quantity: 2',
-                  ),
-                  OrderItem(
-                    imgUrl: '',
-                    id: 1,
-                    name: 'Peperomia Watermelon Plant',
-                    description: 'Price: 800, Quantity: 2',
-                  ),
-                  OrderItem(
-                    imgUrl: '',
-                    id: 2,
-                    name: 'Rubber Tree Plant',
-                    description: 'Price: 1500, Quantity: 1',
-                  ),
-                ],
+                items: _cart.orderItems(),
+                showAll: true,
               ),
             ],
           ),

@@ -38,8 +38,10 @@ class CheckoutBottomBar extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          const CustomTextField(
+          CustomTextField(
             labelText: 'Promo Code',
+            controller: cartListController.pCode,
+            callback: () => cartListController.checkPromoCode(),
           ),
           const SizedBox(
             height: 10,
@@ -81,11 +83,13 @@ class CheckoutBottomBar extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              Text(
-                "10%",
-                style: quicksandBold.copyWith(
-                  fontSize: 14,
-                  color: oxfordBlueColor,
+              Obx(
+                () => Text(
+                  "- ₱${Format.amount(cartListController.calculateLess())}",
+                  style: quicksandBold.copyWith(
+                    fontSize: 14,
+                    color: oxfordBlueColor,
+                  ),
                 ),
               ),
             ],
@@ -113,10 +117,12 @@ class CheckoutBottomBar extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              Text(
-                "₱${Format.amount(600)}",
-                style:
-                    quicksandBold.copyWith(fontSize: 16, color: darkGreenColor),
+              Obx(
+                () => Text(
+                  "₱${Format.amount(cartListController.total())}",
+                  style: quicksandBold.copyWith(
+                      fontSize: 16, color: darkGreenColor),
+                ),
               ),
             ],
           ),

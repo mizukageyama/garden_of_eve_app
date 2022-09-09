@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/widgets/_common_widgets.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
+import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/checkout_controller.dart';
 import 'package:garden_of_eve/utils/format.dart';
 import 'package:garden_of_eve/utils/utils.dart';
@@ -8,6 +9,7 @@ import 'package:garden_of_eve/utils/utils.dart';
 class SubmitOrderBottomBar extends StatelessWidget {
   SubmitOrderBottomBar({Key? key}) : super(key: key);
   final CheckoutController _checkoutController = Get.find();
+  final CartListController _cartController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +41,8 @@ class SubmitOrderBottomBar extends StatelessWidget {
               // Obx(
               //   () =>
               Text(
-                "₱${Format.amount(500)}",
-                //"₱${Format.amount(_cartListController.subTotal())}",
+                //"₱${Format.amount(500)}",
+                "₱${Format.amount(_cartController.subTotal())}",
                 style: quicksandBold.copyWith(
                   fontSize: 14,
                   color: oxfordBlueColor,
@@ -91,7 +93,7 @@ class SubmitOrderBottomBar extends StatelessWidget {
                 width: 10,
               ),
               Text(
-                "10%",
+                "- ₱${Format.amount(_cartController.calculateLess())}",
                 style: quicksandBold.copyWith(
                   fontSize: 14,
                   color: oxfordBlueColor,
@@ -123,7 +125,7 @@ class SubmitOrderBottomBar extends StatelessWidget {
                 width: 10,
               ),
               Text(
-                "₱${Format.amount(600)}",
+                "₱${Format.amount(_cartController.total() + 120)}",
                 style:
                     quicksandBold.copyWith(fontSize: 16, color: darkGreenColor),
               ),
@@ -133,7 +135,13 @@ class SubmitOrderBottomBar extends StatelessWidget {
             height: 10,
           ),
           InkWell(
-            onTap: () => _checkoutController.createOrder(),
+            onTap: () async {
+              await _checkoutController.createOrder(
+                1,
+                _cartController.total(),
+                _cartController.orderItems(),
+              );
+            },
             child: GradientContainer(
               borderRadius: BorderRadius.circular(10),
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),

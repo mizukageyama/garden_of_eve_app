@@ -1,9 +1,10 @@
 import 'package:garden_of_eve/constants/api_key_holder.dart';
 import 'package:garden_of_eve/features/orders/domain/order_items_model.dart';
+import 'package:garden_of_eve/features/profile/domain/shipping_addr_model.dart';
 import 'package:garden_of_eve/utils/dio_network/dio_client.dart';
 import 'package:dio/dio.dart';
 
-class OdrerApi {
+class OrderApi {
   final DioClient dioClient = DioClient();
 
   Future<Response> getOrders(int userId, int page) async {
@@ -26,8 +27,8 @@ class OdrerApi {
   Future<Response> createOrder(
     int userId,
     double total,
-    int addressId,
-    List<OrderItem> orders,
+    ShippingAddr addr,
+    List<Map<String, dynamic>> orders,
   ) async {
     try {
       final Response response = await dioClient.post(
@@ -35,8 +36,10 @@ class OdrerApi {
         data: {
           "user_id": userId,
           "total": total,
-          "address_id": addressId,
-          "order_items": orders.map((item) => item.toJson()).toList(),
+          "contact_number": addr.contactNumber,
+          "address": addr.address,
+          "address_owner": addr.fullName,
+          "order_items": orders,
         },
         options: Options(
           headers: {

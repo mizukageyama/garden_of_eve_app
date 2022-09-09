@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/models/payment_options.dart';
+import 'package:garden_of_eve/constants/app_colors.dart';
+import 'package:garden_of_eve/features/cart/domain/cart_model.dart';
+import 'package:garden_of_eve/features/orders/data/order_repository.dart';
+import 'package:garden_of_eve/features/orders/domain/order_items_model.dart';
 import 'package:garden_of_eve/features/profile/domain/shipping_addr_model.dart';
+import 'package:garden_of_eve/utils/format.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class CheckoutController extends GetxController {
@@ -8,6 +13,7 @@ class CheckoutController extends GetxController {
   final RxBool atLastStep = false.obs;
   final Rxn<ShippingAddr?> shippingAddr = Rxn<ShippingAddr>();
   final Rxn<PaymentOpt?> paymentOption = Rxn<PaymentOpt>();
+  final OrderRepository _orderRepo = OrderRepository();
 
   int get currentStep => _currentStep.value;
 
@@ -48,15 +54,47 @@ class CheckoutController extends GetxController {
 
   set shippingAddress(ShippingAddr addr) => shippingAddr.value = addr;
 
-  ShippingAddr get getSelectedAddr => shippingAddr.value!;
+  ShippingAddr? get getSelectedAddr => shippingAddr.value;
 
   set payment(PaymentOpt payment) => paymentOption.value = payment;
 
-  PaymentOpt get getSelectedPayment => paymentOption.value!;
+  PaymentOpt? get getSelectedPayment => paymentOption.value;
 
-  Future<void> createOrder() async {
+  List<Map<String, dynamic>> orderItems(List<OrderItem> orders) {
+    return orders
+        .map((item) => {
+              "id": item.id,
+              "description": item.description,
+            })
+        .toList();
+  }
+
+  Future<void> createOrder(
+    int userId,
+    double total,
+    List<OrderItem> orders,
+  ) async {
     //show loading
-    //save address and get addressId
-    //pass data and order_items
+    List<Map<String, dynamic>> orderItemsMapped = orderItems(orders);
+    Map<String, dynamic> message = await _orderRepo.createOrder(
+      userId,
+      total,
+      getSelectedAddr!,
+      orderItemsMapped,
+    );
+    bool success = message['success'] == 1;
+    //TO DO: should have a checker for Invalid Token (re login?)
+    Get.snackbar(
+      success ? 'Success' : 'Failed',
+      message['message'],
+      snackPosition: SnackPosition.BOTTOM,
+      borderRadius: 20,
+      margin: const EdgeInsets.all(15),
+      colorText: oxfordBlueColor,
+      duration: const Duration(seconds: 4),
+      isDismissible: true,
+      dismissDirection: DismissDirection.horizontal,
+      forwardAnimationCurve: Curves.easeOutBack,
+    );
   }
 }

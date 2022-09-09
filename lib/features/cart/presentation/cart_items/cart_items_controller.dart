@@ -1,12 +1,19 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common/models/promo_model.dart';
+import 'package:garden_of_eve/constants/app_items.dart';
 import 'package:garden_of_eve/features/cart/data/cart_repository.dart';
 import 'package:garden_of_eve/features/cart/domain/cart_model.dart';
+import 'package:garden_of_eve/features/orders/domain/order_items_model.dart';
+import 'package:garden_of_eve/utils/format.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class CartListController extends GetxController {
   //Repository
   final CartRepository _cartRepo = CartRepository();
   final RxBool selectAll = false.obs;
+
+  final TextEditingController pCode = TextEditingController();
+  final Rxn<Promo?> promoObx = Rxn<Promo>();
 
   //Cart Variable
   final cartListScroller = ScrollController();
@@ -39,6 +46,44 @@ class CartListController extends GetxController {
       subTotal += (item.productInfo.getPrice * item.qty.value);
     }).toList();
     return subTotal;
+  }
+
+  List<OrderItem> orderItems() {
+    return selectedItems
+        .map(
+          (item) => OrderItem(
+            id: item.productInfo.id,
+            name: item.productInfo.name,
+            description:
+                "Price: ${Format.amount(item.productInfo.getPrice * item.qty.value)}, "
+                "Quantity: ${item.qty}${item.productInfo.discount == null ? "" : ", Discount: ${item.productInfo.discount!.discountPercent}%"}",
+            imgUrl: item.productInfo.imgUrl,
+          ),
+        )
+        .toList();
+  }
+
+  void checkPromoCode() {
+    Promo? promoResult;
+    promoResult =
+        promoCodes.singleWhere((item) => item.promoCode == pCode.text);
+    promoObx.value = promoResult;
+  }
+
+  double calculateLess() {
+    if (promoObx.value == null) {
+      return 0.00;
+    }
+    if (promoObx.value!.isPercentBasis) {
+      return ((promoObx.value!.percentDiscount! / 100) * subTotal());
+    } else {
+      return promoObx.value!.amountLess!;
+    }
+  }
+
+  double total() {
+    double total = subTotal() - calculateLess();
+    return total < 0 ? 0.00 : total;
   }
 
   //For Products

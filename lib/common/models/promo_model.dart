@@ -10,4 +10,8 @@ class Promo {
     this.amountLess,
     required this.title,
   });
+
+  bool get isPercentBasis => percentDiscount != null && amountLess == null;
+
+  double? get discount => isPercentBasis ? percentDiscount : amountLess;
 }
