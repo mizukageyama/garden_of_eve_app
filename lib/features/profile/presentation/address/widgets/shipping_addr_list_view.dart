@@ -40,6 +40,7 @@ class ShippingAddrListView extends StatelessWidget {
                 addr: shippingController.addrList[index],
                 forListView: true,
                 showRemove: showRemove,
+                removeFunction: shippingController.deleteAddress,
                 backgroundColor: _selectedId.value == _addr.addressId
                     ? lightGreenColor
                     : backgroundColor,

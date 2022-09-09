@@ -18,4 +18,37 @@ class ShippingAddrRepository {
       throw errorMessage;
     }
   }
+
+  Future<Map<String, dynamic>> addAddress(int userId, ShippingAddr addr) async {
+    try {
+      final response = await _shippingApi.addAddress(userId, addr);
+      return response.data;
+    } on DioError catch (e) {
+      final errorMessage = DioExceptions.fromDioError(e).toString();
+      throw errorMessage;
+    }
+  }
+
+  Future<Map<String, dynamic>> updateAddress(
+    int userId,
+    ShippingAddr addr,
+  ) async {
+    try {
+      final response = await _shippingApi.updateAddress(userId, addr);
+      return response.data;
+    } on DioError catch (e) {
+      final errorMessage = DioExceptions.fromDioError(e).toString();
+      throw errorMessage;
+    }
+  }
+
+  Future<Map<String, dynamic>> deleteAddress(int addrId) async {
+    try {
+      final response = await _shippingApi.deleteddress(addrId);
+      return response;
+    } on DioError catch (e) {
+      final errorMessage = DioExceptions.fromDioError(e).toString();
+      throw errorMessage;
+    }
+  }
 }

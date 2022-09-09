@@ -10,6 +10,7 @@ class ShippingAddrTile extends StatelessWidget {
     this.showRemove = false,
     this.backgroundColor = whiteColor,
     this.fontColor = darkGreyColor,
+    this.removeFunction,
   }) : super(key: key);
 
   final ShippingAddr addr;
@@ -17,6 +18,7 @@ class ShippingAddrTile extends StatelessWidget {
   final bool showRemove;
   final Color backgroundColor;
   final Color fontColor;
+  final void Function(int)? removeFunction;
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +67,7 @@ class ShippingAddrTile extends StatelessWidget {
             child: InkWell(
               onTap: () {
                 if (showRemove) {
+                  removeFunction!(addr.addressId!);
                   print('Removing: ${addr.address} \nRefetch Shipping Addr');
                 }
               },

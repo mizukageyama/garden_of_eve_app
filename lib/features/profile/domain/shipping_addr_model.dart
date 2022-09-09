@@ -31,6 +31,6 @@ class ShippingAddr {
 
   @override
   String toString() {
-    return address + ' $addressId';
+    return fullName + ' ' + address + ' $addressId';
   }
 }
