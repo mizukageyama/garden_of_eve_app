@@ -82,7 +82,7 @@ class CartListView extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Dismissible(
                   onDismissed: (direction) {
-                    cartListController.cartList.removeAt(index);
+                    cartListController.removeFromCart(index);
                   },
                   confirmDismiss: (DismissDirection direction) async {
                     return await showDialog(

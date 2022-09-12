@@ -44,9 +44,9 @@ class CartApi {
     }
   }
 
-  Future<Response> removeFromCart(int cartId) async {
+  Future<Map<String, dynamic>> removeFromCart(int cartId) async {
     try {
-      final Response response = await dioClient.delete(
+      final Map<String, dynamic> response = await dioClient.delete(
         'cart/$cartId',
         options: Options(
           headers: {
@@ -55,6 +55,7 @@ class CartApi {
           },
         ),
       );
+
       return response;
     } catch (e) {
       rethrow;

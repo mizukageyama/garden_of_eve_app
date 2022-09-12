@@ -1,10 +1,12 @@
 class OrderItem {
+  int? cartId;
   int id;
   String name;
   String description;
   String imgUrl;
 
   OrderItem({
+    this.cartId,
     required this.id,
     required this.name,
     required this.description,

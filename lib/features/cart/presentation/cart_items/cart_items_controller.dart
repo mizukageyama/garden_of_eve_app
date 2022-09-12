@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/models/promo_model.dart';
+import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/constants/app_items.dart';
 import 'package:garden_of_eve/features/cart/data/cart_repository.dart';
 import 'package:garden_of_eve/features/cart/domain/cart_model.dart';
@@ -52,6 +53,7 @@ class CartListController extends GetxController {
     return selectedItems
         .map(
           (item) => OrderItem(
+            cartId: item.id,
             id: item.productInfo.id,
             name: item.productInfo.name,
             description:
@@ -114,5 +116,30 @@ class CartListController extends GetxController {
     productHasMoreData = currentPage < totalPage;
 
     if (productHasMoreData) currentPage++;
+  }
+
+  Future<void> removeFromCart(int index) async {
+    final Cart temp = cartList[index];
+    cartList.removeAt(index);
+    Map<String, dynamic> message = await _cartRepo.removeCartItem(
+      temp.id,
+    );
+
+    bool success = message['success'] == 1;
+    if (!success) {
+      cartList.insert(index, temp);
+    }
+    Get.snackbar(
+      success ? 'Success' : 'Failed',
+      success ? 'Removed from Cart' : message['message'],
+      snackPosition: SnackPosition.BOTTOM,
+      borderRadius: 20,
+      margin: const EdgeInsets.all(15),
+      colorText: oxfordBlueColor,
+      duration: const Duration(seconds: 1),
+      isDismissible: true,
+      dismissDirection: DismissDirection.horizontal,
+      forwardAnimationCurve: Curves.easeOutBack,
+    );
   }
 }

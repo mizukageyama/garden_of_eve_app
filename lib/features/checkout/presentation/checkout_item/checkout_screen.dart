@@ -12,7 +12,7 @@ import 'package:garden_of_eve/utils/utils.dart';
 
 class CheckoutScreen extends StatelessWidget {
   CheckoutScreen({Key? key}) : super(key: key);
-  final CheckoutController _checkoutController = Get.put(CheckoutController());
+  final _checkoutController = Get.put(CheckoutController());
 
   @override
   Widget build(BuildContext context) {

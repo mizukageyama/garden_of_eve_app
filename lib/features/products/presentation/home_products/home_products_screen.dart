@@ -50,12 +50,6 @@ class ProductsScreen extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              // const CircleAvatar(
-              //   radius: 20,
-              //   backgroundImage: AssetImage(
-              //     'assets/images/profile.jpg',
-              //   ),
-              // ),
             ],
           ),
         ),

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/models/payment_options.dart';
 import 'package:garden_of_eve/constants/app_colors.dart';
-import 'package:garden_of_eve/features/cart/domain/cart_model.dart';
+import 'package:garden_of_eve/constants/app_items.dart';
 import 'package:garden_of_eve/features/orders/data/order_repository.dart';
 import 'package:garden_of_eve/features/orders/domain/order_items_model.dart';
 import 'package:garden_of_eve/features/profile/domain/shipping_addr_model.dart';
-import 'package:garden_of_eve/utils/format.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class CheckoutController extends GetxController {
@@ -14,6 +13,12 @@ class CheckoutController extends GetxController {
   final Rxn<ShippingAddr?> shippingAddr = Rxn<ShippingAddr>();
   final Rxn<PaymentOpt?> paymentOption = Rxn<PaymentOpt>();
   final OrderRepository _orderRepo = OrderRepository();
+
+  @override
+  void onInit() {
+    payment = paymentOptions[0];
+    super.onInit();
+  }
 
   int get currentStep => _currentStep.value;
 
@@ -63,6 +68,7 @@ class CheckoutController extends GetxController {
   List<Map<String, dynamic>> orderItems(List<OrderItem> orders) {
     return orders
         .map((item) => {
+              "cart_id": item.cartId ?? 0,
               "id": item.id,
               "description": item.description,
             })
@@ -75,6 +81,7 @@ class CheckoutController extends GetxController {
     List<OrderItem> orders,
   ) async {
     //show loading
+    print('loading...');
     List<Map<String, dynamic>> orderItemsMapped = orderItems(orders);
     Map<String, dynamic> message = await _orderRepo.createOrder(
       userId,
@@ -96,5 +103,7 @@ class CheckoutController extends GetxController {
       dismissDirection: DismissDirection.horizontal,
       forwardAnimationCurve: Curves.easeOutBack,
     );
+    //refresh cart
+    //show success dialog, then get back?
   }
 }

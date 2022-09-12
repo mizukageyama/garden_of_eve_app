@@ -37,10 +37,10 @@ class CartRepository {
     }
   }
 
-  Future<String> removeCartItem(int cartId) async {
+  Future<Map<String, dynamic>> removeCartItem(int cartId) async {
     try {
       final response = await _cartApi.removeFromCart(cartId);
-      return response.data['data']['message'];
+      return response;
     } on DioError catch (e) {
       final errorMessage = DioExceptions.fromDioError(e).toString();
       throw errorMessage;
