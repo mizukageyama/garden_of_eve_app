@@ -13,6 +13,7 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.keyboardType,
     this.inputFormatters,
+    this.obscureText = false,
     this.borderRadius = const BorderRadius.all(
       Radius.circular(
         10.0,
@@ -29,6 +30,7 @@ class CustomTextField extends StatelessWidget {
   final BorderRadius borderRadius;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,7 @@ class CustomTextField extends StatelessWidget {
         fontSize: 14,
       ),
       keyboardType: keyboardType,
+      obscureText: obscureText,
       decoration: InputDecoration(
         labelStyle: quicksandSemiBold.copyWith(
           color: neutralGreyColor,
