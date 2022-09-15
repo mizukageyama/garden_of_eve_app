@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/common/controllers/auth_controller.dart';
 import 'package:garden_of_eve/common/services/validator.dart';
 import 'package:garden_of_eve/common/widgets/custom_text_field.dart';
 import 'package:garden_of_eve/common/widgets/gradient_container.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
-import 'package:garden_of_eve/features/authentication/presentation/login/login_controller.dart';
-import 'package:garden_of_eve/features/authentication/presentation/signup/signup_screen.dart';
+import 'package:garden_of_eve/features/authentication/presentation/login/login_screen.dart';
+import 'package:garden_of_eve/features/authentication/presentation/signup/signup_controller.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({Key? key}) : super(key: key);
-  // ignore: unused_field
-  final _authController = Get.put(AuthController(), permanent: true);
-  final _loginController = Get.put(LoginController());
+class SignupScreen extends StatelessWidget {
+  SignupScreen({Key? key}) : super(key: key);
+  final _signupController = Get.put(SignupController());
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +35,12 @@ class LoginScreen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(35, 20, 35, 60),
                     child: Form(
-                      key: _loginController.loginForm,
+                      key: _signupController.signupForm,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            'Login to your account',
+                            'Create New Account',
                             style: quicksandBold.copyWith(
                               color: darkGreyColor,
                               fontSize: 20,
@@ -52,8 +49,36 @@ class LoginScreen extends StatelessWidget {
                           const SizedBox(
                             height: 25,
                           ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: CustomTextField(
+                                  controller: _signupController.firstName,
+                                  borderRadius: BorderRadius.circular(5),
+                                  floatLabel: true,
+                                  labelText: 'First Name',
+                                  validator: Validator().notEmpty,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                child: CustomTextField(
+                                  controller: _signupController.lastName,
+                                  borderRadius: BorderRadius.circular(5),
+                                  floatLabel: true,
+                                  labelText: 'Last Name',
+                                  validator: Validator().notEmpty,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
                           CustomTextField(
-                            controller: _loginController.email,
+                            controller: _signupController.email,
                             borderRadius: BorderRadius.circular(5),
                             floatLabel: true,
                             labelText: 'Email',
@@ -63,7 +88,7 @@ class LoginScreen extends StatelessWidget {
                             height: 12,
                           ),
                           CustomTextField(
-                            controller: _loginController.password,
+                            controller: _signupController.password,
                             obscureText: true,
                             borderRadius: BorderRadius.circular(5),
                             floatLabel: true,
@@ -71,40 +96,18 @@ class LoginScreen extends StatelessWidget {
                             validator: Validator().notEmpty,
                           ),
                           const SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Remember me',
-                                style: quicksandMedium.copyWith(
-                                  color: darkGreyColor,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              Text(
-                                'Forgot password?',
-                                style: quicksandMedium.copyWith(
-                                  color: Colors.blue,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
                             height: 30,
                           ),
                           InkWell(
                             onTap: () {
-                              _loginController.loginUser();
+                              _signupController.signupUser();
                             },
                             child: GradientContainer(
                               padding: const EdgeInsets.symmetric(vertical: 10),
                               width: double.infinity,
                               borderRadius: BorderRadius.circular(20),
                               child: Text(
-                                'Login',
+                                'Register',
                                 style: quicksandSemiBold.copyWith(
                                   color: whiteColor,
                                   fontSize: 16,
@@ -149,7 +152,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                           InkWell(
                             onTap: () {
-                              print('Coming soon..');
+                              print('Register by using Google account');
                             },
                             child: Container(
                               padding: const EdgeInsets.all(8),
@@ -174,7 +177,7 @@ class LoginScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Don\'t have an account?',
+                                'Already have an account?',
                                 style: quicksandMedium.copyWith(
                                   color: darkGreyColor,
                                   fontSize: 14,
@@ -184,9 +187,9 @@ class LoginScreen extends StatelessWidget {
                                 width: 5,
                               ),
                               InkWell(
-                                onTap: () => Get.off(() => SignupScreen()),
+                                onTap: () => Get.off(() => LoginScreen()),
                                 child: Text(
-                                  'Register here',
+                                  'Login here',
                                   style: quicksandMedium.copyWith(
                                     color: Colors.blue,
                                     fontSize: 14,

@@ -23,7 +23,7 @@ class AppPages {
     ),
     GetPage(
       name: '/profile',
-      page: () => ProfileScreen(),
+      page: () => const ProfileScreen(),
     ),
   ];
 

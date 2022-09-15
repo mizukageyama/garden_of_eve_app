@@ -6,7 +6,7 @@ import 'package:garden_of_eve/utils/format.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class ProductTileText extends StatelessWidget {
-  ProductTileText({
+  const ProductTileText({
     Key? key,
     required this.product,
     this.maxLines = 3,

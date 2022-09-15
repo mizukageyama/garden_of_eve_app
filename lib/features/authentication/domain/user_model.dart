@@ -3,31 +3,25 @@ class User {
   String email;
   String firstName;
   String lastName;
-  String address;
-  String contactNumber;
-  String createdAt;
-  String modifiedAt;
+  // DateTime createdAt;
+  // DateTime modifiedAt;
 
   User({
     required this.id,
     required this.email,
     required this.firstName,
     required this.lastName,
-    required this.address,
-    required this.contactNumber,
-    required this.createdAt,
-    required this.modifiedAt,
+    // required this.createdAt,
+    // required this.modifiedAt,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json['id'],
-        email: json['email'],
-        firstName: json['first_name'],
-        lastName: json['last_name'],
-        address: json['address'],
-        contactNumber: json['contact_number'],
-        createdAt: json['created_at'],
-        modifiedAt: json['modified_at'],
+        id: json['id'] as int,
+        email: json['email'] as String,
+        firstName: json['first_name'] as String,
+        lastName: json['last_name'] as String,
+        // createdAt: DateTime.parse(json['created_at']),
+        // modifiedAt: DateTime.parse(json['modified_at']),
       );
 
   Map<String, dynamic> toJson() => {
@@ -35,13 +29,11 @@ class User {
         "email": email,
         "first_name": firstName,
         "last_name": lastName,
-        "address": address,
-        "contact_number": contactNumber,
       };
 
   @override
   String toString() {
-    return 'User Info (First Name: $firstName, Last Name: $lastName, Email: $email, '
-        'Address: $address, Contact Number: $contactNumber)\n Create: $createdAt; Modified: $modifiedAt';
+    return 'User Info (First Name: $firstName, Last Name: $lastName, Email: $email';
+    //'\n Create: $createdAt; Modified: $modifiedAt';
   }
 }

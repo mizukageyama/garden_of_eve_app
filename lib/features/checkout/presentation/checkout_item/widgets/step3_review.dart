@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/checkout_controller.dart';
-import 'package:garden_of_eve/features/orders/domain/order_items_model.dart';
 import 'package:garden_of_eve/features/orders/presentation/order_list/widgets/order_items_list.dart';
 import 'package:garden_of_eve/features/profile/presentation/address/widgets/shipping_addr_tile.dart';
 import 'package:garden_of_eve/utils/utils.dart';
