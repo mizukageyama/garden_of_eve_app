@@ -24,22 +24,21 @@ class SignupController extends GetxController {
         email.text,
         password.text,
       );
+      Get.snackbar(
+        success ? 'Registered' : 'Register Failed',
+        success ? 'You may now login your account' : 'Please try again later',
+        snackPosition: SnackPosition.BOTTOM,
+        borderRadius: 20,
+        margin: const EdgeInsets.all(15),
+        colorText: oxfordBlueColor,
+        duration: const Duration(seconds: 4),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.easeOutBack,
+      );
       if (success) {
         clearInputs();
         Get.off(() => LoginScreen());
-      } else {
-        Get.snackbar(
-          'Register Failed',
-          'Please try again later',
-          snackPosition: SnackPosition.BOTTOM,
-          borderRadius: 20,
-          margin: const EdgeInsets.all(15),
-          colorText: oxfordBlueColor,
-          duration: const Duration(seconds: 4),
-          isDismissible: true,
-          dismissDirection: DismissDirection.horizontal,
-          forwardAnimationCurve: Curves.easeOutBack,
-        );
       }
     }
   }
