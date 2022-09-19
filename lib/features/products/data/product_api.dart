@@ -7,10 +7,8 @@ class ProductApi {
   Future<Response> getProductsByCategory(int page, String category) async {
     try {
       final Response response = await dioClient.get(
-          'products/by_category?page=$page&limit=5&category_key=$category',
-          options: Options(headers: {
-            "content-type": "application/json",
-          }));
+        'products/by_category?page=$page&limit=5&category_key=$category',
+      );
       return response;
     } catch (e) {
       rethrow;
@@ -24,11 +22,9 @@ class ProductApi {
         filterProduct = '&search_key=$searchKey';
       }
 
-      final Response response =
-          await dioClient.get('products?page=$page$filterProduct',
-              options: Options(headers: {
-                "content-type": "application/json",
-              }));
+      final Response response = await dioClient.get(
+        'products?page=$page$filterProduct',
+      );
       return response;
     } catch (e) {
       rethrow;
@@ -37,12 +33,9 @@ class ProductApi {
 
   Future<Response> getCategories() async {
     try {
-      final Response response = await dioClient.get('/categories',
-          options: Options(headers: {
-            "content-type": "application/json",
-            "authorization":
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiaWQiOjMsImVtYWlsIjoibWFkX21heEBnbWFpbC5jb20iLCJjcmVhdGVkX2F0IjoiMjAyMi0wNi0yOVQyMDozMDoxOS4wMDBaIiwibW9kaWZpZWRfYXQiOiIyMDIyLTA3LTMxVDA4OjEwOjEyLjAwMFoiLCJmaXJzdF9uYW1lIjoiTWFkIiwibGFzdF9uYW1lIjoiTWF4In0sImlhdCI6MTY1OTYwMTU1NCwiZXhwIjoxNjU5NjA1MTU0fQ.9JZYMzQ_jNu6WHtUFsyB-_a7g_f7eAoxpoDAXd4Nf3k", // $_tokenKey",
-          }));
+      final Response response = await dioClient.get(
+        '/categories',
+      );
       return response;
     } catch (e) {
       rethrow;

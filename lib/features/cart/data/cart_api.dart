@@ -9,12 +9,6 @@ class CartApi {
     try {
       final Response response = await dioClient.get(
         'cart?id=$userId&$page',
-        options: Options(
-          headers: {
-            "content-type": "application/json",
-            "authorization": "Bearer ${API.key}"
-          },
-        ),
       );
       return response;
     } catch (e) {
@@ -31,12 +25,6 @@ class CartApi {
           "product_id": prodId,
           "qty": qty,
         },
-        options: Options(
-          headers: {
-            "content-type": "application/json",
-            "authorization": "Bearer ${API.key}"
-          },
-        ),
       );
       return response;
     } catch (e) {
@@ -48,12 +36,6 @@ class CartApi {
     try {
       final Map<String, dynamic> response = await dioClient.delete(
         'cart/$cartId',
-        options: Options(
-          headers: {
-            "content-type": "application/json",
-            "authorization": "Bearer ${API.key}"
-          },
-        ),
       );
 
       return response;

@@ -10,7 +10,6 @@ import 'package:garden_of_eve/utils/utils.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
-  // ignore: unused_field
   final _authController = Get.put(AuthController(), permanent: true);
   final _loginController = Get.put(LoginController());
 

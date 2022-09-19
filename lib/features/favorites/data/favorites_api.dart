@@ -9,12 +9,6 @@ class FavoritesApi {
     try {
       final Response response = await dioClient.get(
         'favorites?id=$userId&$page',
-        options: Options(
-          headers: {
-            "content-type": "application/json",
-            "authorization": "Bearer ${API.key}"
-          },
-        ),
       );
       return response;
     } catch (e) {
@@ -30,12 +24,6 @@ class FavoritesApi {
           "user_id": userId,
           "product_id": productId,
         },
-        options: Options(
-          headers: {
-            "content-type": "application/json",
-            "authorization": "Bearer ${API.key}"
-          },
-        ),
       );
       return response;
     } catch (e) {
@@ -47,12 +35,6 @@ class FavoritesApi {
     try {
       final Map<String, dynamic> response = await dioClient.delete(
         'favorites/$favId',
-        options: Options(
-          headers: {
-            "content-type": "application/json",
-            "authorization": "Bearer ${API.key}"
-          },
-        ),
       );
 
       return response;

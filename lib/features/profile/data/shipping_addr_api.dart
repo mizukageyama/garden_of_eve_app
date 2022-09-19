@@ -10,12 +10,6 @@ class ShippingAddrApi {
     try {
       final Response response = await dioClient.get(
         'user_address/$userId',
-        options: Options(
-          headers: {
-            "content-type": "application/json",
-            "authorization": "Bearer ${API.key}"
-          },
-        ),
       );
       return response;
     } catch (e) {
@@ -33,12 +27,6 @@ class ShippingAddrApi {
           "full_name": addr.fullName,
           "contact_number": addr.contactNumber,
         },
-        options: Options(
-          headers: {
-            "content-type": "application/json",
-            "authorization": "Bearer ${API.key}"
-          },
-        ),
       );
       return response;
     } catch (e) {
@@ -48,7 +36,7 @@ class ShippingAddrApi {
 
   Future<Response> updateAddress(int userId, ShippingAddr addr) async {
     try {
-      final Response response = await dioClient.put(
+      final Response response = await dioClient.patch(
         'user_address',
         data: {
           "user_id": userId,
@@ -56,12 +44,6 @@ class ShippingAddrApi {
           "full_name": addr.fullName,
           "contact_number": addr.contactNumber,
         },
-        options: Options(
-          headers: {
-            "content-type": "application/json",
-            "authorization": "Bearer ${API.key}"
-          },
-        ),
       );
       return response;
     } catch (e) {
@@ -73,12 +55,6 @@ class ShippingAddrApi {
     try {
       final Map<String, dynamic> response = await dioClient.delete(
         'user_address/$addrId',
-        options: Options(
-          headers: {
-            "content-type": "application/json",
-            "authorization": "Bearer ${API.key}"
-          },
-        ),
       );
       return response;
     } catch (e) {

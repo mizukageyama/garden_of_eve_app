@@ -13,11 +13,6 @@ class AuthApi {
           "email": email,
           "password": password,
         },
-        options: Options(
-          headers: {
-            "content-type": "application/json",
-          },
-        ),
       );
       return response;
     } catch (e) {
@@ -40,11 +35,6 @@ class AuthApi {
           "first_name": firstName,
           "last_name": lastName,
         },
-        options: Options(
-          headers: {
-            "content-type": "application/json",
-          },
-        ),
       );
       return response;
     } catch (e) {

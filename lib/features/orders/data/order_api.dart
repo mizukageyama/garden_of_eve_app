@@ -10,12 +10,6 @@ class OrderApi {
     try {
       final Response response = await dioClient.get(
         'orders?id=$userId&$page',
-        options: Options(
-          headers: {
-            "content-type": "application/json",
-            "authorization": "Bearer ${API.key}"
-          },
-        ),
       );
       return response;
     } catch (e) {
@@ -40,12 +34,6 @@ class OrderApi {
           "address_owner": addr.fullName,
           "order_items": orders,
         },
-        options: Options(
-          headers: {
-            "content-type": "application/json",
-            "authorization": "Bearer ${API.key}"
-          },
-        ),
       );
       return response;
     } catch (e) {
