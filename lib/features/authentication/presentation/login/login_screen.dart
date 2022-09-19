@@ -1,5 +1,8 @@
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/controllers/auth_controller.dart';
+import 'package:garden_of_eve/common/controllers/user_data_controller.dart';
 import 'package:garden_of_eve/common/services/validator.dart';
 import 'package:garden_of_eve/common/widgets/custom_text_field.dart';
 import 'package:garden_of_eve/common/widgets/gradient_container.dart';
@@ -10,6 +13,8 @@ import 'package:garden_of_eve/utils/utils.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
+
+  final _userData = Get.put(UserData(), permanent: true);
   final _authController = Get.put(AuthController(), permanent: true);
   final _loginController = Get.put(LoginController());
 

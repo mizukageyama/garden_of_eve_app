@@ -1,7 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:garden_of_eve/common/controllers/user_data_controller.dart';
+import 'package:garden_of_eve/constants/api_key_holder.dart';
 import 'package:garden_of_eve/constants/endpoints.dart';
+import 'package:get/get.dart' as getx;
 
 class DioClient {
+  final UserData _userData = getx.Get.find();
   final Dio _dio = Dio();
 
   DioClient() {
@@ -9,7 +13,45 @@ class DioClient {
       ..options.baseUrl = Endpoints.baseUrl
       ..options.connectTimeout = Endpoints.connectionTimeout
       ..options.receiveTimeout = Endpoints.receiveTimeout
-      ..options.responseType = ResponseType.json;
+      ..options.responseType = ResponseType.json
+      ..interceptors.add(
+        InterceptorsWrapper(
+          onRequest: (options, handler) async {
+            options.headers = {
+              "content-type": "application/json",
+              "authorization": "Bearer ${_userData.accessToken}"
+            };
+            return handler.next(options);
+          },
+          onError: (error, handler) async {
+            if (error.response?.statusCode == 401 &&
+                error.response?.data['message'] == "Invalid Token") {
+              print(error.response?.data['message']);
+              if (await _userData.storage.containsKey(key: 'refreshToken')) {
+                await refreshToken();
+              }
+            }
+          },
+        ),
+      );
+  }
+
+  Future<void> refreshToken() async {
+    final _refreshToken = await _userData.storage.read(key: 'refreshToken');
+    final response = await post(
+      'token',
+      data: {
+        "user_id": _userData.currentUserId,
+        "token": _refreshToken,
+      },
+    );
+    if (response.statusCode == 200) {
+      _userData.accessToken = response.data['token'];
+    } else {
+      _userData.accessToken = null;
+      _userData.storage.deleteAll();
+      print('signout user');
+    }
   }
 
   //GET
@@ -60,8 +102,8 @@ class DioClient {
     }
   }
 
-  //PUT
-  Future<Response> put(
+  //PATCH
+  Future<Response> patch(
     String url, {
     data,
     Map<String, dynamic>? queryParameters,
@@ -71,7 +113,7 @@ class DioClient {
     ProgressCallback? onReceiveProgress,
   }) async {
     try {
-      final Response response = await _dio.put(
+      final Response response = await _dio.patch(
         url,
         data: data,
         queryParameters: queryParameters,

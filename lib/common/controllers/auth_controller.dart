@@ -1,29 +1,22 @@
+import 'package:garden_of_eve/common/controllers/user_data_controller.dart';
 import 'package:garden_of_eve/features/authentication/data/auth_repository.dart';
 import 'package:garden_of_eve/features/authentication/domain/user_model.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class AuthController extends GetxController {
-  // final _storage = const FlutterSecureStorage();
-  final Rxn<User?> _currentUser = Rxn<User>();
   final _authRepo = AuthRepository();
-  String? _accessToken;
-
-  @override
-  void onInit() {
-    print('INITIALIZED AUTH');
-    super.onInit();
-  }
+  final UserData _userData = Get.find();
 
   Future<bool> loginUser(String email, String password) async {
     Map<String, dynamic> data = await _authRepo.loginUser(email, password);
     bool success = data['success'] == 1;
     if (success) {
-      _currentUser.value = User.fromJson(data['data']);
-      _accessToken = data['token'];
-      // _storage.write(
-      //   key: 'refreshToken',
-      //   value: data['refreshToken'],
-      // );
+      _userData.currentUser = User.fromJson(data['data']);
+      _userData.accessToken = data['token'];
+      _userData.storage.write(
+        key: 'refreshToken',
+        value: data['refreshToken'],
+      );
       return true;
     }
     return false;
@@ -51,14 +44,4 @@ class AuthController extends GetxController {
   Future<void> signOut() async {
     //signout
   }
-
-  //FlutterSecureStorage get storage => _storage;
-
-  set accessToken(String? newToken) => _accessToken = newToken;
-
-  String get accessToken => _accessToken ?? '';
-
-  int get currentUserId => _currentUser.value?.id ?? 0;
-
-  User get currentUser => _currentUser.value!;
 }

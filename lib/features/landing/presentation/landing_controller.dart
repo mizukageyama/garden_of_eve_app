@@ -16,8 +16,8 @@ class LandingPageController extends GetxController {
     FavoritesScreen(
       key: const PageStorageKey<String>('pageTwo'),
     ),
-    const ProfileScreen(
-      key: PageStorageKey<String>('pageThree'),
+    ProfileScreen(
+      key: const PageStorageKey<String>('pageThree'),
     ),
     const AppInfoScreen(
       key: PageStorageKey<String>('pageFour'),

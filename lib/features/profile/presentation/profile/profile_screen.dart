@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common/controllers/user_data_controller.dart';
 import 'package:garden_of_eve/constants/app_colors.dart';
 import 'package:garden_of_eve/constants/app_text_styles.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_screen.dart';
@@ -12,7 +13,8 @@ import 'package:garden_of_eve/features/profile/presentation/vouchers/vouchers_sc
 import 'package:garden_of_eve/utils/utils.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  ProfileScreen({Key? key}) : super(key: key);
+  final UserData _userData = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class ProfileScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Dakota Johnson',
+                          '${_userData.currentUser!.firstName} ${_userData.currentUser!.lastName}',
                           textAlign: TextAlign.center,
                           style: quicksandSemiBold.copyWith(
                             color: whiteColor,
@@ -51,7 +53,7 @@ class ProfileScreen extends StatelessWidget {
                           height: 5,
                         ),
                         Text(
-                          'd.johnson@gmail.com',
+                          _userData.currentUser!.email,
                           textAlign: TextAlign.center,
                           style: quicksandSemiBold.copyWith(
                             color: whiteColor,

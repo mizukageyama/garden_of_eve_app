@@ -44,6 +44,7 @@ dev_dependencies:
   dropdown_button2: ^1.6.3
   expandable: ^5.0.1
   percent_indicator: ^4.2.2
+  flutter_secure_storage: ^4.1.0
 
 
 # The following section is specific to Flutter.
