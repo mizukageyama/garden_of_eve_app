@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:garden_of_eve/common/controllers/user_data_controller.dart';
-import 'package:garden_of_eve/constants/api_key_holder.dart';
 import 'package:garden_of_eve/constants/endpoints.dart';
 import 'package:get/get.dart' as getx;
 

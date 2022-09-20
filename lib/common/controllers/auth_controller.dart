@@ -1,6 +1,7 @@
+import 'dart:convert';
 import 'package:garden_of_eve/common/controllers/user_data_controller.dart';
 import 'package:garden_of_eve/features/authentication/data/auth_repository.dart';
-import 'package:garden_of_eve/features/authentication/domain/user_model.dart';
+import 'package:garden_of_eve/features/authentication/presentation/login/login_screen.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class AuthController extends GetxController {
@@ -11,12 +12,21 @@ class AuthController extends GetxController {
     Map<String, dynamic> data = await _authRepo.loginUser(email, password);
     bool success = data['success'] == 1;
     if (success) {
-      _userData.currentUser = User.fromJson(data['data']);
-      _userData.accessToken = data['token'];
+      _userData.storage.write(
+        key: 'currentUser',
+        value: json.encode(data['data']),
+      );
       _userData.storage.write(
         key: 'refreshToken',
         value: data['refreshToken'],
       );
+      _userData.storage.write(
+        key: 'accessToken',
+        value: data['token'],
+      );
+      _userData.storage.write(key: 'isLoggedIn', value: '1');
+      await _userData.initializeCurrentUser();
+      await _userData.initializeToken();
       return true;
     }
     return false;
@@ -42,6 +52,7 @@ class AuthController extends GetxController {
   }
 
   Future<void> signOut() async {
-    //signout
+    await _userData.storage.deleteAll();
+    Get.offAll(LoginScreen());
   }
 }

@@ -42,7 +42,7 @@ class ProfileScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${_userData.currentUser!.firstName} ${_userData.currentUser!.lastName}',
+                          _userData.currentUserFullName,
                           textAlign: TextAlign.center,
                           style: quicksandSemiBold.copyWith(
                             color: whiteColor,

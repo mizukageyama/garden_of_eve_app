@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common/controllers/auth_controller.dart';
 import 'package:garden_of_eve/common/controllers/main_controller.dart';
+import 'package:garden_of_eve/common/controllers/user_data_controller.dart';
 import 'package:garden_of_eve/common/widgets/gradient_container.dart';
 import 'package:garden_of_eve/constants/app_colors.dart';
 import 'package:garden_of_eve/constants/app_items.dart';
@@ -9,6 +11,8 @@ import 'package:garden_of_eve/utils/utils.dart';
 
 class CustomDrawer extends StatelessWidget {
   CustomDrawer({Key? key}) : super(key: key);
+  final UserData _userData = Get.find();
+  final AuthController _auth = Get.find();
   final MainController _main = Get.find();
   final LandingPageController _landing = Get.find();
 
@@ -51,11 +55,15 @@ class CustomDrawer extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Text(
-                  'Dakota Johnson',
-                  style: quicksandBold.copyWith(
-                    color: darkestGreenColor,
-                    fontSize: 15,
+                child: Obx(
+                  () => Text(
+                    _userData.currentUser == null
+                        ? ''
+                        : _userData.currentUserFullName,
+                    style: quicksandBold.copyWith(
+                      color: darkestGreenColor,
+                      fontSize: 15,
+                    ),
                   ),
                 ),
               ),
@@ -78,10 +86,9 @@ class CustomDrawer extends StatelessWidget {
         children: drawerItems
             .map(
               (item) => ListTile(
-                onTap: () {
+                onTap: () async {
                   if (item.title == 'Sign out') {
-                    //confirmation dialog
-                    print('logout user');
+                    await _auth.signOut();
                   } else if (item.title == 'Profile') {
                     _main.closeDrawer();
                     _landing.changeIndex(2);

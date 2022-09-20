@@ -1,4 +1,3 @@
-import 'package:garden_of_eve/constants/api_key_holder.dart';
 import 'package:garden_of_eve/utils/dio_network/dio_client.dart';
 import 'package:dio/dio.dart';
 

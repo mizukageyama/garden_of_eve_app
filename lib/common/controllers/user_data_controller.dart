@@ -1,21 +1,49 @@
+import 'dart:convert';
+import 'package:garden_of_eve/common/services/secure_storage.dart';
 import 'package:garden_of_eve/features/authentication/domain/user_model.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class UserData extends GetxController {
-  final _storage = const FlutterSecureStorage();
   String? _accessToken;
   final Rxn<User?> _currentUser = Rxn<User>();
 
+  @override
+  void onInit() {
+    initializeCurrentUser();
+    initializeToken();
+    super.onInit();
+  }
+
+  FlutterSecureStorage get storage => StorageService.storage;
+
   set currentUser(User? user) => _currentUser.value = user;
 
-  FlutterSecureStorage get storage => _storage;
+  User? get currentUser => _currentUser.value;
+
+  int get currentUserId => _currentUser.value?.id ?? 0;
+
+  String get currentUserFullName =>
+      '${_currentUser.value?.firstName} ${_currentUser.value?.lastName}';
 
   set accessToken(String? newToken) => _accessToken = newToken;
 
   String get accessToken => _accessToken ?? '';
 
-  int get currentUserId => _currentUser.value?.id ?? 0;
+  Future<void> initializeCurrentUser() async {
+    String? userJson = await storage.read(key: 'currentUser');
+    if (userJson == null) {
+      return;
+    }
+    currentUser = User.fromJson(json.decode(userJson));
+  }
 
-  User? get currentUser => _currentUser.value;
+  Future<void> initializeToken() async {
+    String? token = await storage.read(key: 'accessToken');
+    accessToken = token;
+  }
+
+  void clearUser() {
+    storage.deleteAll();
+  }
 }

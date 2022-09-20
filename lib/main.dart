@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common/controllers/auth_controller.dart';
+import 'package:garden_of_eve/common/controllers/user_data_controller.dart';
+import 'package:garden_of_eve/common/services/secure_storage.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/constants/app_pages.dart';
-
-import 'package:garden_of_eve/main_screen.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  bool isLoggedIn = await StorageService.isLoggedIn();
+  runApp(MyApp(isLoggedIn: isLoggedIn));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({
+    Key? key,
+    required this.isLoggedIn,
+  }) : super(key: key);
+
+  final bool isLoggedIn;
+
+  final UserData user = Get.put(UserData());
+  final AuthController auth = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +38,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: bgColor,
       ),
       defaultTransition: Transition.noTransition,
-      home: MainScreen(),
-      //initialRoute: '/',
+      initialRoute: isLoggedIn ? '/main' : '/login',
       getPages: AppPages.routes,
       unknownRoute: AppPages.errorRoute,
     );
