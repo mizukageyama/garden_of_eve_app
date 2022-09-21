@@ -7,14 +7,12 @@ import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_screen.dart';
 import 'package:garden_of_eve/features/products/presentation/home_products/home_products_controller.dart';
-import 'package:garden_of_eve/features/products/presentation/home_products/tab_controller.dart';
 import 'package:garden_of_eve/features/products/presentation/home_products/widgets/_widgets.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class ProductsScreen extends StatelessWidget {
   ProductsScreen({Key? key}) : super(key: key);
 
-  final tabController = Get.put(MyTabController());
   final homeProdController = Get.put(HomeProdController());
   final cartListController = Get.put(CartListController());
   final homePageScroller = ScrollController();
