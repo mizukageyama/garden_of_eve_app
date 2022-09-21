@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/widgets/gradient_container.dart';
+import 'package:garden_of_eve/common/widgets/loading_list_view.dart';
+import 'package:garden_of_eve/common/widgets/product_tile_rect_skeleton.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/favorites/presentation/favorites/favorites_controller.dart';
 import 'package:garden_of_eve/features/favorites/presentation/favorites/widgets/favorites_list_view.dart';
@@ -17,27 +19,23 @@ class FavoritesScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Flexible(
-              child: Stack(
-                children: [
-                  _showFavorites(),
-                  GradientContainer(
-                    borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(10),
-                      bottomRight: Radius.circular(45),
-                      bottomLeft: Radius.circular(15),
-                    ),
-                    padding: const EdgeInsets.fromLTRB(15, 15, 30, 15),
-                    child: Text(
-                      'My Favorites',
-                      style: quicksandSemiBold.copyWith(
-                        color: whiteColor,
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
-                ],
+            GradientContainer(
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(10),
+                bottomRight: Radius.circular(45),
+                bottomLeft: Radius.circular(15),
               ),
+              padding: const EdgeInsets.fromLTRB(15, 15, 30, 15),
+              child: Text(
+                'My Favorites',
+                style: quicksandSemiBold.copyWith(
+                  color: whiteColor,
+                  fontSize: 18,
+                ),
+              ),
+            ),
+            Flexible(
+              child: _showFavorites(),
             ),
           ],
         ),
@@ -47,12 +45,9 @@ class FavoritesScreen extends StatelessWidget {
 
   Widget _showFavorites() {
     if (favController.isLoading.value) {
-      return const SizedBox(
-        height: 85,
-        child: Center(
-          child: Text(
-            'Loading...',
-          ),
+      return const LoadingListView(
+        skeleton: ProductTileRectSkeleton(
+          width: double.infinity,
         ),
       );
     }

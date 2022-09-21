@@ -12,7 +12,7 @@ class FavListView extends StatelessWidget {
     return ListView.builder(
       key: const PageStorageKey<String>('pageTwo'),
       controller: favController.favListScroller,
-      padding: const EdgeInsets.fromLTRB(15, 60, 15, 20),
+      padding: const EdgeInsets.fromLTRB(15, 15, 15, 20),
       shrinkWrap: true,
       itemCount: favController.favList.length + 1,
       itemBuilder: (context, index) {

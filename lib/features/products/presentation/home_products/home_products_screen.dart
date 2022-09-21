@@ -7,12 +7,14 @@ import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_screen.dart';
 import 'package:garden_of_eve/features/products/presentation/home_products/home_products_controller.dart';
+import 'package:garden_of_eve/features/products/presentation/home_products/tab_controller.dart';
 import 'package:garden_of_eve/features/products/presentation/home_products/widgets/_widgets.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class ProductsScreen extends StatelessWidget {
   ProductsScreen({Key? key}) : super(key: key);
 
+  final tabController = Get.put(MyTabController());
   final homeProdController = Get.put(HomeProdController());
   final cartListController = Get.put(CartListController());
   final homePageScroller = ScrollController();
@@ -136,7 +138,7 @@ class ProductsScreen extends StatelessWidget {
   }
 
   Widget _showProducts() {
-    if (homeProdController.isLoadingProd.value) {
+    if (homeProdController.isLoadingCategory.value) {
       return const LoadingListView(
         skeleton: ProductTileSkeleton(
           width: 185,
@@ -144,17 +146,20 @@ class ProductsScreen extends StatelessWidget {
         skeletonHeight: 256,
       );
     }
-    if (homeProdController.products.isEmpty) {
+    if (homeProdController.categories.isEmpty) {
       return const SizedBox(
         height: 0,
         width: 0,
       );
     }
-    return ProductListView();
+    return PageStorage(
+      bucket: homeProdController.bucket,
+      child: homeProdController.currentCategoryContainer,
+    );
   }
 
   Widget _showRecentlyViewed() {
-    if (homeProdController.isLoadingProd.value) {
+    if (homeProdController.isLoadingCategory.value) {
       return const LoadingListView(
         skeleton: ProductTileRectSkeleton(
           width: 290,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/controllers/search_controller.dart';
 import 'package:garden_of_eve/features/products/data/product_repository.dart';
 import 'package:garden_of_eve/features/products/domain/product_model.dart';
+import 'package:garden_of_eve/features/products/presentation/home_products/widgets/product_list_view.dart';
 import 'package:garden_of_eve/features/products/presentation/product_list/product_list_screen.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
@@ -10,19 +11,15 @@ class HomeProdController extends GetxController {
   final ProductRepository _productRepo = ProductRepository();
   final SearchController searchController = Get.put(SearchController());
 
-  //Product Variable
-  final productScroller = ScrollController();
-  RxList<Product> products = RxList.empty(growable: true);
-  RxBool isLoadingProd = true.obs;
-  bool productHasMoreData = false;
-  int currentPage = 1;
-  late int totalPage;
-
   //Category Variable
   final categoryScroller = ScrollController();
   List<String> categories = List.empty(growable: true);
   RxBool isLoadingCategory = true.obs;
   RxInt activeCategoryIndex = 1.obs;
+
+  //Product per Category Page Bucket
+  final PageStorageBucket bucket = PageStorageBucket();
+  final List<StatelessWidget> categoryContainer = List.empty(growable: true);
 
   //Recently Viewed Variable
   final recentScroller = ScrollController();
@@ -32,20 +29,6 @@ class HomeProdController extends GetxController {
   @override
   void onInit() {
     getCategories();
-
-    productScroller.addListener(() async {
-      if (productScroller.position.pixels ==
-          productScroller.position.maxScrollExtent) {
-        print('Fetching new data...');
-        await getProductsData();
-      }
-    });
-
-    ever(activeCategoryIndex, (activeCategoryIndex) async {
-      productScroller.jumpTo(0);
-      await getProductsData(isRefresh: true);
-    });
-
     super.onInit();
   }
 
@@ -56,9 +39,21 @@ class HomeProdController extends GetxController {
     isLoadingCategory.value = false;
 
     if (categories.isNotEmpty) {
-      await getProductsData(isRefresh: true);
+      categoryContainer.addAll(
+        categories
+            .map(
+              (data) => ProductListView(
+                key: PageStorageKey<String>(data),
+                category: data,
+              ),
+            )
+            .toList(),
+      );
     }
   }
+
+  StatelessWidget get currentCategoryContainer =>
+      categoryContainer[activeCategoryIndex.value];
 
   void selectCategory(int index) {
     if (index == activeCategoryIndex.value) {
@@ -70,36 +65,6 @@ class HomeProdController extends GetxController {
     } else {
       activeCategoryIndex.value = index;
     }
-  }
-
-  //For Products
-  Future<void> getProductsData({bool isRefresh = false}) async {
-    if (isRefresh) {
-      isLoadingProd.value = true;
-      currentPage = 1;
-    } else {
-      if (!productHasMoreData) {
-        return;
-      }
-    }
-
-    print(categories[activeCategoryIndex.value]);
-    final result = await _productRepo.getProductListByCategory(
-      currentPage,
-      categories[activeCategoryIndex.value],
-    );
-
-    if (isRefresh) {
-      products.value = result;
-      isLoadingProd.value = false;
-    } else {
-      products.addAll(result);
-    }
-
-    totalPage = _productRepo.totalPagebyCategory;
-    productHasMoreData = currentPage < totalPage;
-
-    if (productHasMoreData) currentPage++;
   }
 
   //For Recently Viewed

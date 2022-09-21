@@ -1,29 +1,53 @@
 import 'package:flutter/cupertino.dart';
+import 'package:garden_of_eve/common/widgets/loading_list_view.dart';
 import 'package:garden_of_eve/common/widgets/product_tile_sqr.dart';
-import 'package:garden_of_eve/features/products/presentation/home_products/home_products_controller.dart';
+import 'package:garden_of_eve/common/widgets/product_tile_sqr_skeleton.dart';
+import 'package:garden_of_eve/features/products/presentation/home_products/prod_by_category_controller.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class ProductListView extends StatelessWidget {
-  ProductListView({
+  const ProductListView({
     Key? key,
+    required this.category,
   }) : super(key: key);
 
-  final HomeProdController homeProdController = Get.find();
+  final String category;
 
   @override
   Widget build(BuildContext context) {
+    final ProdByCategoryController _controller =
+        Get.put(ProdByCategoryController(category), tag: category);
+
+    return Obx(() => _showProductsByCategory(_controller));
+  }
+
+  Widget _showProductsByCategory(ProdByCategoryController _controller) {
+    if (_controller.isLoadingProd.value) {
+      return const LoadingListView(
+        skeleton: ProductTileSkeleton(
+          width: 185,
+        ),
+        skeletonHeight: 256,
+      );
+    }
+    if (_controller.products.isEmpty) {
+      return const SizedBox(
+        height: 0,
+        width: 0,
+      );
+    }
     return SizedBox(
       height: 256,
       child: ListView.builder(
-        key: const PageStorageKey<String>('pageOne'),
-        controller: homeProdController.productScroller,
+        key: key,
+        controller: _controller.productScroller,
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        itemCount: homeProdController.products.length + 1,
+        itemCount: _controller.products.length + 1,
         itemBuilder: (context, index) {
-          if (index == homeProdController.products.length) {
+          if (index == _controller.products.length) {
             return Visibility(
-              visible: homeProdController.productHasMoreData,
+              visible: _controller.productHasMoreData,
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 40),
                 child: CupertinoActivityIndicator(),
@@ -39,7 +63,7 @@ class ProductListView extends StatelessWidget {
                   right: 20,
                 ),
                 child: ProductTile(
-                  product: homeProdController.products[index],
+                  product: _controller.products[index],
                   width: 185,
                 ),
               ),
