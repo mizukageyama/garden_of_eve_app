@@ -14,6 +14,7 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType,
     this.inputFormatters,
     this.obscureText = false,
+    this.focusColor = neutralGreyColor,
     this.borderRadius = const BorderRadius.all(
       Radius.circular(
         10.0,
@@ -31,6 +32,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final bool obscureText;
+  final Color focusColor;
 
   @override
   Widget build(BuildContext context) {
@@ -60,14 +62,17 @@ class CustomTextField extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: borderRadius,
-          borderSide: const BorderSide(
-            color: neutralGreyColor,
+          borderSide: BorderSide(
+            color: focusColor,
           ),
         ),
         floatingLabelBehavior: floatLabel ? null : FloatingLabelBehavior.never,
       ),
       inputFormatters: inputFormatters,
       onFieldSubmitted: (value) {
+        if (callback == null) {
+          return;
+        }
         callback!();
       },
       validator: validator,

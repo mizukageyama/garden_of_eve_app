@@ -45,6 +45,7 @@ dev_dependencies:
   expandable: ^5.0.1
   percent_indicator: ^4.2.2
   flutter_secure_storage: ^4.1.0
+  image_picker: ^0.8.5+3
 
 
 # The following section is specific to Flutter.

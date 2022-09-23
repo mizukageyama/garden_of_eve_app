@@ -12,6 +12,7 @@ class CustomDropdown2 extends StatefulWidget {
     this.onChanged,
     this.floatLabel = true,
     this.validator,
+    this.focusColor = neutralGreyColor,
   })  : _key = dpKey,
         super(key: key);
 
@@ -21,6 +22,7 @@ class CustomDropdown2 extends StatefulWidget {
   final String? Function(String?)? validator;
   final bool floatLabel;
   final GlobalKey<FormFieldState>? _key;
+  final Color focusColor;
 
   @override
   State<CustomDropdown2> createState() => _CustomDropdown2State();
@@ -49,9 +51,9 @@ class _CustomDropdown2State extends State<CustomDropdown2> {
           borderRadius: BorderRadius.circular(10),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
+          borderSide: BorderSide(
             width: 1,
-            color: neutralGreyColor,
+            color: widget.focusColor,
           ),
           borderRadius: BorderRadius.circular(10),
         ),
