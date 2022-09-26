@@ -52,4 +52,15 @@ class ProductRepository {
       throw errorMessage;
     }
   }
+
+  //Add New Product
+  Future<Map<String, dynamic>> addNewProduct(data) async {
+    try {
+      final response = await _productApi.addProduct(data);
+      return response.data;
+    } on DioError catch (e) {
+      final errorMessage = DioExceptions.fromDioError(e).toString();
+      throw errorMessage;
+    }
+  }
 }

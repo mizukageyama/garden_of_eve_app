@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:garden_of_eve/common/services/validator.dart';
 import 'package:garden_of_eve/common/widgets/_common_widgets.dart';
 import 'package:garden_of_eve/common/widgets/custom_appbar.dart';
@@ -28,6 +29,7 @@ class AddProductScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(
                   height: 20,
@@ -42,7 +44,7 @@ class AddProductScreen extends StatelessWidget {
                       ),
                       height: 150,
                       width: double.infinity,
-                      child: _addProdController.image.value == null
+                      child: !_addProdController.hasPhotoSelected
                           ? Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -66,7 +68,7 @@ class AddProductScreen extends StatelessWidget {
                               ],
                             )
                           : Image.file(
-                              File(_addProdController.image.value!.path),
+                              File(_addProdController.selectedPhoto.path),
                               width: 140,
                               height: 140,
                               fit: BoxFit.fitHeight,
@@ -83,6 +85,26 @@ class AddProductScreen extends StatelessWidget {
                                 );
                               },
                             ),
+                    ),
+                  ),
+                ),
+                Obx(
+                  () => Visibility(
+                    visible: !_addProdController.hasPhotoSelected,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          'Please select a photo',
+                          style: quicksandMedium.copyWith(
+                            fontSize: 12,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -224,6 +246,12 @@ class AddProductScreen extends StatelessWidget {
                               controller: _addProdController.apQuantity,
                               labelText: 'Quantity',
                               floatLabel: true,
+                              inputFormatters: [
+                                FilteringTextInputFormatter(
+                                  RegExp(r'^[0-9]*'),
+                                  allow: true,
+                                ),
+                              ],
                               borderRadius: BorderRadius.circular(10),
                               keyboardType: TextInputType.number,
                               validator: Validator().notEmpty,
@@ -237,6 +265,12 @@ class AddProductScreen extends StatelessWidget {
                               controller: _addProdController.apPrice,
                               labelText: 'Price',
                               floatLabel: true,
+                              inputFormatters: [
+                                FilteringTextInputFormatter(
+                                  RegExp(r'^[0-9]*'),
+                                  allow: true,
+                                ),
+                              ],
                               keyboardType: TextInputType.number,
                               validator: Validator().notEmpty,
                             ),
@@ -253,7 +287,7 @@ class AddProductScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     InkWell(
-                      onTap: () => _addProdController.preview(),
+                      onTap: () => _addProdController.goToPreviewScreen(),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 20,
@@ -275,8 +309,8 @@ class AddProductScreen extends StatelessWidget {
                       width: 10,
                     ),
                     InkWell(
-                      onTap: () {
-                        _addProdController.addProduct();
+                      onTap: () async {
+                        await _addProdController.addProduct();
                       },
                       child: GradientContainer(
                         padding: const EdgeInsets.symmetric(

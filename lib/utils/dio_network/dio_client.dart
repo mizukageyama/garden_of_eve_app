@@ -20,37 +20,77 @@ class DioClient {
               "content-type": "application/json",
               "authorization": "Bearer ${_userData.accessToken}"
             };
+            //print('Access Token: ${_userData.accessToken}');
             return handler.next(options);
           },
-          onError: (error, handler) async {
-            if (error.response?.statusCode == 401 &&
-                error.response?.data['message'] == "Invalid Token") {
-              print(error.response?.data['message']);
+          onResponse: (response, handler) async {
+            if (response.data['message'] == "Invalid Token") {
               if (await _userData.storage.containsKey(key: 'refreshToken')) {
-                await refreshToken();
+                if (await refreshToken()) {
+                  return handler.resolve(await _retry(response.requestOptions));
+                } else {
+                  print('signout na kay mali refresh pod');
+                  return handler.next(response);
+                }
               }
             }
+            return handler.next(response);
           },
+          // onError: (error, handler) async {
+          //   print('nasulod sa on error');
+          //   if (error.response?.statusCode == 401 &&
+          //       error.response?.data['message'] == "Invalid Token") {
+          //     print(error.response?.data['message']);
+          //     if (await _userData.storage.containsKey(key: 'refreshToken')) {
+          //       await refreshToken();
+          //       return handler.resolve(await _retry(error.requestOptions));
+          //     }
+          //   }
+          //   return handler.next(error);
+          // },
         ),
       );
   }
 
-  Future<void> refreshToken() async {
+  Future<bool> refreshToken() async {
     final _refreshToken = await _userData.storage.read(key: 'refreshToken');
-    final response = await post(
-      'token',
-      data: {
-        "user_id": _userData.currentUserId,
-        "token": _refreshToken,
-      },
-    );
-    if (response.statusCode == 200) {
-      _userData.accessToken = response.data['token'];
-    } else {
-      _userData.accessToken = null;
-      _userData.storage.deleteAll();
-      print('signout user');
+    try {
+      final Response response = await post(
+        'token',
+        data: {
+          "user_id": 3, //_userData.currentUserId,
+          "token": _refreshToken,
+        },
+      );
+      if (response.statusCode == 200) {
+        await _userData.storage.write(
+          key: 'accessToken',
+          value: response.data['token'],
+        );
+        await _userData.initializeToken();
+        return true;
+      } else {
+        _userData.accessToken = null;
+        _userData.storage.deleteAll();
+        return false;
+      }
+    } catch (e) {
+      return false;
     }
+  }
+
+  Future<Response<dynamic>> _retry(RequestOptions requestOptions) async {
+    final options = Options(
+      method: requestOptions.method,
+      headers: requestOptions.headers,
+    );
+
+    return _dio.request<dynamic>(
+      requestOptions.path,
+      data: requestOptions.data,
+      queryParameters: requestOptions.queryParameters,
+      options: options,
+    );
   }
 
   //GET

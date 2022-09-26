@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:garden_of_eve/utils/dio_network/dio_client.dart';
 
@@ -35,6 +37,24 @@ class ProductApi {
     try {
       final Response response = await dioClient.get(
         '/categories',
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<Response> addProduct(productData) async {
+    try {
+      final Response response = await dioClient.post(
+        '/products',
+        data: productData,
+        options: Options(
+          headers: {
+            HttpHeaders.acceptHeader: "json/application/json",
+            HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded"
+          },
+        ),
       );
       return response;
     } catch (e) {
