@@ -26,24 +26,26 @@ class ProductsScreen extends StatelessWidget {
           preferredSize: const Size.fromHeight(100),
           child: CustomAppBar(
             rightWidget: [
-              Badge(
-                padding: const EdgeInsets.all(7.0),
-                badgeColor: greenColor,
-                showBadge: true,
-                position: const BadgePosition(top: -12, end: -10),
-                badgeContent: Text(
-                  '1',
-                  style: quicksandRegular.copyWith(
-                    color: whiteColor,
+              Obx(
+                () => Badge(
+                  padding: const EdgeInsets.all(7.0),
+                  badgeColor: greenColor,
+                  showBadge: cartListController.cartList.isNotEmpty,
+                  position: const BadgePosition(top: -12, end: -10),
+                  badgeContent: Text(
+                    '${cartListController.cartList.length}',
+                    style: quicksandRegular.copyWith(
+                      color: whiteColor,
+                    ),
                   ),
-                ),
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  onTap: () => Get.to(() => CartItemScreen()),
-                  child: const Icon(
-                    Icons.local_mall_outlined,
-                    size: 26,
-                    color: oxfordBlueColor,
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    onTap: () => Get.to(() => CartItemScreen()),
+                    child: const Icon(
+                      Icons.local_mall_outlined,
+                      size: 26,
+                      color: oxfordBlueColor,
+                    ),
                   ),
                 ),
               ),
