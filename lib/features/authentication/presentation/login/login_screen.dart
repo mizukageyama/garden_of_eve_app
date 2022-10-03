@@ -22,6 +22,7 @@ class LoginScreen extends StatelessWidget {
                 context.mediaQueryPadding.top -
                 context.mediaQueryPadding.bottom,
             color: greenColor,
+            //TO DO: add app logo
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -93,7 +94,7 @@ class LoginScreen extends StatelessWidget {
                           const SizedBox(
                             height: 30,
                           ),
-                          InkWell(
+                          GestureDetector(
                             onTap: () {
                               _loginController.loginUser();
                             },
@@ -145,7 +146,7 @@ class LoginScreen extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          InkWell(
+                          GestureDetector(
                             onTap: () {
                               print('Coming soon..');
                             },
@@ -181,7 +182,7 @@ class LoginScreen extends StatelessWidget {
                               const SizedBox(
                                 width: 5,
                               ),
-                              InkWell(
+                              GestureDetector(
                                 onTap: () => Get.off(() => SignupScreen()),
                                 child: Text(
                                   'Register here',

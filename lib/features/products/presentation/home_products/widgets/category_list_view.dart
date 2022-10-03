@@ -32,8 +32,7 @@ class CategoryListView extends StatelessWidget {
                   right: 35,
                 ),
                 child: Obx(
-                  () => InkWell(
-                    splashColor: Colors.transparent,
+                  () => GestureDetector(
                     onTap: () => homeProdController.selectCategory(index),
                     child: homeProdController.activeCategoryIndex.value == index
                         ? GradientContainer(

@@ -155,7 +155,7 @@ class Step2Payment extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        InkWell(
+        GestureDetector(
           onTap: () {
             _checkoutController.payment =
                 paymentOptions[_step2.activeIndex - 1];

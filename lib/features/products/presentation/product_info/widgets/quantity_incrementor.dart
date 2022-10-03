@@ -34,7 +34,7 @@ class QuantityIncrementor extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          InkWell(
+          GestureDetector(
             onTap: () {
               if (_count.value > 1) {
                 _count - (1);
@@ -73,7 +73,7 @@ class QuantityIncrementor extends StatelessWidget {
               ),
             ),
           ),
-          InkWell(
+          GestureDetector(
             onTap: () {
               if (_count.value < maxLimit) {
                 _count + (1);

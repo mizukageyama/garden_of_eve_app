@@ -21,11 +21,6 @@ final List<DrawerModel> drawerItems = [
     screenRoute: '/orders',
   ),
   DrawerModel(
-    icon: FontAwesomeIcons.sliders,
-    title: 'Settings',
-    screenRoute: '/settings',
-  ),
-  DrawerModel(
     icon: FontAwesomeIcons.rightFromBracket,
     title: 'Sign out',
     screenRoute: '',

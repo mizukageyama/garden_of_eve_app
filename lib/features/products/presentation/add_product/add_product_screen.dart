@@ -35,7 +35,7 @@ class AddProductScreen extends StatelessWidget {
                   height: 20,
                 ),
                 Obx(
-                  () => InkWell(
+                  () => GestureDetector(
                     onTap: () => _addProdController.selectProductImage(),
                     child: Container(
                       decoration: BoxDecoration(
@@ -286,7 +286,7 @@ class AddProductScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    InkWell(
+                    GestureDetector(
                       onTap: () => _addProdController.goToPreviewScreen(),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
@@ -308,7 +308,7 @@ class AddProductScreen extends StatelessWidget {
                     const SizedBox(
                       width: 10,
                     ),
-                    InkWell(
+                    GestureDetector(
                       onTap: () async {
                         await _addProdController.addProduct();
                       },

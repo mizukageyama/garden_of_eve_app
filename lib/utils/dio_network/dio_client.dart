@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:garden_of_eve/common/controllers/auth_controller.dart';
 import 'package:garden_of_eve/common/controllers/user_data_controller.dart';
 import 'package:garden_of_eve/constants/endpoints.dart';
 import 'package:get/get.dart' as getx;
@@ -29,7 +30,9 @@ class DioClient {
                 if (await refreshToken()) {
                   return handler.resolve(await _retry(response.requestOptions));
                 } else {
+                  final AuthController _auth = getx.Get.find();
                   print('signout na kay mali refresh pod');
+                  await _auth.signOut();
                   return handler.next(response);
                 }
               }

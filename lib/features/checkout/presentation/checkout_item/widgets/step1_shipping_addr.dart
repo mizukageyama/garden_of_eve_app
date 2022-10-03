@@ -91,7 +91,7 @@ class Step1ShippingAddr extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        InkWell(
+        GestureDetector(
           onTap: () async {
             if (_step1.activeRadioButton.value == 1) {
               if (shippingFormController.hasSelected) {

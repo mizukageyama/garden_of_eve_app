@@ -38,8 +38,7 @@ class ProductsScreen extends StatelessWidget {
                       color: whiteColor,
                     ),
                   ),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
+                  child: GestureDetector(
                     onTap: () => Get.to(() => CartItemScreen()),
                     child: const Icon(
                       Icons.local_mall_outlined,

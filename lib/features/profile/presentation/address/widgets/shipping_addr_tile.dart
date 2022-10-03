@@ -64,7 +64,7 @@ class ShippingAddrTile extends StatelessWidget {
           child: Positioned(
             right: 0,
             top: -5,
-            child: InkWell(
+            child: GestureDetector(
               onTap: () {
                 if (showRemove) {
                   removeFunction!(addr.addressId!);

@@ -165,8 +165,7 @@ class PreviewScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(15),
-              child: InkWell(
-                splashColor: Colors.transparent,
+              child: GestureDetector(
                 onTap: () => Get.back(),
                 child: const Icon(
                   Icons.arrow_back_ios_rounded,

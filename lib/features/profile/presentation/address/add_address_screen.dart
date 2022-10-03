@@ -57,7 +57,7 @@ class AddAddressScreen extends StatelessWidget {
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
-                  child: InkWell(
+                  child: GestureDetector(
                     onTap: () async {
                       if (_formKey.currentState!.validate()) {
                         await formController.setAddrFromInput();

@@ -29,8 +29,7 @@ class MainScreen extends StatelessWidget {
                 duration: const Duration(
                   milliseconds: 250,
                 ),
-                child: InkWell(
-                  splashColor: Colors.transparent,
+                child: GestureDetector(
                   onTap: () => _main.closeDrawer(),
                   child: IgnorePointer(
                     ignoring: _main.clickableLanding.value,

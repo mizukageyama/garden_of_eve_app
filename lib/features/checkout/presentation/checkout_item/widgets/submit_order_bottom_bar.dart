@@ -134,7 +134,7 @@ class SubmitOrderBottomBar extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          InkWell(
+          GestureDetector(
             onTap: () async {
               await _checkoutController.createOrder(
                 1,

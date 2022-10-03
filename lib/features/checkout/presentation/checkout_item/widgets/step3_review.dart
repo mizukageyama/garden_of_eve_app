@@ -59,7 +59,7 @@ class Step3Review extends StatelessWidget {
                       color: oxfordBlueColor,
                     ),
                   ),
-                  InkWell(
+                  GestureDetector(
                     onTap: () => _checkoutController.tapStep(0),
                     child: Text(
                       'Edit',
@@ -114,7 +114,7 @@ class Step3Review extends StatelessWidget {
                       color: oxfordBlueColor,
                     ),
                   ),
-                  InkWell(
+                  GestureDetector(
                     onTap: () => _checkoutController.tapStep(1),
                     child: Text(
                       'Edit',

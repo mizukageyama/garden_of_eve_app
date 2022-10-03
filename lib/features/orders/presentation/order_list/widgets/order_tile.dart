@@ -62,7 +62,7 @@ class OrderTile extends StatelessWidget {
                 width: 30,
               ),
               Expanded(
-                child: InkWell(
+                child: GestureDetector(
                   onTap: () {
                     Get.to(() => OrderInfoScreen(order: order));
                   },

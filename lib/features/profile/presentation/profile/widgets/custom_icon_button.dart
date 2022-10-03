@@ -19,7 +19,7 @@ class CustomIconButton extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        InkWell(
+        GestureDetector(
           onTap: () => onTap(),
           child: Container(
             padding: const EdgeInsets.all(8),

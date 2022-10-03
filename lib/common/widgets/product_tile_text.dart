@@ -42,7 +42,7 @@ class ProductTileText extends StatelessWidget {
             ),
             Visibility(
               visible: forProductInfo,
-              child: InkWell(
+              child: GestureDetector(
                 onTap: () {
                   controller?.toggleHeartIcon(1, product);
                 },

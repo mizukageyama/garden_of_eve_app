@@ -28,8 +28,7 @@ class OrderListScreen extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  InkWell(
-                    splashColor: Colors.transparent,
+                  GestureDetector(
                     onTap: () => Get.back(),
                     child: const Icon(
                       Icons.arrow_back_ios_rounded,

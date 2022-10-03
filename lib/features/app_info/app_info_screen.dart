@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/common/widgets/gradient_container.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 
 class AppInfoScreen extends StatelessWidget {
@@ -17,6 +16,7 @@ class AppInfoScreen extends StatelessWidget {
               const SizedBox(
                 height: 70,
               ),
+              //TO DO: Change app logo
               const Center(
                 child: Icon(
                   Icons.spa_rounded,
@@ -112,53 +112,53 @@ class AppInfoScreen extends StatelessWidget {
               const SizedBox(
                 height: 40,
               ),
-              Text(
-                'Credits',
-                style: quicksandBold.copyWith(
-                  fontSize: 15,
-                  color: oxfordBlueColor,
-                ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Text(
-                'FreePik',
-                style: quicksandSemiBold.copyWith(
-                  fontSize: 14,
-                  color: darkGreyColor,
-                ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Text(
-                'Pinterest',
-                style: quicksandSemiBold.copyWith(
-                  fontSize: 14,
-                  color: darkGreyColor,
-                ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Text(
-                'Icons8',
-                style: quicksandSemiBold.copyWith(
-                  fontSize: 14,
-                  color: darkGreyColor,
-                ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Text(
-                'Lottie',
-                style: quicksandSemiBold.copyWith(
-                  fontSize: 14,
-                  color: darkGreyColor,
-                ),
-              ),
+              // Text(
+              //   'Credits',
+              //   style: quicksandBold.copyWith(
+              //     fontSize: 15,
+              //     color: oxfordBlueColor,
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 5,
+              // ),
+              // Text(
+              //   'FreePik',
+              //   style: quicksandSemiBold.copyWith(
+              //     fontSize: 14,
+              //     color: darkGreyColor,
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 5,
+              // ),
+              // Text(
+              //   'Pinterest',
+              //   style: quicksandSemiBold.copyWith(
+              //     fontSize: 14,
+              //     color: darkGreyColor,
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 5,
+              // ),
+              // Text(
+              //   'Icons8',
+              //   style: quicksandSemiBold.copyWith(
+              //     fontSize: 14,
+              //     color: darkGreyColor,
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 5,
+              // ),
+              // Text(
+              //   'Lottie',
+              //   style: quicksandSemiBold.copyWith(
+              //     fontSize: 14,
+              //     color: darkGreyColor,
+              //   ),
+              // ),
             ],
           ),
         ),

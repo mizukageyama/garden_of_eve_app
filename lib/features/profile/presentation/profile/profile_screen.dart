@@ -7,7 +7,6 @@ import 'package:garden_of_eve/features/orders/presentation/order_list/order_list
 import 'package:garden_of_eve/features/profile/presentation/address/address_screen.dart';
 import 'package:garden_of_eve/features/profile/presentation/profile/widgets/custom_icon_button.dart';
 import 'package:garden_of_eve/features/profile/presentation/profile/widgets/title_and_subtext.dart';
-import 'package:garden_of_eve/features/profile/presentation/settings/settings_screen.dart';
 import 'package:garden_of_eve/features/profile/presentation/user_info/user_info_screen.dart';
 import 'package:garden_of_eve/features/profile/presentation/vouchers/vouchers_screen.dart';
 import 'package:garden_of_eve/utils/utils.dart';
@@ -113,15 +112,28 @@ class ProfileScreen extends StatelessWidget {
                                       icon: Icons.edit,
                                       title: 'User Data',
                                       onTap: () => Get.to(
-                                        () => const UserInfoScreen(),
+                                        () => UserInfoScreen(),
                                       ),
                                     ),
                                     CustomIconButton(
                                       icon: Icons.settings,
                                       title: 'Settings',
-                                      onTap: () => Get.to(
-                                        () => const SettingsScreen(),
-                                      ),
+                                      onTap: () {
+                                        Get.snackbar(
+                                          'Coming Soon...',
+                                          'For now, the application has no settings option',
+                                          snackPosition: SnackPosition.BOTTOM,
+                                          borderRadius: 20,
+                                          margin: const EdgeInsets.all(15),
+                                          colorText: oxfordBlueColor,
+                                          duration: const Duration(seconds: 4),
+                                          isDismissible: true,
+                                          dismissDirection:
+                                              DismissDirection.horizontal,
+                                          forwardAnimationCurve:
+                                              Curves.easeOutBack,
+                                        );
+                                      },
                                     ),
                                   ],
                                 ),
@@ -321,7 +333,7 @@ class ProfileScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                          InkWell(
+                          GestureDetector(
                             onTap: () => Get.to(
                               () => AddressScreen(),
                             ),
@@ -383,7 +395,7 @@ class ProfileScreen extends StatelessWidget {
                           const SizedBox(
                             width: 15,
                           ),
-                          InkWell(
+                          GestureDetector(
                             onTap: () => Get.to(
                               () => const VoucherScreen(),
                             ),

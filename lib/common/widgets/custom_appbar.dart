@@ -43,8 +43,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: hasBackButton
-                    ? InkWell(
-                        splashColor: Colors.transparent,
+                    ? GestureDetector(
                         onTap: () => Get.back(),
                         child: Icon(
                           Icons.arrow_back_ios_rounded,
@@ -52,8 +51,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
                           color: contentColor,
                         ),
                       )
-                    : InkWell(
-                        splashColor: Colors.transparent,
+                    : GestureDetector(
                         onTap: () => _main.openDrawer(),
                         child: Image.asset(
                           'assets/icons/menu.png',

@@ -49,12 +49,12 @@ class ProductApi {
       final Response response = await dioClient.post(
         '/products',
         data: productData,
-        options: Options(
-          headers: {
-            HttpHeaders.acceptHeader: "json/application/json",
-            HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded"
-          },
-        ),
+        //options: Options(
+        //   headers: {
+        //     HttpHeaders.acceptHeader: "json/application/json",
+        //     HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded"
+        //   },
+        // ),
       );
       return response;
     } catch (e) {

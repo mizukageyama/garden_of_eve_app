@@ -14,6 +14,7 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType,
     this.inputFormatters,
     this.obscureText = false,
+    this.enabled = true,
     this.focusColor = neutralGreyColor,
     this.borderRadius = const BorderRadius.all(
       Radius.circular(
@@ -32,11 +33,13 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final bool obscureText;
+  final bool enabled;
   final Color focusColor;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: enabled,
       controller: controller,
       minLines: minLines,
       style: quicksandSemiBold.copyWith(
@@ -54,12 +57,14 @@ class CustomTextField extends StatelessWidget {
         contentPadding: const EdgeInsets.symmetric(horizontal: 10),
         fillColor: whiteColor,
         labelText: labelText,
-        border: OutlineInputBorder(
-          borderRadius: borderRadius,
-          borderSide: const BorderSide(
-            color: neutralGreyColor,
-          ),
-        ),
+        border: enabled
+            ? OutlineInputBorder(
+                borderRadius: borderRadius,
+                borderSide: const BorderSide(
+                  color: neutralGreyColor,
+                ),
+              )
+            : null,
         focusedBorder: OutlineInputBorder(
           borderRadius: borderRadius,
           borderSide: BorderSide(

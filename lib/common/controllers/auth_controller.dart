@@ -53,6 +53,6 @@ class AuthController extends GetxController {
 
   Future<void> signOut() async {
     await _userData.storage.deleteAll();
-    Get.offAll(LoginScreen());
+    Get.offAll(() => LoginScreen());
   }
 }

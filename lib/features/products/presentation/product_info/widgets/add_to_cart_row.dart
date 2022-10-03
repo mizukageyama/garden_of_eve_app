@@ -42,7 +42,7 @@ class AddToCartRow extends StatelessWidget {
             width: 30,
           ),
           Expanded(
-            child: InkWell(
+            child: GestureDetector(
               onTap: () => _prodInfo.addToCart(3, product.id, _prodInfo.qty),
               child: GradientContainer(
                 padding:

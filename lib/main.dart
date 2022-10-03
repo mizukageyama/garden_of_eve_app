@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: lightGreenColor,
         ),
         splashFactory: NoSplash.splashFactory,
+        splashColor: Colors.transparent,
         scaffoldBackgroundColor: bgColor,
       ),
       defaultTransition: Transition.noTransition,

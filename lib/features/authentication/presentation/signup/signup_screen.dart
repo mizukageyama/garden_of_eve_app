@@ -21,6 +21,7 @@ class SignupScreen extends StatelessWidget {
                 context.mediaQueryPadding.top -
                 context.mediaQueryPadding.bottom,
             color: greenColor,
+            //TO DO: add app logo
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -98,7 +99,7 @@ class SignupScreen extends StatelessWidget {
                           const SizedBox(
                             height: 30,
                           ),
-                          InkWell(
+                          GestureDetector(
                             onTap: () {
                               _signupController.signupUser();
                             },
@@ -150,7 +151,7 @@ class SignupScreen extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          InkWell(
+                          GestureDetector(
                             onTap: () {
                               print('Register by using Google account');
                             },
@@ -186,7 +187,7 @@ class SignupScreen extends StatelessWidget {
                               const SizedBox(
                                 width: 5,
                               ),
-                              InkWell(
+                              GestureDetector(
                                 onTap: () => Get.off(() => LoginScreen()),
                                 child: Text(
                                   'Login here',

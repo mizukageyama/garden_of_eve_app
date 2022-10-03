@@ -129,7 +129,7 @@ class CheckoutBottomBar extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          InkWell(
+          GestureDetector(
             onTap: () {
               if (cartListController.selectedItems.isNotEmpty) {
                 Get.to(() => CheckoutScreen());
