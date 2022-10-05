@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/controllers/user_data_controller.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
+import 'package:garden_of_eve/utils/dialogs.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class UserInfoController extends GetxController {
@@ -52,26 +53,30 @@ class UserInfoController extends GetxController {
     );
     if (selectedImage == null) return;
     image.value = selectedImage;
-    Get.defaultDialog(
-      title: 'Save this as profile photo?',
-      textConfirm: 'Proceed',
-      barrierDismissible: false,
-      textCancel: 'Cancel',
-      onConfirm: () {
+    showConfirmationDialog(
+      dialogTitle: 'Save this as profile photo?',
+      dialogCaption:
+          'Please select save to change your profile photo. Otherwise, select cancel',
+      confirmText: 'Yes',
+      cancelText: 'Cancel',
+      onConfirmTap: () {
         print('API save new profile');
       },
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          const SizedBox(height: 10),
           Container(
+            clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
+              color: neutralGreyColor.withOpacity(0.2),
             ),
             child: Image.file(
               File(selectedImage.path),
               width: 140,
               height: 140,
-              fit: BoxFit.fitHeight,
+              fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return Center(
                   child: Text(
