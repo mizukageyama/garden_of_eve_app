@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common/widgets/error_info_display.dart';
 import 'package:garden_of_eve/common/widgets/gradient_container.dart';
 import 'package:garden_of_eve/common/widgets/loading_list_view.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
@@ -6,6 +7,7 @@ import 'package:garden_of_eve/features/cart/presentation/cart_items/widgets/cart
 import 'package:garden_of_eve/features/profile/presentation/address/add_address_screen.dart';
 import 'package:garden_of_eve/features/profile/presentation/address/address_controller.dart';
 import 'package:garden_of_eve/features/profile/presentation/address/widgets/shipping_addr_list_view.dart';
+import 'package:garden_of_eve/utils/dialogs.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class AddressScreen extends StatelessWidget {
@@ -68,8 +70,10 @@ class AddressScreen extends StatelessWidget {
                 shippingController.addrList.length < 5) {
               Get.to(() => AddAddressScreen());
             } else {
-              print(
-                  'Snackbar/dialog that says, "you can only have 5 minumum saved addresses"');
+              showSnackBar(
+                title: 'Unable to proceed',
+                message: 'You can only have a minumum of 5 saved addresses',
+              );
             }
           },
           child: const Icon(
@@ -90,9 +94,8 @@ class AddressScreen extends StatelessWidget {
       );
     }
     if (shippingController.addrList.isEmpty) {
-      return const SizedBox(
-        height: 0,
-        width: 0,
+      return const ErrorInfoDisplay(
+        message: 'No saved address',
       );
     }
 

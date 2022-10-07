@@ -9,6 +9,7 @@ import 'package:garden_of_eve/features/profile/presentation/profile/widgets/cust
 import 'package:garden_of_eve/features/profile/presentation/profile/widgets/title_and_subtext.dart';
 import 'package:garden_of_eve/features/profile/presentation/user_info/user_info_screen.dart';
 import 'package:garden_of_eve/features/profile/presentation/vouchers/vouchers_screen.dart';
+import 'package:garden_of_eve/utils/dialogs.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -119,19 +120,10 @@ class ProfileScreen extends StatelessWidget {
                                       icon: Icons.settings,
                                       title: 'Settings',
                                       onTap: () {
-                                        Get.snackbar(
-                                          'Coming Soon...',
-                                          'For now, the application has no settings option',
-                                          snackPosition: SnackPosition.BOTTOM,
-                                          borderRadius: 20,
-                                          margin: const EdgeInsets.all(15),
-                                          colorText: oxfordBlueColor,
-                                          duration: const Duration(seconds: 4),
-                                          isDismissible: true,
-                                          dismissDirection:
-                                              DismissDirection.horizontal,
-                                          forwardAnimationCurve:
-                                              Curves.easeOutBack,
+                                        showSnackBar(
+                                          title: 'Coming Soon...',
+                                          message:
+                                              'For now, the application has no settings option',
                                         );
                                       },
                                     ),

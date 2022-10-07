@@ -27,7 +27,6 @@ class ProdByCategoryController extends GetxController {
     productScroller.addListener(() async {
       if (productScroller.position.pixels ==
           productScroller.position.maxScrollExtent) {
-        print('Fetching new data...');
         await getProductsData();
       }
     });

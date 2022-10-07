@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/models/payment_options.dart';
-import 'package:garden_of_eve/constants/app_colors.dart';
 import 'package:garden_of_eve/constants/app_items.dart';
 import 'package:garden_of_eve/features/orders/data/order_repository.dart';
 import 'package:garden_of_eve/features/orders/domain/order_items_model.dart';
 import 'package:garden_of_eve/features/profile/domain/shipping_addr_model.dart';
+import 'package:garden_of_eve/utils/dialogs.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class CheckoutController extends GetxController {
@@ -26,7 +26,6 @@ class CheckoutController extends GetxController {
     if (_currentStep.value == 2 || _currentStep.value > step) {
       _currentStep.value = step;
     }
-    print('Tapped: ${_currentStep.value}');
   }
 
   bool checkActive(int value) {
@@ -38,7 +37,6 @@ class CheckoutController extends GetxController {
     if (_currentStep.value == 2) {
       atLastStep.value = true;
     }
-    print('Continuted: ${_currentStep.value}');
   }
 
   StepState checkState(int step) {
@@ -80,8 +78,7 @@ class CheckoutController extends GetxController {
     double total,
     List<OrderItem> orders,
   ) async {
-    //show loading
-    print('loading...');
+    showLoading();
     List<Map<String, dynamic>> orderItemsMapped = orderItems(orders);
     Map<String, dynamic> message = await _orderRepo.createOrder(
       userId,
@@ -90,20 +87,13 @@ class CheckoutController extends GetxController {
       orderItemsMapped,
     );
     bool success = message['success'] == 1;
-    //TO DO: should have a checker for Invalid Token (re login?)
-    Get.snackbar(
-      success ? 'Success' : 'Failed',
-      message['message'],
-      snackPosition: SnackPosition.BOTTOM,
-      borderRadius: 20,
-      margin: const EdgeInsets.all(15),
-      colorText: oxfordBlueColor,
-      duration: const Duration(seconds: 4),
-      isDismissible: true,
-      dismissDirection: DismissDirection.horizontal,
-      forwardAnimationCurve: Curves.easeOutBack,
+    dismissDialog();
+    showSnackBar(
+      title: success ? 'Success' : 'Failed',
+      message: message['message'],
     );
-    //refresh cart
+
+    //TO DO: refresh cart
     //show success dialog, then get back?
   }
 }

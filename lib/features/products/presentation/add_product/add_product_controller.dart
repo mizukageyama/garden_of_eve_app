@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/products/data/product_repository.dart';
 import 'package:garden_of_eve/features/products/domain/product_model.dart';
 import 'package:garden_of_eve/features/products/presentation/add_product/preview_product_screen.dart';
+import 'package:garden_of_eve/utils/dialogs.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class AddProductController extends GetxController {
@@ -95,20 +95,12 @@ class AddProductController extends GetxController {
 
     bool success = message['success'] == 1;
     if (success) {
-      //go back to home screen I guess?
+      //TO DO: go back to home screen I guess?
       clearInput();
     }
-    Get.snackbar(
-      success ? 'Success' : 'Failed',
-      message['message'],
-      snackPosition: SnackPosition.BOTTOM,
-      borderRadius: 20,
-      margin: const EdgeInsets.all(15),
-      colorText: oxfordBlueColor,
-      duration: const Duration(seconds: 4),
-      isDismissible: true,
-      dismissDirection: DismissDirection.horizontal,
-      forwardAnimationCurve: Curves.easeOutBack,
+    showSnackBar(
+      title: success ? 'Success' : 'Failed',
+      message: message['message'],
     );
   }
 

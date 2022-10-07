@@ -5,6 +5,7 @@ import 'package:garden_of_eve/common/widgets/gradient_container.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/authentication/presentation/login/login_screen.dart';
 import 'package:garden_of_eve/features/authentication/presentation/signup/signup_controller.dart';
+import 'package:garden_of_eve/utils/dialogs.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class SignupScreen extends StatelessWidget {
@@ -16,15 +17,41 @@ class SignupScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          child: Container(
+          child: GradientContainer(
             height: context.height -
                 context.mediaQueryPadding.top -
                 context.mediaQueryPadding.bottom,
-            color: greenColor,
-            //TO DO: add app logo
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                const SizedBox(),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(2),
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: whiteColor,
+                      ),
+                      child: Image.asset(
+                        'assets/images/logo.png',
+                        height: 70,
+                        width: 70,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Garden of Eve',
+                      style: quicksandBold.copyWith(
+                        color: whiteColor,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ],
+                ),
                 Container(
                   decoration: const BoxDecoration(
                     color: whiteColor,
@@ -153,7 +180,16 @@ class SignupScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              print('Register by using Google account');
+                              showErrorDialog(
+                                errorTitle: 'Coming Soon...',
+                                errorDescription:
+                                    'Sign up with Google is still not available. Thank you!',
+                                iconWidget: Image.asset(
+                                  'assets/icons/google_logo.png',
+                                  height: 40,
+                                  width: 40,
+                                ),
+                              );
                             },
                             child: Container(
                               padding: const EdgeInsets.all(8),

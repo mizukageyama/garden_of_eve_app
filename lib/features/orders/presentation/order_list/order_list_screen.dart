@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common/widgets/error_info_display.dart';
 import 'package:garden_of_eve/common/widgets/gradient_container.dart';
 import 'package:garden_of_eve/common/widgets/loading_list_view.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
@@ -72,9 +73,8 @@ class OrderListScreen extends StatelessWidget {
       );
     }
     if (orderController.orders.isEmpty) {
-      return const SizedBox(
-        height: 0,
-        width: 0,
+      return const ErrorInfoDisplay(
+        message: 'No orders yet',
       );
     }
 

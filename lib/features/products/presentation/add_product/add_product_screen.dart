@@ -7,7 +7,6 @@ import 'package:garden_of_eve/common/widgets/custom_appbar.dart';
 import 'package:garden_of_eve/common/widgets/custom_text_field.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/products/presentation/add_product/add_product_controller.dart';
-import 'package:garden_of_eve/features/products/presentation/add_product/preview_product_screen.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class AddProductScreen extends StatelessWidget {

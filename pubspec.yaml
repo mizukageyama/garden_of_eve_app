@@ -47,6 +47,7 @@ dev_dependencies:
   flutter_secure_storage: ^4.1.0
   image_picker: ^0.8.5+3
   http_parser: ^4.0.1
+  lottie: ^1.4.2
 
 
 # The following section is specific to Flutter.
@@ -57,6 +58,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/fonts/
+    - assets/lottie_files/
 
   fonts:
     - family: Quicksand

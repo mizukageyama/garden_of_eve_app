@@ -68,7 +68,7 @@ class ShippingAddrTile extends StatelessWidget {
               onTap: () {
                 if (showRemove) {
                   removeFunction!(addr.addressId!);
-                  print('Removing: ${addr.address} \nRefetch Shipping Addr');
+                  //print('Removing: ${addr.address} \nRefetch Shipping Addr');
                 }
               },
               child: Container(

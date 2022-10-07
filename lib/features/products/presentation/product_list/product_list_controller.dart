@@ -21,12 +21,10 @@ class ProdListController extends GetxController {
   //Methods
   @override
   void onInit() {
-    print('onInit | ProdListController');
     _getProductsData(isRefresh: true);
     prodListScroller.addListener(() async {
       if (prodListScroller.position.pixels ==
           prodListScroller.position.maxScrollExtent) {
-        print('Fetching new data...');
         await _getProductsData();
       }
     });
@@ -50,7 +48,7 @@ class ProdListController extends GetxController {
       searchController.getSearchKey,
     );
 
-    print('Search key: ${searchController.getSearchKey}');
+    //print('Search key: ${searchController.getSearchKey}');
 
     if (isRefresh) {
       prodList.value = result;

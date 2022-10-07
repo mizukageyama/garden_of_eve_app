@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:garden_of_eve/constants/app_colors.dart';
 import 'package:garden_of_eve/features/profile/data/shipping_addr_repository.dart';
 import 'package:garden_of_eve/features/profile/domain/shipping_addr_model.dart';
+import 'package:garden_of_eve/utils/dialogs.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class ShippingAddrController extends GetxController {
@@ -31,63 +30,45 @@ class ShippingAddrController extends GetxController {
   }
 
   Future<void> addAddress(ShippingAddr addr) async {
+    showLoading();
     Map<String, dynamic> message = await _addrRepo.addAddress(1, addr);
     bool success = message['success'] == 1;
+    dismissDialog();
     if (success) {
       await getAddress(isRefresh: true);
       Get.back();
     }
-    Get.snackbar(
-      success ? 'Success' : 'Failed',
-      message['message'],
-      snackPosition: SnackPosition.BOTTOM,
-      borderRadius: 20,
-      margin: const EdgeInsets.all(15),
-      colorText: oxfordBlueColor,
-      duration: const Duration(seconds: 4),
-      isDismissible: true,
-      dismissDirection: DismissDirection.horizontal,
-      forwardAnimationCurve: Curves.easeOutBack,
+    showSnackBar(
+      title: success ? 'Success' : 'Failed',
+      message: message['message'],
     );
   }
 
   Future<void> updateAddress(ShippingAddr addr) async {
+    showLoading();
     Map<String, dynamic> message = await _addrRepo.updateAddress(1, addr);
     bool success = message['success'] == 1;
+    dismissDialog();
     if (success) {
       await getAddress(isRefresh: true);
     }
-    Get.snackbar(
-      success ? 'Success' : 'Failed',
-      message['message'],
-      snackPosition: SnackPosition.BOTTOM,
-      borderRadius: 20,
-      margin: const EdgeInsets.all(15),
-      colorText: oxfordBlueColor,
-      duration: const Duration(seconds: 4),
-      isDismissible: true,
-      dismissDirection: DismissDirection.horizontal,
-      forwardAnimationCurve: Curves.easeOutBack,
+    showSnackBar(
+      title: success ? 'Success' : 'Failed',
+      message: message['message'],
     );
   }
 
   Future<void> deleteAddress(int addressId) async {
+    showLoading();
     Map<String, dynamic> message = await _addrRepo.deleteAddress(addressId);
     bool success = message['success'] == 1;
+    dismissDialog();
     if (success) {
       await getAddress(isRefresh: true);
     }
-    Get.snackbar(
-      success ? 'Success' : 'Failed',
-      message['message'],
-      snackPosition: SnackPosition.BOTTOM,
-      borderRadius: 20,
-      margin: const EdgeInsets.all(15),
-      colorText: oxfordBlueColor,
-      duration: const Duration(seconds: 4),
-      isDismissible: true,
-      dismissDirection: DismissDirection.horizontal,
-      forwardAnimationCurve: Curves.easeOutBack,
+    showSnackBar(
+      title: success ? 'Success' : 'Failed',
+      message: message['message'],
     );
   }
 }

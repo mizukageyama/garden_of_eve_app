@@ -9,3 +9,4 @@ export 'package:percent_indicator/percent_indicator.dart';
 export 'package:image_picker/image_picker.dart';
 export 'package:dio/dio.dart';
 export 'package:http_parser/http_parser.dart';
+export 'package:lottie/lottie.dart';

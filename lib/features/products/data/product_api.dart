@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:garden_of_eve/utils/dio_network/dio_client.dart';
 

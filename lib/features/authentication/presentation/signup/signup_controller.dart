@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/controllers/auth_controller.dart';
-import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/authentication/presentation/login/login_screen.dart';
+import 'package:garden_of_eve/utils/dialogs.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class SignupController extends GetxController {
@@ -17,6 +17,7 @@ class SignupController extends GetxController {
   final password = TextEditingController();
 
   Future<void> signupUser() async {
+    showLoading();
     if (signupForm.currentState!.validate()) {
       bool success = await _authController.registerUser(
         firstName.text,
@@ -24,17 +25,12 @@ class SignupController extends GetxController {
         email.text,
         password.text,
       );
-      Get.snackbar(
-        success ? 'Registered' : 'Register Failed',
-        success ? 'You may now login your account' : 'Please try again later',
-        snackPosition: SnackPosition.BOTTOM,
-        borderRadius: 20,
-        margin: const EdgeInsets.all(15),
-        colorText: oxfordBlueColor,
-        duration: const Duration(seconds: 4),
-        isDismissible: true,
-        dismissDirection: DismissDirection.horizontal,
-        forwardAnimationCurve: Curves.easeOutBack,
+      dismissDialog();
+      showSnackBar(
+        title: success ? 'Registered' : 'Register Failed',
+        message: success
+            ? 'You may now login your account'
+            : 'Please try again later',
       );
       if (success) {
         clearInputs();

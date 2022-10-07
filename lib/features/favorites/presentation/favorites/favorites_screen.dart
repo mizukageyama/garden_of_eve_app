@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common/widgets/error_info_display.dart';
 import 'package:garden_of_eve/common/widgets/gradient_container.dart';
 import 'package:garden_of_eve/common/widgets/loading_list_view.dart';
 import 'package:garden_of_eve/common/widgets/product_tile_rect_skeleton.dart';
@@ -52,9 +53,8 @@ class FavoritesScreen extends StatelessWidget {
       );
     }
     if (favController.favList.isEmpty) {
-      return const SizedBox(
-        height: 0,
-        width: 0,
+      return const ErrorInfoDisplay(
+        message: 'No favorites',
       );
     }
 

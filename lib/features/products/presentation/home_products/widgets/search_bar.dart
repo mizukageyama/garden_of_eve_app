@@ -31,7 +31,6 @@ class SearchProductField extends StatelessWidget {
           ),
         ),
         onFieldSubmitted: (value) {
-          print('Submitted: $value');
           if (value != '') {
             searchController.setSearchKey = value;
             Get.to(() => ProductListScreen());

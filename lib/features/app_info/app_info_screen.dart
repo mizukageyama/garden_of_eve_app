@@ -16,12 +16,11 @@ class AppInfoScreen extends StatelessWidget {
               const SizedBox(
                 height: 70,
               ),
-              //TO DO: Change app logo
-              const Center(
-                child: Icon(
-                  Icons.spa_rounded,
-                  size: 70,
-                  color: greenColor,
+              Center(
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  height: 70,
+                  width: 70,
                 ),
               ),
               const SizedBox(
@@ -112,53 +111,53 @@ class AppInfoScreen extends StatelessWidget {
               const SizedBox(
                 height: 40,
               ),
-              // Text(
-              //   'Credits',
-              //   style: quicksandBold.copyWith(
-              //     fontSize: 15,
-              //     color: oxfordBlueColor,
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 5,
-              // ),
-              // Text(
-              //   'FreePik',
-              //   style: quicksandSemiBold.copyWith(
-              //     fontSize: 14,
-              //     color: darkGreyColor,
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 5,
-              // ),
-              // Text(
-              //   'Pinterest',
-              //   style: quicksandSemiBold.copyWith(
-              //     fontSize: 14,
-              //     color: darkGreyColor,
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 5,
-              // ),
-              // Text(
-              //   'Icons8',
-              //   style: quicksandSemiBold.copyWith(
-              //     fontSize: 14,
-              //     color: darkGreyColor,
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 5,
-              // ),
-              // Text(
-              //   'Lottie',
-              //   style: quicksandSemiBold.copyWith(
-              //     fontSize: 14,
-              //     color: darkGreyColor,
-              //   ),
-              // ),
+              Text(
+                'Credits',
+                style: quicksandBold.copyWith(
+                  fontSize: 15,
+                  color: oxfordBlueColor,
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                'FreePik\nLogo by mudassir101 on Freepik',
+                style: quicksandSemiBold.copyWith(
+                  fontSize: 14,
+                  color: darkGreyColor,
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                'Pinterest (some of the UI design)',
+                style: quicksandSemiBold.copyWith(
+                  fontSize: 14,
+                  color: darkGreyColor,
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                'Icons8 (some of the icons used)',
+                style: quicksandSemiBold.copyWith(
+                  fontSize: 14,
+                  color: darkGreyColor,
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                'Lottie (loading indicator used)',
+                style: quicksandSemiBold.copyWith(
+                  fontSize: 14,
+                  color: darkGreyColor,
+                ),
+              ),
             ],
           ),
         ),

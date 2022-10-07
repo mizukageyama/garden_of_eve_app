@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/widgets/_common_widgets.dart';
 import 'package:garden_of_eve/common/widgets/custom_appbar.dart';
+import 'package:garden_of_eve/common/widgets/error_info_display.dart';
 import 'package:garden_of_eve/common/widgets/loading_list_view.dart';
 import 'package:garden_of_eve/common/widgets/product_tile_rect_skeleton.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
@@ -167,16 +168,8 @@ class ProductsScreen extends StatelessWidget {
       );
     }
     if (homeProdController.recentlyViewed.isEmpty) {
-      return SizedBox(
-        height: 120,
-        child: Center(
-          child: Text(
-            'No recent viewed yet',
-            style: quicksandMedium.copyWith(
-              color: neutralGreyColor,
-            ),
-          ),
-        ),
+      return const ErrorInfoDisplay(
+        message: 'No recent viewed yet',
       );
     }
     return RecentlyViewedListView();

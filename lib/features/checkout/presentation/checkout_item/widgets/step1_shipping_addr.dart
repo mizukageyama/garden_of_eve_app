@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/controllers/shipping_addr_form_controller.dart';
+import 'package:garden_of_eve/common/widgets/error_info_display.dart';
 import 'package:garden_of_eve/common/widgets/gradient_container.dart';
+import 'package:garden_of_eve/common/widgets/loading_list_view.dart';
 import 'package:garden_of_eve/common/widgets/shipping_addr_form.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
+import 'package:garden_of_eve/features/cart/presentation/cart_items/widgets/cart_tile_skeleton.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/checkout_controller.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/radio_step_controller.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/widgets/expandable_container.dart';
 import 'package:garden_of_eve/features/profile/presentation/address/address_controller.dart';
 import 'package:garden_of_eve/features/profile/presentation/address/widgets/shipping_addr_list_view.dart';
+import 'package:garden_of_eve/utils/dialogs.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class Step1ShippingAddr extends StatelessWidget {
@@ -97,7 +101,10 @@ class Step1ShippingAddr extends StatelessWidget {
               if (shippingFormController.hasSelected) {
                 _checkoutController.nextStep();
               } else {
-                print('Please select address');
+                showSnackBar(
+                  title: 'No address is selected',
+                  message: 'Please select address to proceed',
+                );
               }
             } else {
               if (_formKey.currentState!.validate()) {
@@ -129,19 +136,16 @@ class Step1ShippingAddr extends StatelessWidget {
 
   Widget showAddress() {
     if (shippingController.isLoading.value) {
-      return const SizedBox(
-        height: 85,
-        child: Center(
-          child: Text(
-            'Loading...',
-          ),
-        ),
+      return const LoadingListView(
+        isHorizontalDirection: false,
+        itemCount: 2,
+        skeleton: CartTileSkeleton(),
       );
     }
     if (shippingController.addrList.isEmpty) {
-      return const SizedBox(
-        height: 0,
-        width: 0,
+      return const ErrorInfoDisplay(
+        message: 'No saved address',
+        isWhiteBackground: false,
       );
     }
 

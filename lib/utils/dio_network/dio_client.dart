@@ -31,7 +31,7 @@ class DioClient {
                   return handler.resolve(await _retry(response.requestOptions));
                 } else {
                   final AuthController _auth = getx.Get.find();
-                  print('signout na kay mali refresh pod');
+                  //print('signout na kay mali refresh or expired');
                   await _auth.signOut();
                   return handler.next(response);
                 }

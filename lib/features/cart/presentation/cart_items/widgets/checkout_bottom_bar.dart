@@ -4,6 +4,7 @@ import 'package:garden_of_eve/common/widgets/custom_text_field.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/checkout_screen.dart';
+import 'package:garden_of_eve/utils/dialogs.dart';
 import 'package:garden_of_eve/utils/format.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
@@ -134,7 +135,11 @@ class CheckoutBottomBar extends StatelessWidget {
               if (cartListController.selectedItems.isNotEmpty) {
                 Get.to(() => CheckoutScreen());
               } else {
-                print('No selected items to checkout');
+                showErrorDialog(
+                  errorTitle: 'No items selected',
+                  errorDescription:
+                      'Please select items from cart to proceed checkout',
+                );
               }
             },
             child: GradientContainer(

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common/controllers/user_data_controller.dart';
 import 'package:garden_of_eve/common/models/promo_model.dart';
-import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/constants/app_items.dart';
 import 'package:garden_of_eve/features/cart/data/cart_repository.dart';
 import 'package:garden_of_eve/features/cart/domain/cart_model.dart';
 import 'package:garden_of_eve/features/orders/domain/order_items_model.dart';
+import 'package:garden_of_eve/utils/dialogs.dart';
 import 'package:garden_of_eve/utils/format.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class CartListController extends GetxController {
   //Repository
   final CartRepository _cartRepo = CartRepository();
+  final UserData _user = Get.find();
   final RxBool selectAll = false.obs;
 
   final TextEditingController pCode = TextEditingController();
@@ -29,12 +31,10 @@ class CartListController extends GetxController {
   //Methods
   @override
   void onInit() {
-    print('onInit | CartListController');
     getCartData(isRefresh: true);
     cartListScroller.addListener(() async {
       if (cartListScroller.position.pixels ==
           cartListScroller.position.maxScrollExtent) {
-        print('Fetching new data...');
         await getCartData();
       }
     });
@@ -99,9 +99,12 @@ class CartListController extends GetxController {
       }
     }
 
-    //TO DO: Change user Id after authentication
+    if (_user.currentUserId == 0) {
+      getCartData(isRefresh: true);
+    }
+
     final result = await _cartRepo.geCartList(
-      3,
+      _user.currentUserId,
       currentPage,
     );
 
@@ -129,17 +132,10 @@ class CartListController extends GetxController {
     if (!success) {
       cartList.insert(index, temp);
     }
-    Get.snackbar(
-      success ? 'Success' : 'Failed',
-      success ? 'Removed from Cart' : message['message'],
-      snackPosition: SnackPosition.BOTTOM,
-      borderRadius: 20,
-      margin: const EdgeInsets.all(15),
-      colorText: oxfordBlueColor,
+    showSnackBar(
+      title: success ? 'Success' : 'Failed',
+      message: success ? 'Removed from Cart' : message['message'],
       duration: const Duration(seconds: 1),
-      isDismissible: true,
-      dismissDirection: DismissDirection.horizontal,
-      forwardAnimationCurve: Curves.easeOutBack,
     );
   }
 }

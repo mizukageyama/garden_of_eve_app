@@ -18,7 +18,6 @@ class FavoritesController extends GetxController {
     favListScroller.addListener(() async {
       if (favListScroller.position.pixels ==
           favListScroller.position.maxScrollExtent) {
-        print('Fetching new data...');
         await getFavorites();
       }
     });

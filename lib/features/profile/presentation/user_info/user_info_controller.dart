@@ -1,8 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/controllers/user_data_controller.dart';
-import 'package:garden_of_eve/constants/_constants.dart';
+import 'package:garden_of_eve/features/profile/presentation/user_info/widgets.dart/profile_pic_dialog.dart';
 import 'package:garden_of_eve/utils/dialogs.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
@@ -53,6 +51,7 @@ class UserInfoController extends GetxController {
     );
     if (selectedImage == null) return;
     image.value = selectedImage;
+
     showConfirmationDialog(
       dialogTitle: 'Save this as profile photo?',
       dialogCaption:
@@ -60,38 +59,10 @@ class UserInfoController extends GetxController {
       confirmText: 'Yes',
       cancelText: 'Cancel',
       onConfirmTap: () {
-        print('API save new profile');
+        //TO DO: API save profile photo
       },
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const SizedBox(height: 10),
-          Container(
-            clipBehavior: Clip.hardEdge,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: neutralGreyColor.withOpacity(0.2),
-            ),
-            child: Image.file(
-              File(selectedImage.path),
-              width: 140,
-              height: 140,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Center(
-                  child: Text(
-                    'Could not load image',
-                    textAlign: TextAlign.center,
-                    style: quicksandMedium.copyWith(
-                      color: neutralGreyColor,
-                      fontSize: 13.5,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
+      content: ProfilePicDialog(
+        path: selectedImage.path,
       ),
     );
     //show dialog with the selected image

@@ -19,7 +19,6 @@ class OrderListController extends GetxController {
     orderScroller.addListener(() async {
       if (orderScroller.position.pixels ==
           orderScroller.position.maxScrollExtent) {
-        print('Fetching new data...');
         await getOrders();
       }
     });
