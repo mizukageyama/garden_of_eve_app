@@ -44,7 +44,7 @@ class ProductTileText extends StatelessWidget {
               visible: forProductInfo,
               child: GestureDetector(
                 onTap: () {
-                  controller?.toggleHeartIcon(1, product);
+                  controller?.toggleHeartIcon(product);
                 },
                 child: Obx(
                   () => FutureBuilder(

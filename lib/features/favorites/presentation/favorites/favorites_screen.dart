@@ -36,7 +36,9 @@ class FavoritesScreen extends StatelessWidget {
               ),
             ),
             Flexible(
-              child: _showFavorites(),
+              child: Obx(
+                () => _showFavorites(),
+              ),
             ),
           ],
         ),

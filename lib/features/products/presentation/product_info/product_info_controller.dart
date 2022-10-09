@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common/controllers/user_data_controller.dart';
 import 'package:garden_of_eve/features/cart/data/cart_repository.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
 import 'package:garden_of_eve/features/favorites/data/favorites_repository.dart';
@@ -13,8 +15,9 @@ class ProductInfoController extends GetxController {
   final RxInt quantity = 1.obs;
   final CartListController cartListController = Get.find();
   final FavoritesController favController = Get.find();
+  final UserData _user = Get.find();
 
-  Future<void> toggleHeartIcon(int userId, Product product) async {
+  Future<void> toggleHeartIcon(Product product) async {
     if (product.isFavorite.value) {
       product.setFav = false;
 
@@ -38,7 +41,7 @@ class ProductInfoController extends GetxController {
     } else {
       product.setFav = true;
       Map<String, dynamic> message =
-          await _favRepo.addToFavorites(userId, product.id);
+          await _favRepo.addToFavorites(_user.currentUserId, product.id);
       bool success = message['success'] == 1;
       if (success) {
         favController.getFavorites(isRefresh: true);
