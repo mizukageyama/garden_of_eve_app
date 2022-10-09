@@ -4,7 +4,7 @@ import 'package:garden_of_eve/common/widgets/custom_appbar.dart';
 import 'package:garden_of_eve/common/widgets/gradient_container.dart';
 import 'package:garden_of_eve/common/widgets/shipping_addr_form.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
-import 'package:garden_of_eve/features/profile/presentation/address/address_controller.dart';
+import 'package:garden_of_eve/features/shipping_address/presentation/address/address_controller.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class AddAddressScreen extends StatelessWidget {

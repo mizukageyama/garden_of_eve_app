@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/controllers/user_data_controller.dart';
-import 'package:garden_of_eve/common/models/promo_model.dart';
+import 'package:garden_of_eve/features/vouchers/domain/voucher_model.dart';
 import 'package:garden_of_eve/constants/app_items.dart';
 import 'package:garden_of_eve/features/cart/data/cart_repository.dart';
 import 'package:garden_of_eve/features/cart/domain/cart_model.dart';
@@ -16,7 +16,7 @@ class CartListController extends GetxController {
   final RxBool selectAll = false.obs;
 
   final TextEditingController pCode = TextEditingController();
-  final Rxn<Promo?> promoObx = Rxn<Promo>();
+  final Rxn<Voucher?> voucherObx = Rxn<Voucher>();
 
   //Cart Variable
   final cartListScroller = ScrollController();
@@ -65,21 +65,21 @@ class CartListController extends GetxController {
         .toList();
   }
 
-  void checkPromoCode() {
-    Promo? promoResult;
-    promoResult =
-        promoCodes.singleWhere((item) => item.promoCode == pCode.text);
-    promoObx.value = promoResult;
+  void checkVoucherCode() {
+    Voucher? voucherResult;
+    voucherResult =
+        promoCodes.singleWhere((item) => item.voucherCode == pCode.text);
+    voucherObx.value = voucherResult;
   }
 
   double calculateLess() {
-    if (promoObx.value == null) {
+    if (voucherObx.value == null) {
       return 0.00;
     }
-    if (promoObx.value!.isPercentBasis) {
-      return ((promoObx.value!.percentDiscount! / 100) * subTotal());
+    if (voucherObx.value!.isPercentBasis) {
+      return ((voucherObx.value!.percentDiscount! / 100) * subTotal());
     } else {
-      return promoObx.value!.amountLess!;
+      return voucherObx.value!.amountLess!;
     }
   }
 
@@ -100,7 +100,8 @@ class CartListController extends GetxController {
     }
 
     if (_user.currentUserId == 0) {
-      getCartData(isRefresh: true);
+      await Future.delayed(const Duration(seconds: 5));
+      //delay to wait for initialization of current user
     }
 
     final result = await _cartRepo.geCartList(

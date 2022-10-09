@@ -1,5 +1,5 @@
-import 'package:garden_of_eve/features/profile/data/shipping_addr_api.dart';
-import 'package:garden_of_eve/features/profile/domain/shipping_addr_model.dart';
+import 'package:garden_of_eve/features/shipping_address/data/shipping_addr_api.dart';
+import 'package:garden_of_eve/features/shipping_address/domain/shipping_addr_model.dart';
 import 'package:garden_of_eve/utils/dio_network/dio_exception.dart';
 import 'package:dio/dio.dart';
 

@@ -47,6 +47,7 @@ class FavoritesScreen extends StatelessWidget {
   Widget _showFavorites() {
     if (favController.isLoading.value) {
       return const LoadingListView(
+        isHorizontalDirection: false,
         skeleton: ProductTileRectSkeleton(
           width: double.infinity,
         ),

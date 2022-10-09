@@ -1,11 +1,11 @@
-class Promo {
-  final String promoCode;
+class Voucher {
+  final String voucherCode;
   final double? percentDiscount;
   final double? amountLess;
   final String title;
 
-  Promo({
-    required this.promoCode,
+  Voucher({
+    required this.voucherCode,
     this.percentDiscount,
     this.amountLess,
     required this.title,

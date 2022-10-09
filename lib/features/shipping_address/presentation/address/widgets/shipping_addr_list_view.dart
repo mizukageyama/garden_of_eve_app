@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/constants/app_colors.dart';
-import 'package:garden_of_eve/features/profile/domain/shipping_addr_model.dart';
-import 'package:garden_of_eve/features/profile/presentation/address/address_controller.dart';
-import 'package:garden_of_eve/features/profile/presentation/address/widgets/shipping_addr_tile.dart';
+import 'package:garden_of_eve/features/shipping_address/domain/shipping_addr_model.dart';
+import 'package:garden_of_eve/features/shipping_address/presentation/address/address_controller.dart';
+import 'package:garden_of_eve/features/shipping_address/presentation/address/widgets/shipping_addr_tile.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class ShippingAddrListView extends StatelessWidget {

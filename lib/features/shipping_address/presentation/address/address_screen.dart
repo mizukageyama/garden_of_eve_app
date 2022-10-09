@@ -4,9 +4,9 @@ import 'package:garden_of_eve/common/widgets/gradient_container.dart';
 import 'package:garden_of_eve/common/widgets/loading_list_view.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/widgets/cart_tile_skeleton.dart';
-import 'package:garden_of_eve/features/profile/presentation/address/add_address_screen.dart';
-import 'package:garden_of_eve/features/profile/presentation/address/address_controller.dart';
-import 'package:garden_of_eve/features/profile/presentation/address/widgets/shipping_addr_list_view.dart';
+import 'package:garden_of_eve/features/shipping_address/presentation/address/add_address_screen.dart';
+import 'package:garden_of_eve/features/shipping_address/presentation/address/address_controller.dart';
+import 'package:garden_of_eve/features/shipping_address/presentation/address/widgets/shipping_addr_list_view.dart';
 import 'package:garden_of_eve/utils/dialogs.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 

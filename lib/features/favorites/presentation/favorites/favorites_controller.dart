@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common/controllers/user_data_controller.dart';
 import 'package:garden_of_eve/features/favorites/data/favorites_repository.dart';
 import 'package:garden_of_eve/features/products/domain/product_model.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class FavoritesController extends GetxController {
   final FavoritesRepository _favRepo = FavoritesRepository();
+  final UserData _user = Get.find();
+
   final favListScroller = ScrollController();
   RxList<Product> favList = RxList.empty(growable: true);
   bool hasMoreData = false;
@@ -34,7 +37,13 @@ class FavoritesController extends GetxController {
       }
     }
 
-    final results = await _favRepo.geFavorites(1, currentPage);
+    if (_user.currentUserId == 0) {
+      await Future.delayed(const Duration(seconds: 5));
+      //delay to wait for initialization of current user
+    }
+
+    final results =
+        await _favRepo.geFavorites(_user.currentUserId, currentPage);
 
     if (isRefresh) {
       favList.value = results;

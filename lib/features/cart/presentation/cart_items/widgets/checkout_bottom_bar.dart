@@ -42,7 +42,7 @@ class CheckoutBottomBar extends StatelessWidget {
           CustomTextField(
             labelText: 'Promo Code',
             controller: cartListController.pCode,
-            callback: () => cartListController.checkPromoCode(),
+            callback: () => cartListController.checkVoucherCode(),
           ),
           const SizedBox(
             height: 10,

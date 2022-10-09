@@ -1,5 +1,5 @@
 import 'package:garden_of_eve/features/orders/domain/order_items_model.dart';
-import 'package:garden_of_eve/features/profile/domain/shipping_addr_model.dart';
+import 'package:garden_of_eve/features/shipping_address/domain/shipping_addr_model.dart';
 
 class Order {
   int id;

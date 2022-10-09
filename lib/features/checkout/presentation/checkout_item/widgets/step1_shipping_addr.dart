@@ -9,8 +9,8 @@ import 'package:garden_of_eve/features/cart/presentation/cart_items/widgets/cart
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/checkout_controller.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/radio_step_controller.dart';
 import 'package:garden_of_eve/features/checkout/presentation/checkout_item/widgets/expandable_container.dart';
-import 'package:garden_of_eve/features/profile/presentation/address/address_controller.dart';
-import 'package:garden_of_eve/features/profile/presentation/address/widgets/shipping_addr_list_view.dart';
+import 'package:garden_of_eve/features/shipping_address/presentation/address/address_controller.dart';
+import 'package:garden_of_eve/features/shipping_address/presentation/address/widgets/shipping_addr_list_view.dart';
 import 'package:garden_of_eve/utils/dialogs.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 

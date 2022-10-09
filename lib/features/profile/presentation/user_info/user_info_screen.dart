@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common/services/validator.dart';
 import 'package:garden_of_eve/common/widgets/custom_appbar.dart';
 import 'package:garden_of_eve/common/widgets/custom_text_field.dart';
 import 'package:garden_of_eve/common/widgets/gradient_container.dart';
@@ -110,7 +111,9 @@ class UserInfoScreen extends StatelessWidget {
                               child: Obx(
                                 () => _info.isEdit
                                     ? GestureDetector(
-                                        onTap: () => _info.editable = false,
+                                        onTap: () async {
+                                          await _info.updateUser();
+                                        },
                                         child: Container(
                                           padding: const EdgeInsets.symmetric(
                                             horizontal: 20,
@@ -146,42 +149,50 @@ class UserInfoScreen extends StatelessWidget {
                       const SizedBox(
                         height: 25,
                       ),
-                      Obx(
-                        () => CustomTextField(
-                          enabled: _info.isEdit,
-                          controller: _info.firstName,
-                          borderRadius: BorderRadius.circular(5),
-                          floatLabel: true,
-                          labelText: 'First Name',
-                          // validator: Validator().email,
+                      Form(
+                        key: _info.editFormKey,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Obx(
+                              () => CustomTextField(
+                                enabled: _info.isEdit,
+                                controller: _info.firstName,
+                                borderRadius: BorderRadius.circular(5),
+                                floatLabel: true,
+                                labelText: 'First Name',
+                                validator: Validator().notEmpty,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            Obx(
+                              () => CustomTextField(
+                                enabled: _info.isEdit,
+                                controller: _info.lastName,
+                                borderRadius: BorderRadius.circular(5),
+                                floatLabel: true,
+                                labelText: 'Last Name',
+                                validator: Validator().notEmpty,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Obx(
-                        () => CustomTextField(
-                          enabled: _info.isEdit,
-                          controller: _info.lastName,
-                          borderRadius: BorderRadius.circular(5),
-                          floatLabel: true,
-                          labelText: 'Last Name',
-                          // validator: Validator().email,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Obx(
-                        () => CustomTextField(
-                          enabled: _info.isEdit,
-                          controller: _info.email,
-                          borderRadius: BorderRadius.circular(5),
-                          floatLabel: true,
-                          labelText: 'Email',
-                          // validator: Validator().email,
-                        ),
-                      ),
+                      // const SizedBox(
+                      //   height: 12,
+                      // ),
+                      // Obx(
+                      //   () => CustomTextField(
+                      //     enabled: _info.isEdit,
+                      //     controller: _info.email,
+                      //     borderRadius: BorderRadius.circular(5),
+                      //     floatLabel: true,
+                      //     labelText: 'Email',
+                      //     // validator: Validator().email,
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

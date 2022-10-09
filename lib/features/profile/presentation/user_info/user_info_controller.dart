@@ -1,26 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/controllers/user_data_controller.dart';
+import 'package:garden_of_eve/features/profile/data/user_repository.dart';
 import 'package:garden_of_eve/features/profile/presentation/user_info/widgets.dart/profile_pic_dialog.dart';
 import 'package:garden_of_eve/utils/dialogs.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class UserInfoController extends GetxController {
+  final _userRepo = UserRepository();
   final UserData _userData = Get.find();
+  final editFormKey = GlobalKey<FormState>();
 
   final ImagePicker _picker = ImagePicker();
   final Rxn<XFile?> image = Rxn<XFile?>();
 
   final firstName = TextEditingController();
   final lastName = TextEditingController();
-  final email = TextEditingController();
+  //final email = TextEditingController();
   final RxBool isEditable = false.obs;
 
   @override
   void onInit() {
+    initDisplayedData();
+    super.onInit();
+  }
+
+  Future<void> initDisplayedData() async {
     firstName.text = _userData.currentUser!.firstName;
     lastName.text = _userData.currentUser!.lastName;
-    email.text = _userData.currentUser!.email;
-    super.onInit();
   }
 
   bool get isEdit => isEditable.value;
@@ -28,16 +34,38 @@ class UserInfoController extends GetxController {
   set editable(bool value) => isEditable.value = value;
 
   bool get isFirstNameChanged =>
-      firstName.text != _userData.currentUser!.firstName;
+      firstName.text != _userData.currentUser?.firstName;
 
   bool get isLastNameChanged =>
-      firstName.text != _userData.currentUser!.firstName;
+      lastName.text != _userData.currentUser?.lastName;
 
-  bool get isEmailChanged => firstName.text != _userData.currentUser!.firstName;
+  Future<void> updateUser() async {
+    if (editFormKey.currentState!.validate()) {
+      if (isFirstNameChanged || isLastNameChanged) {
+        showLoading();
 
-  void updateUser() {
-    if (isFirstNameChanged || isLastNameChanged || isEmailChanged) {
-      //update info
+        final message = await _userRepo.updateUser(
+          101, //_userData.currentUserId,
+          firstName.text,
+          lastName.text,
+        );
+
+        bool success = message['success'] == 1;
+        dismissDialog();
+
+        if (!success) {
+          await initDisplayedData();
+        } else {
+          //reset current user
+        }
+
+        showSnackBar(
+          title: success ? 'Success' : 'Failed',
+          message: message['message'],
+          duration: const Duration(seconds: 1),
+        );
+      }
+      editable = false;
     }
     return;
   }

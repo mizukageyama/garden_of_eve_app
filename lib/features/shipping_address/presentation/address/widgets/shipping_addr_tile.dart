@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/constants/_constants.dart';
-import 'package:garden_of_eve/features/profile/domain/shipping_addr_model.dart';
+import 'package:garden_of_eve/features/shipping_address/domain/shipping_addr_model.dart';
 
 class ShippingAddrTile extends StatelessWidget {
   const ShippingAddrTile({

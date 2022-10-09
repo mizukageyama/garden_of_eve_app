@@ -4,11 +4,11 @@ import 'package:garden_of_eve/constants/app_colors.dart';
 import 'package:garden_of_eve/constants/app_text_styles.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_screen.dart';
 import 'package:garden_of_eve/features/orders/presentation/order_list/order_list_screen.dart';
-import 'package:garden_of_eve/features/profile/presentation/address/address_screen.dart';
 import 'package:garden_of_eve/features/profile/presentation/profile/widgets/custom_icon_button.dart';
 import 'package:garden_of_eve/features/profile/presentation/profile/widgets/title_and_subtext.dart';
 import 'package:garden_of_eve/features/profile/presentation/user_info/user_info_screen.dart';
-import 'package:garden_of_eve/features/profile/presentation/vouchers/vouchers_screen.dart';
+import 'package:garden_of_eve/features/shipping_address/presentation/address/address_screen.dart';
+import 'package:garden_of_eve/features/vouchers/presentation/vouchers/vouchers_screen.dart';
 import 'package:garden_of_eve/utils/dialogs.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
@@ -389,7 +389,7 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () => Get.to(
-                              () => const VoucherScreen(),
+                              () => VoucherScreen(),
                             ),
                             child: Text(
                               'View',
