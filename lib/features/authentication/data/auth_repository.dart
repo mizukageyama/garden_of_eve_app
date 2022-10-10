@@ -34,4 +34,19 @@ class AuthRepository {
       throw errorMessage;
     }
   }
+
+  Future<Map<String, dynamic>> changePassword(
+      int userId, String oldPassword, String newPassword) async {
+    try {
+      final response = await _authApi.changePassword(
+        userId,
+        oldPassword,
+        newPassword,
+      );
+      return response.data;
+    } on DioError catch (e) {
+      //final errorMessage = DioExceptions.fromDioError(e).toString();
+      return e.response?.data;
+    }
+  }
 }

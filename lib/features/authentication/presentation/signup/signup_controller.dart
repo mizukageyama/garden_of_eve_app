@@ -9,6 +9,7 @@ class SignupController extends GetxController {
 
   //form
   final signupForm = GlobalKey<FormState>();
+  final RxBool _isObscure = true.obs;
 
   //inputs
   final firstName = TextEditingController();
@@ -45,4 +46,8 @@ class SignupController extends GetxController {
     email.clear();
     password.clear();
   }
+
+  bool get isObscurePw => _isObscure.value;
+
+  void toggleIsObsurePw() => _isObscure.value = !_isObscure.value;
 }

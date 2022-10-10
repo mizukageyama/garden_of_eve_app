@@ -22,7 +22,6 @@ class LoginScreen extends StatelessWidget {
             height: context.height -
                 context.mediaQueryPadding.top -
                 context.mediaQueryPadding.bottom,
-            //color: lightGreenColor.withOpacity(.55),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -89,13 +88,25 @@ class LoginScreen extends StatelessWidget {
                           const SizedBox(
                             height: 12,
                           ),
-                          CustomTextField(
-                            controller: _loginController.password,
-                            obscureText: true,
-                            borderRadius: BorderRadius.circular(5),
-                            floatLabel: true,
-                            labelText: 'Password',
-                            validator: Validator().notEmpty,
+                          Obx(
+                            () => CustomTextField(
+                              controller: _loginController.password,
+                              obscureText: _loginController.isObscurePass,
+                              borderRadius: BorderRadius.circular(5),
+                              floatLabel: true,
+                              labelText: 'Password',
+                              validator: Validator().password,
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  _loginController.toggleIsObsure();
+                                },
+                                icon: Icon(
+                                  _loginController.isObscurePass
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                ),
+                              ),
+                            ),
                           ),
                           const SizedBox(
                             height: 20,

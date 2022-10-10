@@ -47,8 +47,14 @@ class AuthController extends GetxController {
     return data['success'] == 1;
   }
 
-  Future<void> changePassword(String oldPassword, String newPassword) async {
-    //change password
+  Future<Map<String, dynamic>> changePassword(
+      String oldPassword, String newPassword) async {
+    Map<String, dynamic> data = await _authRepo.changePassword(
+      _userData.currentUserId,
+      oldPassword,
+      newPassword,
+    );
+    return data;
   }
 
   Future<void> signOut() async {

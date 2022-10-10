@@ -115,13 +115,25 @@ class SignupScreen extends StatelessWidget {
                           const SizedBox(
                             height: 12,
                           ),
-                          CustomTextField(
-                            controller: _signupController.password,
-                            obscureText: true,
-                            borderRadius: BorderRadius.circular(5),
-                            floatLabel: true,
-                            labelText: 'Password',
-                            validator: Validator().notEmpty,
+                          Obx(
+                            () => CustomTextField(
+                              controller: _signupController.password,
+                              obscureText: _signupController.isObscurePw,
+                              borderRadius: BorderRadius.circular(5),
+                              floatLabel: true,
+                              labelText: 'Password',
+                              validator: Validator().password,
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  _signupController.toggleIsObsurePw();
+                                },
+                                icon: Icon(
+                                  _signupController.isObscurePw
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                ),
+                              ),
+                            ),
                           ),
                           const SizedBox(
                             height: 30,

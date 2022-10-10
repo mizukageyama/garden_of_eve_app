@@ -16,11 +16,8 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.enabled = true,
     this.focusColor = neutralGreyColor,
-    this.borderRadius = const BorderRadius.all(
-      Radius.circular(
-        10.0,
-      ),
-    ),
+    this.suffixIcon,
+    this.borderRadius = const BorderRadius.all(Radius.circular(10.0)),
   }) : super(key: key);
 
   final int minLines;
@@ -35,6 +32,7 @@ class CustomTextField extends StatelessWidget {
   final bool obscureText;
   final bool enabled;
   final Color focusColor;
+  final Widget? suffixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +70,7 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         floatingLabelBehavior: floatLabel ? null : FloatingLabelBehavior.never,
+        suffixIcon: suffixIcon,
       ),
       inputFormatters: inputFormatters,
       onFieldSubmitted: (value) {

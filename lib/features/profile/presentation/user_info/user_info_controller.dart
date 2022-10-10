@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garden_of_eve/common/controllers/auth_controller.dart';
 import 'package:garden_of_eve/common/controllers/user_data_controller.dart';
 import 'package:garden_of_eve/features/profile/data/user_repository.dart';
 import 'package:garden_of_eve/features/profile/presentation/user_info/widgets.dart/profile_pic_dialog.dart';
@@ -7,21 +8,52 @@ import 'package:garden_of_eve/utils/utils.dart';
 
 class UserInfoController extends GetxController {
   final _userRepo = UserRepository();
+
   final UserData _userData = Get.find();
-  final editFormKey = GlobalKey<FormState>();
+  final AuthController _auth = Get.find();
+
+  final RxBool isEditable = false.obs;
 
   final ImagePicker _picker = ImagePicker();
   final Rxn<XFile?> image = Rxn<XFile?>();
 
+  final editFormKey = GlobalKey<FormState>();
   final firstName = TextEditingController();
   final lastName = TextEditingController();
-  //final email = TextEditingController();
-  final RxBool isEditable = false.obs;
+
+  final changePassFormKey = GlobalKey<FormState>();
+  final oldPw = TextEditingController();
+  final newPw = TextEditingController();
+  final RxBool isObscureOldPw = true.obs;
+  final RxBool isObscureNewPw = true.obs;
 
   @override
   void onInit() {
     initDisplayedData();
     super.onInit();
+  }
+
+  Future<void> changePassword() async {
+    if (changePassFormKey.currentState!.validate()) {
+      showLoading();
+      final Map<String, dynamic> message = await _auth.changePassword(
+        oldPw.text,
+        newPw.text,
+      );
+      dismissDialog();
+      final bool success = message['success'] == 1;
+
+      if (success) {
+        dismissDialog();
+        oldPw.clear();
+        newPw.clear();
+      }
+      showSnackBar(
+        title: 'Change Password ${success ? 'Success' : 'Failed'}',
+        message: '${message['message']}',
+      );
+    }
+    return;
   }
 
   Future<void> initDisplayedData() async {
@@ -45,7 +77,7 @@ class UserInfoController extends GetxController {
         showLoading();
 
         final message = await _userRepo.updateUser(
-          101, //_userData.currentUserId,
+          _userData.currentUserId,
           firstName.text,
           lastName.text,
         );
@@ -96,4 +128,12 @@ class UserInfoController extends GetxController {
     //show dialog with the selected image
     //and have an option proceed or cancel
   }
+
+  bool get isObscureOldPass => isObscureOldPw.value;
+
+  bool get isObscureNewPass => isObscureNewPw.value;
+
+  void toggleIsObsureOld() => isObscureOldPw.value = !isObscureOldPw.value;
+
+  void toggleIsObsureNew() => isObscureNewPw.value = !isObscureNewPw.value;
 }

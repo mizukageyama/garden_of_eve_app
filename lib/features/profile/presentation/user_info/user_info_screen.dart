@@ -6,6 +6,8 @@ import 'package:garden_of_eve/common/widgets/gradient_container.dart';
 import 'package:garden_of_eve/constants/app_colors.dart';
 import 'package:garden_of_eve/constants/app_text_styles.dart';
 import 'package:garden_of_eve/features/profile/presentation/user_info/user_info_controller.dart';
+import 'package:garden_of_eve/features/profile/presentation/user_info/widgets.dart/change_pass_dialog.dart';
+import 'package:garden_of_eve/utils/dialogs.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
 class UserInfoScreen extends StatelessWidget {
@@ -180,49 +182,51 @@ class UserInfoScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      // const SizedBox(
-                      //   height: 12,
-                      // ),
-                      // Obx(
-                      //   () => CustomTextField(
-                      //     enabled: _info.isEdit,
-                      //     controller: _info.email,
-                      //     borderRadius: BorderRadius.circular(5),
-                      //     floatLabel: true,
-                      //     labelText: 'Email',
-                      //     // validator: Validator().email,
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
                 const SizedBox(
                   height: 30,
                 ),
-                GradientContainer(
-                  borderRadius: BorderRadius.circular(10),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(
-                        Icons.lock,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        'Change Password',
-                        style: quicksandSemiBold.copyWith(
-                          color: whiteColor,
+                GestureDetector(
+                  onTap: () {
+                    showConfirmationDialog(
+                      dialogTitle: 'Change Password',
+                      dialogCaption:
+                          'Please provide your current password and your new password.',
+                      confirmText: 'Proceed',
+                      cancelText: 'Cancel',
+                      content: ChangePassDialog(),
+                      onConfirmTap: () async {
+                        await _info.changePassword();
+                      },
+                    );
+                  },
+                  child: GradientContainer(
+                    borderRadius: BorderRadius.circular(10),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 10,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(
+                          Icons.lock,
+                          color: Colors.white,
+                          size: 20,
                         ),
-                      ),
-                    ],
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Change Password',
+                          style: quicksandSemiBold.copyWith(
+                            color: whiteColor,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

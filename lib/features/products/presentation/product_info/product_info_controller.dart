@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/controllers/user_data_controller.dart';
 import 'package:garden_of_eve/features/cart/data/cart_repository.dart';
 import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
