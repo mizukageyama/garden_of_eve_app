@@ -192,9 +192,9 @@ class SignupScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              showErrorDialog(
-                                errorTitle: 'Coming Soon...',
-                                errorDescription:
+                              showCustomDialog(
+                                title: 'Coming Soon...',
+                                description:
                                     'Sign up with Google is still not available. Thank you!',
                                 iconWidget: Image.asset(
                                   'assets/icons/google_logo.png',

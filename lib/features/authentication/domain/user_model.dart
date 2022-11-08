@@ -3,6 +3,8 @@ class User {
   String email;
   String firstName;
   String lastName;
+  String profileImage;
+  bool isAdmin;
   // DateTime createdAt;
   // DateTime modifiedAt;
 
@@ -11,6 +13,8 @@ class User {
     required this.email,
     required this.firstName,
     required this.lastName,
+    required this.profileImage,
+    required this.isAdmin,
     // required this.createdAt,
     // required this.modifiedAt,
   });
@@ -20,6 +24,8 @@ class User {
         email: json['email'] as String,
         firstName: json['first_name'] as String,
         lastName: json['last_name'] as String,
+        profileImage: json['profile_img'] ?? '',
+        isAdmin: json['is_admin'] == 1,
         // createdAt: DateTime.parse(json['created_at']),
         // modifiedAt: DateTime.parse(json['modified_at']),
       );
@@ -29,6 +35,8 @@ class User {
         "email": email,
         "first_name": firstName,
         "last_name": lastName,
+        "profile_img": profileImage,
+        "is_admin": isAdmin ? 1 : 0,
       };
 
   @override

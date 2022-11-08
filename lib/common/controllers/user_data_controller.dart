@@ -23,6 +23,8 @@ class UserData extends GetxController {
 
   int get currentUserId => _currentUser.value?.id ?? 0;
 
+  bool get isCurrentUserAdmin => _currentUser.value?.isAdmin ?? false;
+
   String get currentUserFullName =>
       '${_currentUser.value?.firstName} ${_currentUser.value?.lastName}';
 

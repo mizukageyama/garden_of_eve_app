@@ -27,9 +27,8 @@ class AuthController extends GetxController {
       _userData.storage.write(key: 'isLoggedIn', value: '1');
       await _userData.initializeCurrentUser();
       await _userData.initializeToken();
-      return true;
     }
-    return false;
+    return success;
   }
 
   Future<bool> registerUser(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/models/payment_options.dart';
 import 'package:garden_of_eve/constants/app_items.dart';
+import 'package:garden_of_eve/features/cart/presentation/cart_items/cart_items_controller.dart';
 import 'package:garden_of_eve/features/orders/data/order_repository.dart';
 import 'package:garden_of_eve/features/orders/domain/order_items_model.dart';
 import 'package:garden_of_eve/features/shipping_address/domain/shipping_addr_model.dart';
@@ -13,6 +14,7 @@ class CheckoutController extends GetxController {
   final Rxn<ShippingAddr?> shippingAddr = Rxn<ShippingAddr>();
   final Rxn<PaymentOpt?> paymentOption = Rxn<PaymentOpt>();
   final OrderRepository _orderRepo = OrderRepository();
+  final CartListController _cartController = Get.find();
 
   @override
   void onInit() {
@@ -87,13 +89,20 @@ class CheckoutController extends GetxController {
       orderItemsMapped,
     );
     bool success = message['success'] == 1;
+    if (success) {
+      await _cartController.getCartData(isRefresh: true);
+    }
     dismissDialog();
-    showSnackBar(
-      title: success ? 'Success' : 'Failed',
-      message: message['message'],
+    showCustomDialog(
+      title: success ? 'Order Created' : 'Order Failed',
+      description: success
+          ? 'Your order has been placed. Feel free to order more. Thank you!'
+          : 'There has been an error while placing your order. Please try again later',
+      hasButton: true,
+      onTapFunc: () {
+        Get.back(); //dismiss dialog
+        Get.back(); //go back to cart screen
+      },
     );
-
-    //TO DO: refresh cart
-    //show success dialog, then get back?
   }
 }

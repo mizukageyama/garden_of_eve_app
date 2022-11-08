@@ -68,9 +68,12 @@ void showLoading() {
   );
 }
 
-void showErrorDialog({
-  required String errorTitle,
-  required String errorDescription,
+void showCustomDialog({
+  required String title,
+  required String description,
+  bool hasButton = false,
+  String buttonText = 'Okay',
+  void Function()? onTapFunc = dismissDialog,
   Widget? iconWidget,
 }) {
   Get.dialog(
@@ -90,7 +93,7 @@ void showErrorDialog({
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  errorTitle,
+                  title,
                   style: quicksandBold.copyWith(
                     color: darkGreyColor,
                     fontSize: 16,
@@ -101,12 +104,30 @@ void showErrorDialog({
                   height: 10,
                 ),
                 Text(
-                  errorDescription,
+                  description,
                   style: quicksandSemiBold.copyWith(
                     color: neutralGreyColor,
                     fontSize: 14,
                   ),
                   textAlign: TextAlign.center,
+                ),
+                Visibility(
+                  visible: hasButton,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        width: 130,
+                        child: DialogButton(
+                          buttonText: buttonText,
+                          onTap: onTapFunc,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -130,7 +151,7 @@ void showErrorDialog({
         ],
       ),
     ),
-    barrierDismissible: true,
+    barrierDismissible: !hasButton,
   );
 }
 

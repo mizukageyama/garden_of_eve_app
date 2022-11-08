@@ -135,9 +135,9 @@ class CheckoutBottomBar extends StatelessWidget {
               if (cartListController.selectedItems.isNotEmpty) {
                 Get.to(() => CheckoutScreen());
               } else {
-                showErrorDialog(
-                  errorTitle: 'No items selected',
-                  errorDescription:
+                showCustomDialog(
+                  title: 'No items selected',
+                  description:
                       'Please select items from cart to proceed checkout',
                 );
               }

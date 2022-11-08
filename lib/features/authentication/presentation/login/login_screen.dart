@@ -192,9 +192,9 @@ class LoginScreen extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              showErrorDialog(
-                                errorTitle: 'Coming Soon...',
-                                errorDescription:
+                              showCustomDialog(
+                                title: 'Coming Soon...',
+                                description:
                                     'Google Sign-in feature is still not available. Thank you!',
                                 iconWidget: Image.asset(
                                   'assets/icons/google_logo.png',

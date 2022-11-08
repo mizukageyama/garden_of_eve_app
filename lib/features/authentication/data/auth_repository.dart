@@ -1,5 +1,4 @@
 import 'package:garden_of_eve/features/authentication/data/auth_api.dart';
-import 'package:garden_of_eve/utils/dio_network/dio_exception.dart';
 import 'package:dio/dio.dart';
 
 class AuthRepository {
@@ -10,8 +9,7 @@ class AuthRepository {
       final response = await _authApi.loginUser(email, pw);
       return response.data;
     } on DioError catch (e) {
-      final errorMessage = DioExceptions.fromDioError(e).toString();
-      throw errorMessage;
+      return e.response?.data;
     }
   }
 
@@ -30,8 +28,7 @@ class AuthRepository {
       );
       return response.data;
     } on DioError catch (e) {
-      final errorMessage = DioExceptions.fromDioError(e).toString();
-      throw errorMessage;
+      return e.response?.data;
     }
   }
 

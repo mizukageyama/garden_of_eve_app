@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garden_of_eve/common/services/validator.dart';
 import 'package:garden_of_eve/common/widgets/custom_text_field.dart';
-import 'package:garden_of_eve/common/widgets/dialog_button.dart';
-import 'package:garden_of_eve/constants/app_colors.dart';
-import 'package:garden_of_eve/constants/app_text_styles.dart';
 import 'package:garden_of_eve/features/profile/presentation/user_info/user_info_controller.dart';
 import 'package:garden_of_eve/utils/utils.dart';
 
