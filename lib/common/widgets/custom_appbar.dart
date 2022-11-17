@@ -23,8 +23,8 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final String? title;
   final Color backgroundColor;
   final Color contentColor;
-  final MainController _main = Get.put(MainController());
-  //final MainController _main = Get.find();
+  // final MainController _main = Get.put(MainController());
+  final MainController _main = Get.find();
 
   @override
   Widget build(BuildContext context) {

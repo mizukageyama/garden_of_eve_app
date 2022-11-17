@@ -35,7 +35,7 @@ class OrderListController extends GetxController {
       }
     }
 
-    final results = await _orderRepo.geCartList(1, currentPage);
+    final results = await _orderRepo.geOrderList(1, currentPage);
 
     if (isRefresh) {
       orders.value = results;

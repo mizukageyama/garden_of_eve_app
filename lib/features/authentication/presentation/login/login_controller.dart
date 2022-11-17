@@ -11,8 +11,9 @@ class LoginController extends GetxController {
   final loginForm = GlobalKey<FormState>();
   final RxBool _isObscure = true.obs;
 
-  final email = TextEditingController();
-  final password = TextEditingController();
+  //inputs
+  final email = TextEditingController(text: 'mad_max@gmail.com');
+  final password = TextEditingController(text: 'test1234');
 
   Future<void> loginUser() async {
     showLoading();

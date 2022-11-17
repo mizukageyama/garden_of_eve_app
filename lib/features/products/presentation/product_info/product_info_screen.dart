@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:garden_of_eve/common/controllers/user_data_controller.dart';
 import 'package:garden_of_eve/common/widgets/_common_widgets.dart';
 import 'package:garden_of_eve/constants/app_colors.dart';
 import 'package:garden_of_eve/constants/app_text_styles.dart';
@@ -18,7 +17,6 @@ class ProductInfoScreen extends StatelessWidget {
 
   final Product product;
   final ProductInfoController _prodInfo = Get.put(ProductInfoController());
-  final UserData _userData = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -123,55 +121,13 @@ class ProductInfoScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () => Get.back(),
-                    child: const Icon(
-                      Icons.arrow_back_ios_rounded,
-                      size: 24,
-                      color: oxfordBlueColor,
-                    ),
-                  ),
-                  Visibility(
-                    visible: _userData.isCurrentUserAdmin,
-                    child: GestureDetector(
-                      onTap: () async {
-                        //TO DO: add discount
-                        debugPrint('add discount');
-                      },
-                      child: GradientContainer(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 8,
-                          horizontal: 12,
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              'Add Discount',
-                              style: quicksandSemiBold.copyWith(
-                                color: whiteColor,
-                                fontSize: 14,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            const Icon(
-                              Icons.discount_outlined,
-                              size: 15,
-                              color: whiteColor,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              child: GestureDetector(
+                onTap: () => Get.back(),
+                child: const Icon(
+                  Icons.arrow_back_ios_rounded,
+                  size: 24,
+                  color: oxfordBlueColor,
+                ),
               ),
             ),
           ],

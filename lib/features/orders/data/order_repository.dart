@@ -8,7 +8,7 @@ class OrderRepository {
   final OrderApi _orderApi = OrderApi();
   int totalPages = 0;
 
-  Future<List<Order>> geCartList(int userId, int page) async {
+  Future<List<Order>> geOrderList(int userId, int page) async {
     try {
       final response = await _orderApi.getOrders(userId, page);
       final Map<String, dynamic> rawData = response.data['data'];
