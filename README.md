@@ -1,28 +1,15 @@
-<!-- ABOUT THE PROJECT -->
-## About The Project
+## Garden of Eve App
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+Garden of Eve is an ecommerce appplication built with Flutter framework. The GOE's backend is a RESTful API developed using NodeJS with Express.
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+## Built with
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+Flutter
 
-### Built With
-
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
-
-<!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Emmalyn Nabiamos - emmy2699@gmail.com
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Project Link: [garden_of_eve_app] https://github.com/mizukageyama/garden_of_eve_app
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+## Acknowledgement
