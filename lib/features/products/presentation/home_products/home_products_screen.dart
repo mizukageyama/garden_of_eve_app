@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Badge;
 import 'package:garden_of_eve/common/widgets/_common_widgets.dart';
 import 'package:garden_of_eve/common/widgets/custom_appbar.dart';
 import 'package:garden_of_eve/common/widgets/error_info_display.dart';

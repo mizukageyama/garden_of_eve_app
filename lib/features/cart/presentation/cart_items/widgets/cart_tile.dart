@@ -73,6 +73,7 @@ class CartTile extends StatelessWidget {
                             ),
                           ),
                           child: CachedNetworkImage(
+                            memCacheHeight: 400,
                             imageUrl: cartItem.productInfo.imgUrl,
                             errorWidget: (context, url, error) => Center(
                               child: Text(

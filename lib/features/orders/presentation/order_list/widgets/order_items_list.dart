@@ -53,6 +53,7 @@ class OrderItemsList extends StatelessWidget {
                       width: 25,
                       height: 25,
                       imageUrl: data.imgUrl,
+                      memCacheHeight: 400,
                       errorWidget: (context, url, error) => Center(
                         child: Text(
                           'Could not load image',

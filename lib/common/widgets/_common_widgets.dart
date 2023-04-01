@@ -1,3 +1,4 @@
+export 'package:garden_of_eve/common/widgets/category_tile.dart';
 export 'package:garden_of_eve/common/widgets/category_skeleton.dart';
 export 'package:garden_of_eve/common/widgets/gradient_container.dart';
 export 'package:garden_of_eve/common/widgets/product_tile_rect.dart';

@@ -35,19 +35,8 @@ class CategoryListView extends StatelessWidget {
                   () => GestureDetector(
                     onTap: () => homeProdController.selectCategory(index),
                     child: homeProdController.activeCategoryIndex.value == index
-                        ? GradientContainer(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 8,
-                              horizontal: 18,
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                            child: Text(
-                              homeProdController.categories[index],
-                              style: quicksandBold.copyWith(
-                                color: whiteColor,
-                                fontSize: 14,
-                              ),
-                            ),
+                        ? CategoryTile(
+                            categoryName: homeProdController.categories[index],
                           )
                         : Padding(
                             padding: const EdgeInsets.symmetric(
